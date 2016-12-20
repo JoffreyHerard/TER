@@ -19,12 +19,13 @@ public class ButtonAjout extends JButton implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
-	 private Image img;
-	 
+	private Image img;
+	private JFrame fenetreAjout;
 	 public ButtonAjout(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
+	    JFrame fenetreAjout = new JFrame();
 	  }
 	  
 	@Override

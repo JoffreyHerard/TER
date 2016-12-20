@@ -21,12 +21,22 @@ public class ButtonContact extends JButton implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
-	 private Image img;
-	 
+	private Image img;
+	private JLabel label_creator ;
+	private JLabel label_director ;
+	private JLabel label_version ;
+	private JLabel label_date ;
+	private JLabel label_mail ; 
+	
 	 public ButtonContact(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
+	    label_creator = new JLabel("Createur : Joffrey Herard");
+		label_director = new JLabel("Reponsable : Olivier Flauzac");
+		label_version = new JLabel("Version : 0.1.0");
+		label_date = new JLabel("2016");
+		label_mail = new JLabel("mail : joffrey.herard[at]etudiant.univ-reims.fr");
 	  }
 	  
 	@Override

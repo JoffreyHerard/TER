@@ -22,34 +22,38 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	
 	 private String name;
 	 private Image img;
+	 private ButtonOKdo bouton_ok;
+	 private JFrame fenetre;
+	 private JComboBox<String> comboPrb; 
+	 private JComboBox<String> combo ;
 	 
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
+	    fenetre = new JFrame();
+	    comboPrb = new JComboBox<String>();
+	    combo = new JComboBox<String>();
+	    bouton_ok = new ButtonOKdo("OK");
 	  }
 	  
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		JFrame fenetre = new JFrame();
+		
 		fenetre.setTitle("Lancement d'une tache");
 		fenetre.setSize(800, 400);
 		fenetre.setLocationRelativeTo(null);
 
 		fenetre.setBackground(Color.white);
 		fenetre.setLayout(new FlowLayout());
-		
-		JComboBox<String> comboPrb = new JComboBox<String>();
-		
+
 		comboPrb.setPreferredSize(new Dimension(150, 40));
 		comboPrb.addItem("NQueen");
 		comboPrb.addItem("NQueen-14");
 		comboPrb.addItem("Langford");
 		comboPrb.addItem("Tannerie");
 		
-		
-	    JComboBox<String> combo = new JComboBox<String>();
 	    combo.setPreferredSize(new Dimension(150, 40));
 	    combo.addItem("0");
 	    combo.addItem("1");
