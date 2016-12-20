@@ -13,9 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("unused")
 public class ButtonContact extends JButton implements MouseListener {
 	
-	 private String name;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
 	 private Image img;
 	 
 	 public ButtonContact(String str){

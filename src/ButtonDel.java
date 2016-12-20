@@ -11,9 +11,14 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+@SuppressWarnings("unused")
 public class ButtonDel extends JButton implements MouseListener {
 	
-	 private String name;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
 	 private Image img;
 	 
 	 public ButtonDel(String str){

@@ -1,7 +1,10 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,11 +13,26 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+
+@SuppressWarnings({ "serial", "unused" })
 public class ButtonWorker extends JButton implements MouseListener {
 	
 	 private String name;
 	 private Image img;
+	 private JFrame fenetre = new JFrame();
+	 private ButtonOKdo bouton_ok = new ButtonOKdo("OK");
+	 private JTextField pseudo = new JTextField("pseudo");
+	 private JLabel label_pseudal = new JLabel("Pseudo");
+		
+	 private JTextField pass = new JTextField("Password");
+	 private JLabel label_pass = new JLabel("Mot de passe");
+	 private JLabel affichage = new JLabel("Affichage du chat :");	
+	 private String username ;
+	 private String password ;
 	 
 	 public ButtonWorker(String str){
 	    super(str);
@@ -25,12 +43,72 @@ public class ButtonWorker extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		JFrame fenetre = new JFrame();
-		fenetre.setTitle("Lancement d'une tache");
-		fenetre.setSize(250, 275);
+		GridLayout gl;
+		//fenetre.setLayout(gl=new GridLayout(3, 2));
+		fenetre.setLayout(new FlowLayout());
+		fenetre.add(label_pseudal);
+		fenetre.add(pseudo);
+		
+	    fenetre.add(label_pass);
+	    fenetre.add(pass);
+		fenetre.setTitle("Travail sur des taches");
+		fenetre.add(bouton_ok);
+		fenetre.add(affichage);
+		fenetre.setSize(400, 500);
+		//gl.setColumns(2);
+		//gl.setRows(3);
+		
 		fenetre.setLocationRelativeTo(null);
 
 		fenetre.setVisible(true); 
+		
+
+		/*
+		XmppManager xmppManager = new XmppManager("myserver", 5222);
+		
+		try {
+			xmppManager.init();
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			xmppManager.performLogin(username, password);
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		xmppManager.setStatus(true, "Hello everyone");
+		
+		String buddyJID = "testuser2";
+		String buddyName = "testuser2";
+		try {
+			xmppManager.createEntry(buddyJID, buddyName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			xmppManager.sendMessage("Hello mate", "testuser2@myserver");
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		boolean isRunning = true;
+		
+		while (isRunning) {
+		    try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		xmppManager.destroy();*/
+		
 	}
 
 	@Override

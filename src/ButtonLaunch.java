@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 
 import org.jivesoftware.smack.*;
 
+@SuppressWarnings({ "unused", "serial" })
 public class ButtonLaunch extends JButton implements MouseListener {
 	
 	 private String name;

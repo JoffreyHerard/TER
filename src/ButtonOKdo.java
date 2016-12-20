@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 @SuppressWarnings("unused")
-public class ButtonAjout extends JButton implements MouseListener {
+public class ButtonOKdo extends JButton implements MouseListener {
 	
 	 /**
 	 * 
@@ -21,7 +21,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 	private String name;
 	 private Image img;
 	 
-	 public ButtonAjout(String str){
+	 public ButtonOKdo(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
@@ -30,12 +30,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		JFrame fenetreAjout = new JFrame();
-		fenetreAjout.setTitle("Ajout d'une tache dans la base");
-		fenetreAjout.setSize(250, 275);
-		fenetreAjout.setLocationRelativeTo(null);
-
-		fenetreAjout.setVisible(true); 
+		
 	}
 
 	@Override

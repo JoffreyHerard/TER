@@ -8,9 +8,10 @@ import java.awt.Image;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("unused")
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		JFrame fenetre = new JFrame();
 		ImageIcon icone = new ImageIcon("/home/apocalypzer/workspace/TER/src/images/urca.jpg");
 		JLabel image = new JLabel(icone);

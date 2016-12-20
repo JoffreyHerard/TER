@@ -13,6 +13,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 
+@SuppressWarnings("unused")
 public class XmppManager {
     
     private static final int packetReplyTimeout = 500; // millis
