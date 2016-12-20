@@ -30,7 +30,7 @@ public class ButtonContact extends JButton implements MouseListener {
 		
 		JLabel label_creator = new JLabel("Createur : Joffrey Herard");
 		JLabel label_director = new JLabel("Reponsable : Olivier Flauzac");
-		JLabel label_version = new JLabel("Vesion : 0.1.0");
+		JLabel label_version = new JLabel("Version : 0.1.0");
 		JLabel label_date = new JLabel("2016");
 		JLabel label_mail = new JLabel("mail : joffrey.herard[at]etudiant.univ-reims.fr");
 		

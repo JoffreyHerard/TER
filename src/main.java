@@ -30,6 +30,7 @@ public class main {
 
 	    fenetre.getContentPane().add(image,BorderLayout.WEST);
 	    fenetre.getContentPane().add(new ButtonLaunch("Lancer une tache"),BorderLayout.EAST);
+	    fenetre.getContentPane().add(new ButtonWorker("Client d'une tache"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonAjout("Ajouter une tache a la base"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonDel("Retirer une tache de la base"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonContact("Contact"),BorderLayout.EAST);
