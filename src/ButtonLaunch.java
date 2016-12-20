@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +12,7 @@ import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import org.jivesoftware.smack.*;
@@ -29,10 +33,38 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 		JFrame fenetre = new JFrame();
 		fenetre.setTitle("Lancement d'une tache");
-		fenetre.setSize(250, 275);
+		fenetre.setSize(800, 400);
 		fenetre.setLocationRelativeTo(null);
 
+		fenetre.setBackground(Color.white);
+		fenetre.setLayout(new FlowLayout());
+		
+		JComboBox<String> comboPrb = new JComboBox<String>();
+		
+		comboPrb.setPreferredSize(new Dimension(150, 40));
+		comboPrb.addItem("NQueen");
+		comboPrb.addItem("NQueen-14");
+		comboPrb.addItem("Langford");
+		comboPrb.addItem("Tannerie");
+		
+		
+	    JComboBox<String> combo = new JComboBox<String>();
+	    combo.setPreferredSize(new Dimension(150, 40));
+	    combo.addItem("0");
+	    combo.addItem("1");
+	    combo.addItem("2");
+	    combo.addItem("3");
+	    combo.addItem("4");
+	    combo.addItem("6");
+	    combo.addItem("7");
+	    combo.addItem("8");
+	    combo.addItem("9");
+	    combo.addItem("10");
+	    fenetre.add(comboPrb);
+	    fenetre.add(combo);
 		fenetre.setVisible(true); 
+   	    
+	    /*
 		String username = "testuser1";
 		String password = "testuser1pass";
 		
@@ -79,7 +111,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 			}
 		}
 		
-		xmppManager.destroy();
+		xmppManager.destroy();*/
 	}
 
 	@Override
