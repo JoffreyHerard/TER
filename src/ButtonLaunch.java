@@ -11,6 +11,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+
+
+import org.jivesoftware.smack.*;
+
 public class ButtonLaunch extends JButton implements MouseListener {
 	
 	 private String name;
