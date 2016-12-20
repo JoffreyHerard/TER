@@ -23,14 +23,14 @@ public class ButtonWorker extends JButton implements MouseListener {
 	
 	 private String name;
 	 private Image img;
-	 private JFrame fenetre = new JFrame();
-	 private ButtonOKdo bouton_ok = new ButtonOKdo("OK");
-	 private JTextField pseudo = new JTextField("pseudo");
-	 private JLabel label_pseudal = new JLabel("Pseudo");
+	 private JFrame fenetre ;
+	 private ButtonOKdo bouton_ok ;
+	 private JTextField pseudo ;
+	 private JLabel label_pseudal ;
 		
-	 private JTextField pass = new JTextField("Password");
-	 private JLabel label_pass = new JLabel("Mot de passe");
-	 private JLabel affichage = new JLabel("Affichage du chat :");	
+	 private JTextField pass ;
+	 private JLabel label_pass ;
+	 private JLabel affichage ;	
 	 private String username ;
 	 private String password ;
 	 
@@ -38,6 +38,13 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
+	    this.fenetre = new JFrame();
+	    this.bouton_ok = new ButtonOKdo("OK");
+	    this.pseudo = new JTextField("pseudo");
+	    this.label_pseudal = new JLabel("Pseudo");	
+	    this.pass = new JTextField("Password");
+	    this.label_pass = new JLabel("Mot de passe");
+	    this.affichage = new JLabel("Affichage du chat :");	
 	  }
 	  
 	@Override

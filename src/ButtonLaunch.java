@@ -22,11 +22,11 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	
 	 private String name;
 	 private Image img;
-	 private ButtonOKdo bouton_ok;
+	 private ButtonOKLa bouton_ok;
 	 private JFrame fenetre;
 	 private JComboBox<String> comboPrb; 
 	 private JComboBox<String> combo ;
-	 
+
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -34,7 +34,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    fenetre = new JFrame();
 	    comboPrb = new JComboBox<String>();
 	    combo = new JComboBox<String>();
-	    bouton_ok = new ButtonOKdo("OK");
+	    bouton_ok = new ButtonOKLa("OK");
 	  }
 	  
 	@Override
@@ -50,7 +50,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 
 		comboPrb.setPreferredSize(new Dimension(150, 40));
 		comboPrb.addItem("NQueen");
-		comboPrb.addItem("NQueen-14");
+		comboPrb.addItem("NQueen_test");
 		comboPrb.addItem("Langford");
 		comboPrb.addItem("Tannerie");
 		
@@ -67,6 +67,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    combo.addItem("10");
 	    fenetre.add(comboPrb);
 	    fenetre.add(combo);
+	    fenetre.add(bouton_ok);
 		fenetre.setVisible(true); 
    	    
 	    /*
