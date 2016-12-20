@@ -15,7 +15,7 @@ public class main {
 		ImageIcon icone = new ImageIcon("/home/apocalypzer/workspace/TER/src/images/urca.jpg");
 		JLabel image = new JLabel(icone);
 		
-	    fenetre.setTitle("GRID TER");
+	    fenetre.setTitle("Plateforme de lancement de Travail en XMPP");
 	    fenetre.setSize(250, 275);
 	    fenetre.setLocationRelativeTo(null);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
