@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td>Ajout d'un job</td>
-<td>?</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Suppresion d'un job</td>
