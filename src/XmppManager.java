@@ -52,7 +52,15 @@ public class XmppManager {
         
     }
     
-    public void performLogin(String username, String password) throws XMPPException {
+    public XMPPConnection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(XMPPConnection connection) {
+		this.connection = connection;
+	}
+
+	public void performLogin(String username, String password) throws XMPPException {
         if (connection!=null && connection.isConnected()) {
             connection.login(username, password);
         }

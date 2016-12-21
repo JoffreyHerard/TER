@@ -69,52 +69,6 @@ public class ButtonWorker extends JButton implements MouseListener {
 
 		fenetre.setVisible(true); 
 		
-
-		/*
-		XmppManager xmppManager = new XmppManager("myserver", 5222);
-		
-		try {
-			xmppManager.init();
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			xmppManager.performLogin(username, password);
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		xmppManager.setStatus(true, "Hello everyone");
-		
-		String buddyJID = "testuser2";
-		String buddyName = "testuser2";
-		try {
-			xmppManager.createEntry(buddyJID, buddyName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			xmppManager.sendMessage("Hello mate", "testuser2@myserver");
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		boolean isRunning = true;
-		
-		while (isRunning) {
-		    try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		xmppManager.destroy();*/
 		
 	}
 

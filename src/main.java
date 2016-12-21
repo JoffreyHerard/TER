@@ -24,7 +24,6 @@ public class main {
 	    fenetre.setVisible(true);
 	   
 	    
-	    
 	    fenetre.setContentPane(new Panneau()); 
 	    
 	    fenetre.setLayout(new FlowLayout());

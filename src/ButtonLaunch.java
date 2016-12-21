@@ -14,16 +14,34 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jivesoftware.smack.*;
+
+import org.jivesoftware.smack.*;
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.ChatManager;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.SmackConfiguration;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Presence;
+import org.jivesoftware.smack.packet.Presence.Type;
+import org.jivesoftware.smackx.Form;
+import org.jivesoftware.smackx.muc.MultiUserChat;
 
 @SuppressWarnings({ "unused", "serial" })
 public class ButtonLaunch extends JButton implements MouseListener {
 	
 	 private String name;
 	 private Image img;
-	 private ButtonOKLa bouton_ok;
+	 private JButton bouton_ok;
 	 private JFrame fenetre;
 	 private JComboBox<String> comboPrb; 
 	 private JComboBox<String> combo ;
@@ -31,6 +49,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private File repertoire;
 	 private File[] files;
 	 private File fichier_Choisi;
+	 private XmppManager xmppManager;
+	 
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -38,7 +58,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    fenetre = new JFrame();
 	    comboPrb = new JComboBox<String>();
 	    combo = new JComboBox<String>();
-	    bouton_ok = new ButtonOKLa("OK");
+	    bouton_ok = new JButton("OK");
 	  }
 	  
 	@Override
@@ -77,54 +97,34 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    fenetre.add(bouton_ok);
 		fenetre.setVisible(true); 
    	    
-	    /*
-		String username = "testuser1";
-		String password = "testuser1pass";
-		
-		XmppManager xmppManager = new XmppManager("myserver", 5222);
-		
-		try {
-			xmppManager.init();
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			xmppManager.performLogin(username, password);
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		xmppManager.setStatus(true, "Hello everyone");
-		
-		String buddyJID = "testuser2";
-		String buddyName = "testuser2";
-		try {
-			xmppManager.createEntry(buddyJID, buddyName);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			xmppManager.sendMessage("Hello mate", "testuser2@myserver");
-		} catch (XMPPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		boolean isRunning = true;
-		
-		while (isRunning) {
-		    try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		bouton_ok.addMouseListener(new MouseListener() {
+
+		    public void mouseClicked(MouseEvent e) {
+		    	/*Lancement du JOB*/
+		    	// on recupere ce qui a ete choisi 
+		    	String choix =comboPrb.getSelectedItem().toString();
+		    	int taille = combo.getSelectedIndex();
+		    	
+		    	
+		    	
+		    }
+
+		    public void mousePressed(MouseEvent e) {
+
+		    }
+
+		    public void mouseReleased(MouseEvent e) {
+
+		    }
+
+		    public void mouseEntered(MouseEvent e) {
+
+		    }
+
+		    public void mouseExited(MouseEvent e) {
+
 			}
-		}
-		
-		xmppManager.destroy();*/
+		});
 	}
 
 	@Override
