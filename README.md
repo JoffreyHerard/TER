@@ -20,7 +20,11 @@
 <td>Fait</td>
 </tr>
 <tr>
-<td>Envoi et reception message XMPP</td>
+<td>Envoi JOB en message XMPP</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Reception message XMPP</td>
 <td>40%	</td>
 </tr>
 <tr>
