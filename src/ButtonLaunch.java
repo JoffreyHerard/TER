@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -26,7 +27,10 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private JFrame fenetre;
 	 private JComboBox<String> comboPrb; 
 	 private JComboBox<String> combo ;
-
+	 private static FilenameFilter xmlFileFilter = new FilenameFilter() {public boolean accept(File dir, String name) {return name.endsWith(".xml");}};
+	 private File repertoire;
+	 private File[] files;
+	 private File fichier_Choisi;
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -47,12 +51,15 @@ public class ButtonLaunch extends JButton implements MouseListener {
 
 		fenetre.setBackground(Color.white);
 		fenetre.setLayout(new FlowLayout());
-
+		repertoire = new File("DB_JOBS");
+		files =repertoire.listFiles(xmlFileFilter);
+		
 		comboPrb.setPreferredSize(new Dimension(150, 40));
-		comboPrb.addItem("NQueen");
-		comboPrb.addItem("NQueen_test");
-		comboPrb.addItem("Langford");
-		comboPrb.addItem("Tannerie");
+		for(int i = 0;i<files.length;i++)
+		{
+			int taille_nom= files[i].getName().length();
+			comboPrb.addItem((files[i].getName()).substring(0, taille_nom-4));
+		}
 		
 	    combo.setPreferredSize(new Dimension(150, 40));
 	    combo.addItem("0");

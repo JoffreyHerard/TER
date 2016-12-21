@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td>Envoi et reception message XMPP</td>
-<td>40%</td>
+<td>40%	</td>
 </tr>
 <tr>
 <td>Lancement d'un job</td>

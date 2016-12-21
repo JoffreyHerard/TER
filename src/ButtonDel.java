@@ -33,6 +33,7 @@ public class ButtonDel extends JButton implements MouseListener {
 	private JButton bouton_ok;
 	private File fichier_Choisi;
 	private String choix;
+	
 	public ButtonDel(String str){
 	    super(str);
 	    this.name = str;
