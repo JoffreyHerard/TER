@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -44,22 +45,25 @@ public class ButtonAjout extends JButton implements MouseListener {
 	private JLabel split ;
 	private JLabel exec ;
 	private JLabel build ;
+	private JLabel nom_p ;
 	
 	private JTextField contraintes1 ;
+	private JTextField nom_p1 ;
 	private JTextField split1 ;
 	private JTextField exec1 ;
     private JTextField build1 ;
     
     private JButton bouton_ok ;
     
-    static org.jdom2.Document document;
-	static Element racine;
+
 	
 	 public ButtonAjout(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
 	    this.fenetreAjout = new JFrame();
+	    this.nom_p= new JLabel("Nom : ");
+	    this.nom_p1= new JTextField("Nom du probleme");
 		this.contraintes= new JLabel("Chemin du fichier de contrainte");
 		this.split= new JLabel("Chemin du fichier contenant le Split");
 		this.exec= new JLabel("Chemin du fichier contenant l'Execution");
@@ -69,34 +73,134 @@ public class ButtonAjout extends JButton implements MouseListener {
 	    this.exec1= new JTextField("path_du_fichier_du_code_de_exec");
 	    this.build1= new JTextField("path_du_fichier_du_code_de_build");
 	    this.bouton_ok=new JButton("OK");
-	    this.racine = new Element("JOB");
-	    this.document=new Document(racine);
-
+	   
+	   
+	    
 	}
 	 
-	 
-	public int Ajouter_TYPE_DE_JOBS(String contraintesT,String splitT,String exec1T,String buildT)
+	public String FileToString(String PathFile)
+	{
+		String fic ="";
+		//lecture du fichier texte	
+		try
+		{
+			InputStream ips=new FileInputStream(PathFile); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null)
+			{
+				System.out.println(ligne);
+				fic+=ligne+"\n";
+			}
+			br.close(); 
+		}		
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		return fic;
+	} 
+	public int Ajouter_TYPE_DE_JOBS(String nom,String contraintesT,String splitT,String exec1T,String buildT)
 	{
 		/*Ici on va crer le fichier XML dans un dossier propre a la machine */
 		/*On va tester, l'existence du dossier  */
-		File f = new File ("DB_JOBS");
-		if (f.exists()&& f.isDirectory()){
+		int retour = -42;
+		String Fichier_Perl;
+		String Fichier_Split;
+		String Fichier_Exec;
+		String Fichier_Build;
+		File d = new File ("DB_JOBS");
+		File f = new File ("DB_JOBS/"+nom+".xml");
+		if (d.exists()&& d.isDirectory()){
 		     /*Le fichier existe on va faire la creation du fichier XML associer*/
-			  
+			if (!f.exists())
+			{
+				try {
+
+					
+					Element JOB = new Element("JOB");
+					Document doc = new Document(JOB);
+					
+					
+					Fichier_Perl=FileToString(contraintesT);
+					Fichier_Split=FileToString(splitT);
+					Fichier_Exec=FileToString(exec1T);
+					Fichier_Build=FileToString(buildT);
+					
+					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
+					JOB.addContent(new Element("code_split").setText(Fichier_Split));
+					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
+					JOB.addContent(new Element("code_build").setText(Fichier_Build));
+
+					
+
+					// new XMLOutputter().output(doc, System.out);
+					XMLOutputter xmlOutput = new XMLOutputter();
+
+					// display nice nice
+					xmlOutput.setFormat(Format.getPrettyFormat());
+					xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
+
+					System.out.println("Fichier Enregistrer!");
+				  } catch (IOException io) {
+					System.out.println(io.getMessage());
+				  }
+				retour= 0;
+			}
+			else
+			{
+				retour= -1;
+			}
 			
 		}else{
 		     System.out.println("Mon répertoire n'existe pas");
+		     d.mkdir();
+		     try {
+
+			 		Element JOB = new Element("JOB");
+					Document doc = new Document(JOB);
+					
+					
+					Fichier_Perl=FileToString(contraintesT);
+					Fichier_Split=FileToString(splitT);
+					Fichier_Exec=FileToString(exec1T);
+					Fichier_Build=FileToString(buildT);
+					
+					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
+					JOB.addContent(new Element("code_split").setText(Fichier_Split));
+					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
+					JOB.addContent(new Element("code_build").setText(Fichier_Build));
+
+					
+
+					// new XMLOutputter().output(doc, System.out);
+					XMLOutputter xmlOutput = new XMLOutputter();
+
+					// display nice nice
+					xmlOutput.setFormat(Format.getPrettyFormat());
+					xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
+
+					System.out.println("Fichier Enregistrer!");
+				  } catch (IOException io) {
+					System.out.println(io.getMessage());
+				  }
+				retour= 0;
 		}
-		return 0;
+		
+		return retour;
 	}  
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		JFrame fenetreAjout = new JFrame();
 		fenetreAjout.setTitle("Ajout d'une tache dans la base");
-		fenetreAjout.setSize(250, 275);
+		fenetreAjout.setSize(275, 275);
 		fenetreAjout.setLocationRelativeTo(null);
 		fenetreAjout.setLayout(new FlowLayout());
+		fenetreAjout.add(nom_p);
+		fenetreAjout.add(nom_p1);
 		fenetreAjout.add(contraintes);
 		fenetreAjout.add(contraintes1);
 		fenetreAjout.add(split);
@@ -243,7 +347,23 @@ public class ButtonAjout extends JButton implements MouseListener {
 		bouton_ok.addMouseListener(new MouseListener() {
 
 		    public void mouseClicked(MouseEvent e) {
-		    	Ajouter_TYPE_DE_JOBS(contraintes1.getText(),split1.getText(),exec1.getText(),build1.getText());
+		    	int retour =Ajouter_TYPE_DE_JOBS(nom_p1.getText(),contraintes1.getText(),split1.getText(),exec1.getText(),build1.getText());
+		    	switch(retour)
+		    	{
+			    	case -1:
+			    		// le fichier existe deja 
+			    		
+			    		JOptionPane.showMessageDialog(null, "Le fichier existe deja", "Erreur", JOptionPane.ERROR_MESSAGE);
+			    		break;
+	
+			    	case 0:
+			    		// Good
+			    		break;
+	
+			    	default:
+			    		// Une erreur inconnu
+			    		break;
+		    	}
 		    }
 
 		    public void mousePressed(MouseEvent e) {
