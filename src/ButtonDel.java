@@ -72,8 +72,8 @@ public class ButtonDel extends JButton implements MouseListener {
 		    	choix =comboPrb.getSelectedItem().toString();
 		    	
 		    	fichier_Choisi=new File("DB_JOBS/"+choix+".xml");
-		    	System.out.println("Fichier choisi : "+fichier_Choisi);
-		    	
+			    	System.out.println("Fichier choisi : "+fichier_Choisi);
+			    	
 		    	if(fichier_Choisi.delete())
 		    	{
 		    		System.out.println("Fichier supprimer");

@@ -8,9 +8,13 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -47,8 +51,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private File repertoire;
 	 private File[] files;
 	 private File fichier_Choisi;
-	 private XmppManager xmppManager;
-	 
+	 private XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
+	 private String ProblemeCourant;
+	 boolean isRunning ;
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -57,8 +62,33 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    comboPrb = new JComboBox<String>();
 	    combo = new JComboBox<String>();
 	    bouton_ok = new JButton("OK");
+	   
 	  }
-	  
+	 public String FileToString(String PathFile)
+		{
+			String fic ="";
+			//lecture du fichier texte	
+			try
+			{
+				InputStream ips=new FileInputStream(PathFile); 
+				InputStreamReader ipsr=new InputStreamReader(ips);
+				BufferedReader br=new BufferedReader(ipsr);
+				String ligne;
+				while ((ligne=br.readLine())!=null)
+				{
+					System.out.println(ligne);
+					fic+=ligne+"\n";
+				}
+				br.close(); 
+				ipsr.close();
+				ips.close();
+			}		
+			catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			return fic;
+		} 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -66,7 +96,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		fenetre.setTitle("Lancement d'une tache");
 		fenetre.setSize(800, 400);
 		fenetre.setLocationRelativeTo(null);
-
+		
 		fenetre.setBackground(Color.white);
 		fenetre.setLayout(new FlowLayout());
 		repertoire = new File("DB_JOBS");
@@ -95,7 +125,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    fenetre.add(bouton_ok);
 		fenetre.setVisible(true); 
    	    
-		bouton_ok.addMouseListener(new MouseListener() {
+		bouton_ok.addMouseListener(new MouseListener(){
 
 		    public void mouseClicked(MouseEvent e) {
 		    	/*Lancement du JOB*/
@@ -107,35 +137,45 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	choix= choix+".xml"; 
 		    	
 		    	try { 
-		    		/*On initialise la connection */
-		    		xmppManager.init();
-		    		xmppManager.performLogin(username, password);
-		    		xmppManager.setStatus(true, "");  
-		    		XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
-		    		
-		    		/*On crer la chatroom Multiuser */
-		    		// Get the MultiUserChatManager
-		    		
-		    	      // Create a MultiUserChat using an XMPPConnection for a room
-		    	      MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), "providing_room@conference.apocalypzer-lg-gram");
-
-		    	      // Create the room
-		    	      muc.create("BOT_Providing");
-
-		    	      // Send an empty room configuration form which indicates that we want
-		    	      // an instant room
-		    	      muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
-		    	      
-		    	      muc.sendMessage("TEST");
-		    		/*On essaye d'utiliser le XML selectioner*/
-		    	      	
+					/*On initialise la connection */
+					xmppManager.init();
+					xmppManager.performLogin(username, password);
+					xmppManager.setStatus(true, "YOLO");  
+					
+					
+					/*On crer la chatroom Multiuser */
+					  //Get the MultiUserChatManager
+					
+					  //Create a MultiUserChat using an XMPPConnection for a room
+					  MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference.apocalypzer-lg-gram");
+					
+					  // Create the room
+					  muc.create("BOT_Providing");
+					
+					  // Send an empty room configuration form which indicates that we want
+					  // an instant room
+					  muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
+					  
+					
+					  
+					  /*On essaye d'utiliser le XML selectioner*/
+					  
+					  ProblemeCourant= FileToString("DB_JOBS/"+choix);
+					  
+					  // sa marche muc.sendMessage("TEST");
+					  muc.sendMessage(ProblemeCourant);
+					   isRunning = true;
+					  while (isRunning){
+						  Thread.sleep(50);
+					  }
+					  xmppManager.destroy();	
 		    	}
-		    	catch (XMPPException ex) {
-		    		  // TODO Auto-generated catch block
+		    	 catch (XMPPException ex) {
+		    		// TODO Auto-generated catch block
 		    		  ex.printStackTrace();
 		    	}
 		    	catch (Exception ex) {
-		    		  // TODO Auto-generated catch block
+		    		 // TODO Auto-generated catch block
 		    		  ex.printStackTrace();
 		    	}
 		    	
