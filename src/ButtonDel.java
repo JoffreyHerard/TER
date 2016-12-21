@@ -69,7 +69,9 @@ public class ButtonDel extends JButton implements MouseListener {
 
 		    public void mouseClicked(MouseEvent e) {
 		    	choix =comboPrb.getSelectedItem().toString();
-		    	fichier_Choisi=new File(choix+".xml");
+		    	
+		    	fichier_Choisi=new File("DB_JOBS/"+choix+".xml");
+		    	System.out.println("Fichier choisi : "+fichier_Choisi);
 		    	
 		    	if(fichier_Choisi.delete())
 		    	{
@@ -79,6 +81,8 @@ public class ButtonDel extends JButton implements MouseListener {
 		    	{
 		    		System.out.println("Fichier non supprimer");
 		    	}
+		    	
+
 		    }
 
 		    public void mousePressed(MouseEvent e) {

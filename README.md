@@ -9,7 +9,7 @@
 </thead><tbody>
 <tr>
 <td>Interface</td>
-<td>fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Ajout d'un job</td>
@@ -17,11 +17,11 @@
 </tr>
 <tr>
 <td>Suppresion d'un job</td>
-<td>?</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Envoi et reception message XMPP</td>
-<td>?</td>
+<td>40%</td>
 </tr>
 <tr>
 <td>Lancement d'un job</td>

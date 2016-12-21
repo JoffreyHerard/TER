@@ -94,6 +94,8 @@ public class ButtonAjout extends JButton implements MouseListener {
 				fic+=ligne+"\n";
 			}
 			br.close(); 
+			ipsr.close();
+			ips.close();
 		}		
 		catch (Exception e)
 		{
