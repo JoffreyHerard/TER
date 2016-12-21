@@ -30,6 +30,7 @@ import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
+import org.jivesoftware.smackx.Form;
 
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
@@ -113,8 +114,21 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    		XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
 		    		
 		    		/*On crer la chatroom Multiuser */
+		    		// Get the MultiUserChatManager
 		    		
+		    	      // Create a MultiUserChat using an XMPPConnection for a room
+		    	      MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), "providing_room@conference.apocalypzer-lg-gram");
+
+		    	      // Create the room
+		    	      muc.create("BOT_Providing");
+
+		    	      // Send an empty room configuration form which indicates that we want
+		    	      // an instant room
+		    	      muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
+		    	      
+		    	      muc.sendMessage("TEST");
 		    		/*On essaye d'utiliser le XML selectioner*/
+		    	      	
 		    	}
 		    	catch (XMPPException ex) {
 		    		  // TODO Auto-generated catch block
