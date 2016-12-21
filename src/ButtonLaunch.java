@@ -10,7 +10,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.Iterator;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -34,6 +36,7 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smackx.Form;
+import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 @SuppressWarnings({ "unused", "serial" })
@@ -104,8 +107,29 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	// on recupere ce qui a ete choisi 
 		    	String choix =comboPrb.getSelectedItem().toString();
 		    	int taille = combo.getSelectedIndex();
+		    	String username = "provider";
+		    	String password = "toto";
+		    	choix= choix+".xml"; 
 		    	
-		    	
+		    	try { 
+		    		/*On initialise la connection */
+		    		xmppManager.init();
+		    		xmppManager.performLogin(username, password);
+		    		xmppManager.setStatus(true, "");  
+		    		XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
+		    		
+		    		/*On crer la chatroom Multiuser */
+		    		
+		    		/*On essaye d'utiliser le XML selectioner*/
+		    	}
+		    	catch (XMPPException ex) {
+		    		  // TODO Auto-generated catch block
+		    		  ex.printStackTrace();
+		    	}
+		    	catch (Exception ex) {
+		    		  // TODO Auto-generated catch block
+		    		  ex.printStackTrace();
+		    	}
 		    	
 		    }
 
