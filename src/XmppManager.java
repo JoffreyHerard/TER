@@ -26,13 +26,22 @@ public class XmppManager {
 
     private ChatManager chatManager;
     private MessageListener messageListener;
-    
+    private boolean provider;
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
+        this.provider=true;
     }
     
-    public void init() throws XMPPException {
+    public boolean isProvider() {
+		return provider;
+	}
+
+	public void setProvider(boolean provider) {
+		this.provider = provider;
+	}
+
+	public void init() throws XMPPException {
         
         System.out.println(String.format("Initializing connection to server %1$s port %2$d", server, port));
 
@@ -98,6 +107,8 @@ public class XmppManager {
 
         @Override
         public void processMessage(Chat chat, Message message) {
+        	
+        	//Modification de reaction si provider ou non 
             String from = message.getFrom();
             String body = message.getBody();
             System.out.println(String.format("Received message '%1$s' from %2$s", body, from));

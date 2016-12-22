@@ -15,6 +15,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -35,8 +37,12 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 import org.jivesoftware.smackx.Form;
-
+import org.jivesoftware.smackx.ServiceDiscoveryManager;
+import org.jivesoftware.smackx.muc.Affiliate;
 import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.Occupant;
+import org.jivesoftware.smackx.muc.RoomInfo;
+import org.jivesoftware.smackx.packet.DiscoverItems;
 
 @SuppressWarnings({ "unused", "serial" })
 public class ButtonLaunch extends JButton implements MouseListener {
@@ -53,7 +59,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private File fichier_Choisi;
 	 private XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
 	 private String ProblemeCourant;
-	 boolean isRunning ;
+	 private boolean isRunning ;
+	 private ArrayList<identity> Liste_user;
+	 
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -62,7 +70,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    comboPrb = new JComboBox<String>();
 	    combo = new JComboBox<String>();
 	    bouton_ok = new JButton("OK");
-	   
+	    Liste_user = new ArrayList<identity>();
 	  }
 	 public String FileToString(String PathFile)
 		{
@@ -135,7 +143,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	String username = "provider";
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
-		    	
+		    	ProblemeCourant= FileToString("DB_JOBS/"+choix);
+		    	//ProblemeCourant="CECI EST UN TEST";
 		    	try { 
 					/*On initialise la connection */
 					xmppManager.init();
@@ -147,28 +156,89 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  //Get the MultiUserChatManager
 					
 					  //Create a MultiUserChat using an XMPPConnection for a room
-					  MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference.apocalypzer-lg-gram");
+					  String Name_room = "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference.apocalypzer-lg-gram";
+					  MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), Name_room);
 					
-					  // Create the room
+					  // Create the room identity
 					  muc.create("BOT_Providing");
-					
+					  
 					  // Send an empty room configuration form which indicates that we want
 					  // an instant room
 					  muc.sendConfigurationForm(new Form(Form.TYPE_SUBMIT));
-					  
-					
-					  
 					  /*On essaye d'utiliser le XML selectioner*/
 					  
-					  ProblemeCourant= FileToString("DB_JOBS/"+choix);
+					  //On va essayer d'avoir la liste des utilisateurs selectionner et de leur envoyer chacun une tache a faire 
 					  
-					  // sa marche muc.sendMessage("TEST");
-					  muc.sendMessage(ProblemeCourant);
-					   isRunning = true;
+
+				      System.out.println("On enregistre le nombre de personne");
+				      int  Nombre_Participants=muc.getOccupantsCount();
+				      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
+				      
+				      Iterator it = muc.getOccupants();
+				      
+				      while(it.hasNext())
+				      {
+				    	  System.out.print("Membre : ");
+				    	  System.out.println("Valeur "+it.next());	  
+				      }
+				      
+				      /*On attend un nombre d'utilisateur requis par le split ici on le simule seulement avec 1 utilisateur de type worker */
+				      System.out.println("On attend un nombre dutilisateur precis");
+				      
+				      while(Nombre_Participants<2){
+				    	  Nombre_Participants=muc.getOccupantsCount();
+					      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
+					      
+					      it = muc.getOccupants();
+					      
+					      while(it.hasNext())
+					      {
+					    	  System.out.println("Affichage tableau : ");
+					    	  System.out.println("Valeur "+it.next());	  
+					      }
+
+				      }
+				      
+				      //Faire liste utilisateurs de la room
+				      
+				   
+				      ArrayList<Occupant> Liste=(ArrayList<Occupant>)muc.getParticipants();
+				      
+				      
+				      for(int i = 0;i<Liste.size();i++)
+				      {
+				    	  Liste_user.add(new identity(Liste.get(i).getJid(),Liste.get(i).getRole(),Liste.get(i).getNick()));
+				    	  System.out.println("Nickname "+i+Liste.get(i).getNick());
+				      }
+				    	  			      
+				      
+				      //maitnenant que on a la liste des utilisateur connecte a la chatRoom on va leur envoyer chacun un #Split method un job 
+				      //On a attendu que lon est assez de participant ou pas en fonction du split 
+				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
+				      System.out.println("Debut split ");
+				      
+				      for(int i=0;i<Nombre_Participants-1;i++)
+				      {
+					      String buddyJID = Liste_user.get(i).getId();
+					      String buddyName = Liste_user.get(i).getName();
+					      
+					      xmppManager.createEntry(buddyJID, buddyName);
+					     
+					      xmppManager.sendMessage(ProblemeCourant, buddyName+"@apocalypzer-lg-gram");
+
+				      }
+				      System.out.println("Fin du split ");
+					  muc.sendMessage("Lancement du probleme du"+comboPrb.getSelectedItem().toString());
+					  
+					  /*Maintenant que l'on a envoyer plusieurs problemes on va essayer davoir leur reponses*/
+					  
+					  isRunning = true;
 					  while (isRunning){
 						  Thread.sleep(50);
 					  }
 					  xmppManager.destroy();	
+					  
+					  
 		    	}
 		    	 catch (XMPPException ex) {
 		    		// TODO Auto-generated catch block

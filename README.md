@@ -24,6 +24,10 @@
 <td>Fait</td>
 </tr>
 <tr>
+<td>Repartition des JOBs en message XMPP</td>
+<td>Fait</td>
+</tr>
+<tr>
 <td>Reception message XMPP</td>
 <td>40%	</td>
 </tr>
