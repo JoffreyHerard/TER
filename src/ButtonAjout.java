@@ -412,6 +412,122 @@ public class ButtonAjout extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+	public JFrame getFenetreAjout() {
+		return fenetreAjout;
+	}
+
+	public void setFenetreAjout(JFrame fenetreAjout) {
+		this.fenetreAjout = fenetreAjout;
+	}
+
+	public JLabel getContraintes() {
+		return contraintes;
+	}
+
+	public void setContraintes(JLabel contraintes) {
+		this.contraintes = contraintes;
+	}
+
+	public JLabel getSplit() {
+		return split;
+	}
+
+	public void setSplit(JLabel split) {
+		this.split = split;
+	}
+
+	public JLabel getExec() {
+		return exec;
+	}
+
+	public void setExec(JLabel exec) {
+		this.exec = exec;
+	}
+
+	public JLabel getBuild() {
+		return build;
+	}
+
+	public void setBuild(JLabel build) {
+		this.build = build;
+	}
+
+	public JLabel getNom_p() {
+		return nom_p;
+	}
+
+	public void setNom_p(JLabel nom_p) {
+		this.nom_p = nom_p;
+	}
+
+	public JTextField getContraintes1() {
+		return contraintes1;
+	}
+
+	public void setContraintes1(JTextField contraintes1) {
+		this.contraintes1 = contraintes1;
+	}
+
+	public JTextField getNom_p1() {
+		return nom_p1;
+	}
+
+	public void setNom_p1(JTextField nom_p1) {
+		this.nom_p1 = nom_p1;
+	}
+
+	public JTextField getSplit1() {
+		return split1;
+	}
+
+	public void setSplit1(JTextField split1) {
+		this.split1 = split1;
+	}
+
+	public JTextField getExec1() {
+		return exec1;
+	}
+
+	public void setExec1(JTextField exec1) {
+		this.exec1 = exec1;
+	}
+
+	public JTextField getBuild1() {
+		return build1;
+	}
+
+	public void setBuild1(JTextField build1) {
+		this.build1 = build1;
+	}
+
+	public JButton getBouton_ok() {
+		return bouton_ok;
+	}
+
+	public void setBouton_ok(JButton bouton_ok) {
+		this.bouton_ok = bouton_ok;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 }

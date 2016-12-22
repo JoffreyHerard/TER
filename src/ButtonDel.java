@@ -129,4 +129,80 @@ public class ButtonDel extends JButton implements MouseListener {
 
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+	public JComboBox<String> getComboPrb() {
+		return comboPrb;
+	}
+
+	public void setComboPrb(JComboBox<String> comboPrb) {
+		this.comboPrb = comboPrb;
+	}
+
+	public static FilenameFilter getXmlFileFilter() {
+		return xmlFileFilter;
+	}
+
+	public static void setXmlFileFilter(FilenameFilter xmlFileFilter) {
+		ButtonDel.xmlFileFilter = xmlFileFilter;
+	}
+
+	public File getRepertoire() {
+		return repertoire;
+	}
+
+	public void setRepertoire(File repertoire) {
+		this.repertoire = repertoire;
+	}
+
+	public File[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(File[] files) {
+		this.files = files;
+	}
+
+	public JButton getBouton_ok() {
+		return bouton_ok;
+	}
+
+	public void setBouton_ok(JButton bouton_ok) {
+		this.bouton_ok = bouton_ok;
+	}
+
+	public File getFichier_Choisi() {
+		return fichier_Choisi;
+	}
+
+	public void setFichier_Choisi(File fichier_Choisi) {
+		this.fichier_Choisi = fichier_Choisi;
+	}
+
+	public String getChoix() {
+		return choix;
+	}
+
+	public void setChoix(String choix) {
+		this.choix = choix;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

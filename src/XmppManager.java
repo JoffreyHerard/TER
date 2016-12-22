@@ -117,5 +117,57 @@ public class XmppManager {
         }
         
     }
+
+	public String getServer() {
+		return server;
+	}
+
+	public void setServer(String server) {
+		this.server = server;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	public ConnectionConfiguration getConfig() {
+		return config;
+	}
+
+	public void setConfig(ConnectionConfiguration config) {
+		this.config = config;
+	}
+
+	public ChatManager getChatManager() {
+		return chatManager;
+	}
+
+	public void setChatManager(ChatManager chatManager) {
+		this.chatManager = chatManager;
+	}
+
+	public MessageListener getMessageListener() {
+		return messageListener;
+	}
+
+	public void setMessageListener(MessageListener messageListener) {
+		this.messageListener = messageListener;
+	}
+
+	public int getRetour_Providing() {
+		return retour_Providing;
+	}
+
+	public void setRetour_Providing(int retour_Providing) {
+		this.retour_Providing = retour_Providing;
+	}
+
+	public static int getPacketreplytimeout() {
+		return packetReplyTimeout;
+	}
     
 }

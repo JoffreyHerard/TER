@@ -29,7 +29,7 @@
 </tr>
 <tr>
 <td>Reception message XMPP cote client</td>
-<td>En cours</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Lancement d'un job et sa terminaison</td>

@@ -292,5 +292,89 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Image getImg() {
+		return img;
+	}
+	public void setImg(Image img) {
+		this.img = img;
+	}
+	public JButton getBouton_ok() {
+		return bouton_ok;
+	}
+	public void setBouton_ok(JButton bouton_ok) {
+		this.bouton_ok = bouton_ok;
+	}
+	public JFrame getFenetre() {
+		return fenetre;
+	}
+	public void setFenetre(JFrame fenetre) {
+		this.fenetre = fenetre;
+	}
+	public JComboBox<String> getComboPrb() {
+		return comboPrb;
+	}
+	public void setComboPrb(JComboBox<String> comboPrb) {
+		this.comboPrb = comboPrb;
+	}
+	public JComboBox<String> getCombo() {
+		return combo;
+	}
+	public void setCombo(JComboBox<String> combo) {
+		this.combo = combo;
+	}
+	public static FilenameFilter getXmlFileFilter() {
+		return xmlFileFilter;
+	}
+	public static void setXmlFileFilter(FilenameFilter xmlFileFilter) {
+		ButtonLaunch.xmlFileFilter = xmlFileFilter;
+	}
+	public File getRepertoire() {
+		return repertoire;
+	}
+	public void setRepertoire(File repertoire) {
+		this.repertoire = repertoire;
+	}
+	public File[] getFiles() {
+		return files;
+	}
+	public void setFiles(File[] files) {
+		this.files = files;
+	}
+	public File getFichier_Choisi() {
+		return fichier_Choisi;
+	}
+	public void setFichier_Choisi(File fichier_Choisi) {
+		this.fichier_Choisi = fichier_Choisi;
+	}
+	public XmppManager getXmppManager() {
+		return xmppManager;
+	}
+	public void setXmppManager(XmppManager xmppManager) {
+		this.xmppManager = xmppManager;
+	}
+	public String getProblemeCourant() {
+		return ProblemeCourant;
+	}
+	public void setProblemeCourant(String problemeCourant) {
+		ProblemeCourant = problemeCourant;
+	}
+	public boolean isRunning() {
+		return isRunning;
+	}
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	public ArrayList<identity> getListe_user() {
+		return Liste_user;
+	}
+	public void setListe_user(ArrayList<identity> liste_user) {
+		Liste_user = liste_user;
+	}
+	
 }

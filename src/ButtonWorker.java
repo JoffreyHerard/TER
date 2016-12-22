@@ -187,4 +187,141 @@ public class ButtonWorker extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+	public JFrame getFenetre() {
+		return fenetre;
+	}
+
+	public void setFenetre(JFrame fenetre) {
+		this.fenetre = fenetre;
+	}
+
+	public JButton getBouton_ok() {
+		return bouton_ok;
+	}
+
+	public void setBouton_ok(JButton bouton_ok) {
+		this.bouton_ok = bouton_ok;
+	}
+
+	public ButtonDoW getBouton_ok_channel() {
+		return bouton_ok_channel;
+	}
+
+	public void setBouton_ok_channel(ButtonDoW bouton_ok_channel) {
+		this.bouton_ok_channel = bouton_ok_channel;
+	}
+
+	public JTextField getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(JTextField pseudo) {
+		this.pseudo = pseudo;
+	}
+
+	public JLabel getLabel_pseudal() {
+		return label_pseudal;
+	}
+
+	public void setLabel_pseudal(JLabel label_pseudal) {
+		this.label_pseudal = label_pseudal;
+	}
+
+	public JTextField getPass() {
+		return pass;
+	}
+
+	public void setPass(JTextField pass) {
+		this.pass = pass;
+	}
+
+	public JLabel getLabel_pass() {
+		return label_pass;
+	}
+
+	public void setLabel_pass(JLabel label_pass) {
+		this.label_pass = label_pass;
+	}
+
+	public JLabel getAffichage() {
+		return affichage;
+	}
+
+	public void setAffichage(JLabel affichage) {
+		this.affichage = affichage;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public XmppManager getXmppManager() {
+		return xmppManager;
+	}
+
+	public void setXmppManager(XmppManager xmppManager) {
+		this.xmppManager = xmppManager;
+	}
+
+	public String getProblemeCourant() {
+		return ProblemeCourant;
+	}
+
+	public void setProblemeCourant(String problemeCourant) {
+		ProblemeCourant = problemeCourant;
+	}
+
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+
+	public ArrayList<HostedRoom> getListeRoom() {
+		return ListeRoom;
+	}
+
+	public void setListeRoom(ArrayList<HostedRoom> listeRoom) {
+		ListeRoom = listeRoom;
+	}
+
+	public JComboBox<String> getComboPrb() {
+		return comboPrb;
+	}
+
+	public void setComboPrb(JComboBox<String> comboPrb) {
+		this.comboPrb = comboPrb;
+	}
+	
 }
