@@ -150,7 +150,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					xmppManager.init();
 					xmppManager.performLogin(username, password);
 					xmppManager.setStatus(true, "YOLO");  
-					
+					xmppManager.setProvider(true);
 					
 					/*On crer la chatroom Multiuser */
 					  //Get the MultiUserChatManager
@@ -212,7 +212,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      }
 				    	  			      
 				      
-				      //maitnenant que on a la liste des utilisateur connecte a la chatRoom on va leur envoyer chacun un #Split method un job 
+				      //maintenant que on a la liste des utilisateur connecte a la chatRoom on va leur envoyer chacun un #Split method un job 
 				      //On a attendu que lon est assez de participant ou pas en fonction du split 
 				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
 				      System.out.println("Debut split ");

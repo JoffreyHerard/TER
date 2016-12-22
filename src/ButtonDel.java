@@ -82,8 +82,8 @@ public class ButtonDel extends JButton implements MouseListener {
 		    	{
 		    		System.out.println("Fichier non supprimer");
 		    	}
-		    	
-
+		    	fenetre.setVisible(false); 
+		    	fenetre.setVisible(true); 
 		    }
 
 		    public void mousePressed(MouseEvent e) {

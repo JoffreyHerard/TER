@@ -28,12 +28,12 @@
 <td>Fait</td>
 </tr>
 <tr>
-<td>Reception message XMPP</td>
-<td>40%	</td>
+<td>Reception message XMPP cote client</td>
+<td>En cours</td>
 </tr>
 <tr>
-<td>Lancement d'un job</td>
-<td>?</td>
+<td>Lancement d'un job et sa terminaison</td>
+<td>45%</td>
 </tr>
 <tr>
 <td>Cote client/Worker</td>
