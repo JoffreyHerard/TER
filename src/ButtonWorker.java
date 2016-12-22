@@ -21,7 +21,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.ChatManager;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smackx.muc.HostedRoom;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
@@ -33,7 +37,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 	 private Image img;
 	 private JFrame fenetre ;
 	 private JButton bouton_ok ;
-	 private JButton bouton_ok_channel ;
+	 private ButtonDoW bouton_ok_channel ;
 	 private JTextField pseudo ;
 	 private JLabel label_pseudal ;
 		
@@ -55,7 +59,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    this.addMouseListener(this);
 	    this.fenetre = new JFrame();
 	    this.bouton_ok = new JButton("OK");
-	    this.bouton_ok_channel = new JButton("OK");
+	    this.bouton_ok_channel = new ButtonDoW("OK");
 	    this.pseudo = new JTextField("pseudo");
 	    this.label_pseudal = new JLabel("Pseudo");	
 	    this.pass = new JTextField("Password");
@@ -89,7 +93,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		fenetre.setVisible(true); 
 		
 		
-	
+
 		bouton_ok.addMouseListener(new MouseListener(){
 	
 		    @SuppressWarnings("deprecation")
@@ -103,6 +107,8 @@ public class ButtonWorker extends JButton implements MouseListener {
 					xmppManager.performLogin(username, password);
 					xmppManager.setStatus(true, "YOLO");  
 					xmppManager.setProvider(false);
+					
+					
 					System.out.println("Etablir une liste de room");
 					
 					ListeRoom =(ArrayList<HostedRoom>)MultiUserChat.getHostedRooms(xmppManager.getConnection(), "conference.apocalypzer-lg-gram");
@@ -129,52 +135,12 @@ public class ButtonWorker extends JButton implements MouseListener {
 					fenetre.add(bouton_ok_channel);
 					
 					
+					bouton_ok_channel.setProblemeCourant(comboPrb.getSelectedItem().toString());
+					bouton_ok_channel.setUsername(username);
+					bouton_ok_channel.setPassword(password);
+					
 					fenetre.setVisible(true); 
-					
-					
-					bouton_ok_channel.addMouseListener(new MouseListener(){
-						
-					    @SuppressWarnings("deprecation")
-						public void mouseClicked(MouseEvent e) {
-					    	
-					    	try{
-					    		
-							  // Create a MultiUserChat using an XMPPConnection for a room
-							  MultiUserChat muc2 = new MultiUserChat(xmppManager.getConnection(), comboPrb.getSelectedItem().toString()+"@conference.apocalypzer-lg-gram");
-							
-							  // User2 joins the new room
-							  // The room service will decide the amount of history to send
-				    	      muc2.join(username);
-				    	      
-				    	      isRunning = true;
-							  while (isRunning){
-								  Thread.sleep(50);
-								  System.out.println("Attente de message ");
-							  }
-							  xmppManager.destroy();	
-							  
-							} catch (Exception exc) {
-								// TODO Auto-generated catch block
-								exc.printStackTrace();
-							}
-					    }
-				
-					    public void mousePressed(MouseEvent e) {
-				
-					    }
-				
-					    public void mouseReleased(MouseEvent e) {
-				
-					    }
-				
-					    public void mouseEntered(MouseEvent e) {
-				
-					    }
-				
-					    public void mouseExited(MouseEvent e) {
-				
-						}
-					});
+					xmppManager.destroy();					
 				} catch (XMPPException exc) {
 					// TODO Auto-generated catch block
 					exc.printStackTrace();
@@ -221,5 +187,4 @@ public class ButtonWorker extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-
 }

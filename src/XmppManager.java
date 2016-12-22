@@ -28,6 +28,7 @@ public class XmppManager {
     private MessageListener messageListener;
     private boolean provider;
     private int retour_Providing =0;
+    
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
