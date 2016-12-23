@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -26,6 +28,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.xpath.XPath;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
@@ -52,7 +60,6 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private JButton bouton_ok;
 	 private JFrame fenetre;
 	 private JComboBox<String> comboPrb; 
-	 private JComboBox<String> combo ;
 	 private static FilenameFilter xmlFileFilter = new FilenameFilter() {public boolean accept(File dir, String name) {return name.endsWith(".xml");}};
 	 private File repertoire;
 	 private File[] files;
@@ -68,7 +75,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    this.addMouseListener(this);
 	    fenetre = new JFrame();
 	    comboPrb = new JComboBox<String>();
-	    combo = new JComboBox<String>();
+	    
 	    bouton_ok = new JButton("OK");
 	    Liste_user = new ArrayList<identity>();
 	  }
@@ -117,19 +124,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 			comboPrb.addItem((files[i].getName()).substring(0, taille_nom-4));
 		}
 		
-	    combo.setPreferredSize(new Dimension(150, 40));
-	    combo.addItem("0");
-	    combo.addItem("1");
-	    combo.addItem("2");
-	    combo.addItem("3");
-	    combo.addItem("4");
-	    combo.addItem("6");
-	    combo.addItem("7");
-	    combo.addItem("8");
-	    combo.addItem("9");
-	    combo.addItem("10");
+
 	    fenetre.add(comboPrb);
-	    fenetre.add(combo);
+
 	    fenetre.add(bouton_ok);
 		fenetre.setVisible(true); 
    	    
@@ -139,7 +136,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	/*Lancement du JOB*/
 		    	// on recupere ce qui a ete choisi 
 		    	String choix =comboPrb.getSelectedItem().toString();
-		    	int taille = combo.getSelectedIndex();
+		    
 		    	String username = "provider";
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
@@ -183,9 +180,23 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      }
 				      
 				      /*On attend un nombre d'utilisateur requis par le split ici on le simule seulement avec 1 utilisateur de type worker */
-				      System.out.println("On attend un nombre dutilisateur precis");
 				      
-				      while(Nombre_Participants<2){
+				      //On cherche a savoir combien d'utilisateurs par rapport au fichier xml enregistrer
+				      
+				      System.out.println("On attend un nombre dutilisateur precis");
+				      SAXBuilder sxb = new SAXBuilder();
+				      Document document = sxb.build(new File(ProblemeCourant));
+				      //On initialise un nouvel élément racine avec l'élément racine du
+				      // document.
+				      Element racine = document.getRootElement();
+ 
+				      XPath xpa = XPath.newInstance("/JOB/rang");
+				      Element monNoeud = (Element) xpa.selectSingleNode(racine);
+				      String retour = xpa.valueOf(monNoeud);
+				      
+				      int Nombre_requis =Integer.parseInt(retour);
+				      
+				      while(Nombre_Participants<Nombre_requis){
 				    	  Nombre_Participants=muc.getOccupantsCount();
 					      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
 					      
@@ -217,16 +228,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
 				      System.out.println("Debut split ");
 				      
-				      for(int i=0;i<Nombre_Participants-1;i++)
-				      {
-					      String buddyJID = Liste_user.get(i).getId();
-					      String buddyName = Liste_user.get(i).getName();
-					      
-					      xmppManager.createEntry(buddyJID, buddyName);
-					     
-					      xmppManager.sendMessage(ProblemeCourant, buddyName+"@apocalypzer-lg-gram");
-
-				      }
+				      split(Liste_user,Nombre_Participants,ProblemeCourant,xmppManager);
+				      
 				      System.out.println("Fin du split ");
 					  muc.sendMessage("Lancement du probleme du"+comboPrb.getSelectedItem().toString());
 					  
@@ -292,6 +295,69 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+	public int split(ArrayList<identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager)
+	{
+		for(int i=0;i<Nombre_Participants-1;i++)
+		{
+			String buddyJID = Liste_user.get(i).getId();
+			String buddyName = Liste_user.get(i).getName();
+			      
+			try {
+				xmppManager.createEntry(buddyJID, buddyName);
+				
+				//On va crer le message XML approprier puis l'envoyer 
+				Element JOB = new Element("DEBUT_JOB");
+				SAXBuilder sxb = new SAXBuilder();
+				Document doc = sxb.build(ProblemeCourant);
+				
+				//On construit le fichier XML avec le code a executer 
+				
+				 Element racine = doc.getRootElement();
+		            
+	            /* On va dans un premier temps rechercher l'ensemble des noms des patients de notre hôpital. */
+	            
+	            /* Recherche de la liste des patients*/
+	            XPath xpa = XPath.newInstance("/JOB/exec/");   
+	            
+	            /* On récupère tous les noeuds répondant au chemin //patient */
+	            List<String> results = (List<String>) xpa.selectNodes(racine) ;
+		            
+		            
+				JOB.addContent(new Element("code_exec").setText(results.get(0)));
+				
+				// On ajouter a sa la bonne ligne de commande a executer
+				xpa = XPath.newInstance("/JOB/cmd/");   
+		            
+		        /* On récupère tous les noeuds répondant au chemin //patient */
+				results = (List<String>) xpa.selectNodes(racine) ;
+				//Faut paerser la liste 
+				JOB.addContent(new Element("cmd").setText("toto execute des patates"));
+				JOB.addContent(new Element("id").setText(String.valueOf(i)));
+				
+				// new XMLOutputter().output(doc, System.out);
+				XMLOutputter xmlOutput = new XMLOutputter();
+				
+				
+				
+				// display nice nice
+				xmlOutput.setFormat(Format.getPrettyFormat());
+				xmlOutput.output(doc, new FileWriter("JOB_SEND/Fichier_envoie_"+i));
+				String Probleme_individuel=FileToString("JOB_SEND/Fichier_envoie_"+i);
+				
+				xmppManager.sendMessage(Probleme_individuel, buddyName+"@apocalypzer-lg-gram");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Ici on fait apelle a la fonction split 
+			  
+			  
+			
+		
+		}
+		 
+		return 0;
+	}
 	public String getName() {
 		return name;
 	}
@@ -322,12 +388,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	public void setComboPrb(JComboBox<String> comboPrb) {
 		this.comboPrb = comboPrb;
 	}
-	public JComboBox<String> getCombo() {
-		return combo;
-	}
-	public void setCombo(JComboBox<String> combo) {
-		this.combo = combo;
-	}
+	
 	public static FilenameFilter getXmlFileFilter() {
 		return xmlFileFilter;
 	}

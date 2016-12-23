@@ -42,16 +42,17 @@ public class ButtonAjout extends JButton implements MouseListener {
 	private JFrame fenetreAjout;
 	
 	private JLabel contraintes ;
-	private JLabel split ;
 	private JLabel exec ;
-	private JLabel build ;
 	private JLabel nom_p ;
+	private JLabel commande ;
+	private JLabel rang ;
 	
+	private JTextField rang1 ;
+	
+	private JTextField commande1 ;
 	private JTextField contraintes1 ;
 	private JTextField nom_p1 ;
-	private JTextField split1 ;
 	private JTextField exec1 ;
-    private JTextField build1 ;
     
     private JButton bouton_ok ;
     
@@ -65,15 +66,15 @@ public class ButtonAjout extends JButton implements MouseListener {
 	    this.nom_p= new JLabel("Nom : ");
 	    this.nom_p1= new JTextField("Nom du probleme");
 		this.contraintes= new JLabel("Chemin du fichier de contrainte");
-		this.split= new JLabel("Chemin du fichier contenant le Split");
+		
 		this.exec= new JLabel("Chemin du fichier contenant l'Execution");
-		this.build= new JLabel("Chemin du fichier contenant le build");
 	    this.contraintes1 =new JTextField("Path_dufichier_perl_de_Contraintes");
-	    this.split1= new JTextField("path_du_fichier_du_code_de_split");
 	    this.exec1= new JTextField("path_du_fichier_du_code_de_exec");
-	    this.build1= new JTextField("path_du_fichier_du_code_de_build");
 	    this.bouton_ok=new JButton("OK");
-	   
+		this.commande= new JLabel("Ligne de commande d'execution");
+	    this.commande1 =new JTextField("Ligne de comandes a executer");
+	    this.rang= new JLabel("Rang du probleme");
+	    this.rang1 =new JTextField("Rang");
 	   
 	    
 	}
@@ -103,15 +104,15 @@ public class ButtonAjout extends JButton implements MouseListener {
 		}
 		return fic;
 	} 
-	public int Ajouter_TYPE_DE_JOBS(String nom,String contraintesT,String splitT,String exec1T,String buildT)
+	public int Ajouter_TYPE_DE_JOBS(String nom,String contraintesT,String exec1T,String commande,String rang,String commandeT)
 	{
 		/*Ici on va crer le fichier XML dans un dossier propre a la machine */
 		/*On va tester, l'existence du dossier  */
 		int retour = -42;
 		String Fichier_Perl;
-		String Fichier_Split;
 		String Fichier_Exec;
-		String Fichier_Build;
+		String Fichier_Commande;
+		
 		File d = new File ("DB_JOBS");
 		File f = new File ("DB_JOBS/"+nom+".xml");
 		if (d.exists()&& d.isDirectory()){
@@ -126,14 +127,15 @@ public class ButtonAjout extends JButton implements MouseListener {
 					
 					
 					Fichier_Perl=FileToString(contraintesT);
-					Fichier_Split=FileToString(splitT);
+
 					Fichier_Exec=FileToString(exec1T);
-					Fichier_Build=FileToString(buildT);
+					Fichier_Commande=FileToString(commandeT);
 					
 					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
-					JOB.addContent(new Element("code_split").setText(Fichier_Split));
+					
 					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
-					JOB.addContent(new Element("code_build").setText(Fichier_Build));
+					JOB.addContent(new Element("cmd").setText(Fichier_Commande));
+					JOB.addContent(new Element("rang").setText(rang));
 
 					
 
@@ -165,14 +167,17 @@ public class ButtonAjout extends JButton implements MouseListener {
 					
 					
 					Fichier_Perl=FileToString(contraintesT);
-					Fichier_Split=FileToString(splitT);
+			
 					Fichier_Exec=FileToString(exec1T);
-					Fichier_Build=FileToString(buildT);
+
+					Fichier_Commande=FileToString(commandeT);
 					
 					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
-					JOB.addContent(new Element("code_split").setText(Fichier_Split));
+
 					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
-					JOB.addContent(new Element("code_build").setText(Fichier_Build));
+					JOB.addContent(new Element("cmd").setText(commande));
+					JOB.addContent(new Element("rang").setText(rang));
+
 
 					
 
@@ -205,15 +210,49 @@ public class ButtonAjout extends JButton implements MouseListener {
 		fenetreAjout.add(nom_p1);
 		fenetreAjout.add(contraintes);
 		fenetreAjout.add(contraintes1);
-		fenetreAjout.add(split);
-		fenetreAjout.add(split1);
+
 		fenetreAjout.add(exec);
 		fenetreAjout.add(exec1);
-		fenetreAjout.add(build);
-		fenetreAjout.add(build1);
+		fenetreAjout.add(commande);
+		fenetreAjout.add(commande1);
+		fenetreAjout.add(rang);
+		fenetreAjout.add(rang1);
 		fenetreAjout.add(bouton_ok);
 		fenetreAjout.setVisible(true); 
 		
+		commande1.addMouseListener(new MouseListener() {
+
+		    public void mouseClicked(MouseEvent e) {
+		    	JFileChooser fc = new JFileChooser();
+				 
+		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
+		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
+		        fc.setFileFilter(ff);
+		 
+		        int returnVal = fc.showOpenDialog(contraintes1);
+		        String nomFic = "";
+		        if (returnVal == JFileChooser.APPROVE_OPTION) {
+		        	contraintes1.setText(fc.getSelectedFile().getAbsolutePath());
+		        }  
+		    }
+
+		    public void mousePressed(MouseEvent e) {
+
+		    }
+
+		    public void mouseReleased(MouseEvent e) {
+
+		    }
+
+		    public void mouseEntered(MouseEvent e) {
+
+		    }
+
+		    public void mouseExited(MouseEvent e) {
+
+		    }
+
+		});		
 		contraintes1.addMouseListener(new MouseListener() {
 
 		    public void mouseClicked(MouseEvent e) {
@@ -247,39 +286,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		    }
 
 		});
-		split1.addMouseListener(new MouseListener() {
-
-		    public void mouseClicked(MouseEvent e) {
-		    	JFileChooser fc = new JFileChooser();
-				 
-		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
-		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
-		        fc.setFileFilter(ff);
-		 
-		        int returnVal = fc.showOpenDialog(contraintes1);
-		        String nomFic = "";
-		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-		        	split1.setText(fc.getSelectedFile().getAbsolutePath());
-		        }  
-		    }
-
-		    public void mousePressed(MouseEvent e) {
-
-		    }
-
-		    public void mouseReleased(MouseEvent e) {
-
-		    }
-
-		    public void mouseEntered(MouseEvent e) {
-
-		    }
-
-		    public void mouseExited(MouseEvent e) {
-
-		    }
-
-		});
+		
 		exec1.addMouseListener(new MouseListener() {
 
 		    public void mouseClicked(MouseEvent e) {
@@ -313,43 +320,11 @@ public class ButtonAjout extends JButton implements MouseListener {
 		    }
 
 		});
-		build1.addMouseListener(new MouseListener() {
-
-		    public void mouseClicked(MouseEvent e) {
-		    	JFileChooser fc = new JFileChooser();
-				 
-		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
-		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
-		        fc.setFileFilter(ff);
-		 
-		        int returnVal = fc.showOpenDialog(contraintes1);
-		        String nomFic = "";
-		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-		        	build1.setText(fc.getSelectedFile().getAbsolutePath());
-		        }  
-		    }
-
-		    public void mousePressed(MouseEvent e) {
-
-		    }
-
-		    public void mouseReleased(MouseEvent e) {
-
-		    }
-
-		    public void mouseEntered(MouseEvent e) {
-
-		    }
-
-		    public void mouseExited(MouseEvent e) {
-
-		    }
-
-		});
+		
 		bouton_ok.addMouseListener(new MouseListener() {
 
 		    public void mouseClicked(MouseEvent e) {
-		    	int retour =Ajouter_TYPE_DE_JOBS(nom_p1.getText(),contraintes1.getText(),split1.getText(),exec1.getText(),build1.getText());
+		    	int retour =Ajouter_TYPE_DE_JOBS(nom_p1.getText(),contraintes1.getText(),exec1.getText(),commande1.getText(),rang1.getText(),commande.getText());
 		    	switch(retour)
 		    	{
 			    	case -1:
@@ -445,13 +420,6 @@ public class ButtonAjout extends JButton implements MouseListener {
 		this.contraintes = contraintes;
 	}
 
-	public JLabel getSplit() {
-		return split;
-	}
-
-	public void setSplit(JLabel split) {
-		this.split = split;
-	}
 
 	public JLabel getExec() {
 		return exec;
@@ -461,13 +429,6 @@ public class ButtonAjout extends JButton implements MouseListener {
 		this.exec = exec;
 	}
 
-	public JLabel getBuild() {
-		return build;
-	}
-
-	public void setBuild(JLabel build) {
-		this.build = build;
-	}
 
 	public JLabel getNom_p() {
 		return nom_p;
@@ -493,14 +454,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		this.nom_p1 = nom_p1;
 	}
 
-	public JTextField getSplit1() {
-		return split1;
-	}
-
-	public void setSplit1(JTextField split1) {
-		this.split1 = split1;
-	}
-
+	
 	public JTextField getExec1() {
 		return exec1;
 	}
@@ -509,13 +463,6 @@ public class ButtonAjout extends JButton implements MouseListener {
 		this.exec1 = exec1;
 	}
 
-	public JTextField getBuild1() {
-		return build1;
-	}
-
-	public void setBuild1(JTextField build1) {
-		this.build1 = build1;
-	}
 
 	public JButton getBouton_ok() {
 		return bouton_ok;

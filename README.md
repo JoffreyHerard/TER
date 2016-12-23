@@ -37,15 +37,15 @@
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de contrainte</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de split</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de exec</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de build</td>
@@ -53,7 +53,7 @@
 </tr>
 <tr>
 <td>Realisation d'echantillon de test des scripts </td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Cote client/Worker fonctionnelle</td>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JOB>
+  <code_Perl />
+  <code_split>path_du_fichier_du_code_de_split</code_split>
+  <code_exec />
+  <cmd>Ligne de comandes a executer</cmd>
+  <code_build />
+</JOB>
