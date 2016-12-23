@@ -329,8 +329,12 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				xpa = XPath.newInstance("/JOB/cmd/");   
 		            
 		        /* On récupère tous les noeuds répondant au chemin //patient */
-				results = (List<String>) xpa.selectNodes(racine) ;
-				//Faut paerser la liste 
+				results = (List<String>) xpa.selectNodes(racine);
+				String delims = "[,#]+";
+				String[] tokens =results.get(0).split(delims);
+				//Faut parser la liste 
+				
+				
 				JOB.addContent(new Element("cmd").setText("toto execute des patates"));
 				JOB.addContent(new Element("id").setText(String.valueOf(i)));
 				
