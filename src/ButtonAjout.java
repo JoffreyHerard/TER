@@ -104,7 +104,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		}
 		return fic;
 	} 
-	public int Ajouter_TYPE_DE_JOBS(String nom,String contraintesT,String exec1T,String commande,String rang,String commandeT)
+	public int Ajouter_TYPE_DE_JOBS(String nom,String contraintesT,String exec1T,String commandeT,String rang)
 	{
 		/*Ici on va crer le fichier XML dans un dossier propre a la machine */
 		/*On va tester, l'existence du dossier  */
@@ -175,7 +175,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
 
 					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
-					JOB.addContent(new Element("cmd").setText(commande));
+					JOB.addContent(new Element("cmd").setText(Fichier_Commande));
 					JOB.addContent(new Element("rang").setText(rang));
 
 
@@ -226,13 +226,13 @@ public class ButtonAjout extends JButton implements MouseListener {
 		    	JFileChooser fc = new JFileChooser();
 				 
 		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
-		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
+		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers liste de commande", "dc");
 		        fc.setFileFilter(ff);
 		 
-		        int returnVal = fc.showOpenDialog(contraintes1);
+		        int returnVal = fc.showOpenDialog(commande1);
 		        String nomFic = "";
 		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-		        	contraintes1.setText(fc.getSelectedFile().getAbsolutePath());
+		        	commande1.setText(fc.getSelectedFile().getAbsolutePath());
 		        }  
 		    }
 
@@ -259,7 +259,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		    	JFileChooser fc = new JFileChooser();
 				 
 		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
-		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
+		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers Perl", "pl");
 		        fc.setFileFilter(ff);
 		 
 		        int returnVal = fc.showOpenDialog(contraintes1);
@@ -293,10 +293,10 @@ public class ButtonAjout extends JButton implements MouseListener {
 		    	JFileChooser fc = new JFileChooser();
 				 
 		        //Creer un filtre qui ne sélectionnera que les fichiers .txt
-		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers texte", "txt");
+		        FileNameExtensionFilter ff = new FileNameExtensionFilter("Fichiers executable", "pl");
 		        fc.setFileFilter(ff);
 		 
-		        int returnVal = fc.showOpenDialog(contraintes1);
+		        int returnVal = fc.showOpenDialog(exec1);
 		        String nomFic = "";
 		        if (returnVal == JFileChooser.APPROVE_OPTION) {
 		        	exec1.setText(fc.getSelectedFile().getAbsolutePath());
@@ -324,7 +324,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		bouton_ok.addMouseListener(new MouseListener() {
 
 		    public void mouseClicked(MouseEvent e) {
-		    	int retour =Ajouter_TYPE_DE_JOBS(nom_p1.getText(),contraintes1.getText(),exec1.getText(),commande1.getText(),rang1.getText(),commande.getText());
+		    	int retour =Ajouter_TYPE_DE_JOBS(nom_p1.getText(),contraintes1.getText(),exec1.getText(),commande1.getText(),rang1.getText());
 		    	switch(retour)
 		    	{
 			    	case -1:

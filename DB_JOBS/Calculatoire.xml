@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JOB>
+  <code_Perl>./calcul 2 3,
+./calcul 3 3,
+./calcul 4 3,
+./calcul 5 3, 
+./calcul 26 3, 
+./calcul 29 3#</code_Perl>
+  <code_exec>#!/usr/bin/perl
+use v5.14;
+
+exit $ARGV[0] +$ARGV[1] ;</code_exec>
+  <cmd />
+  <rang>6</rang>
+</JOB>

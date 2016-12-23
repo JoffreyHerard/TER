@@ -28,12 +28,24 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-import org.jdom2.xpath.XPath;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
@@ -51,6 +63,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 import org.jivesoftware.smackx.muc.Occupant;
 import org.jivesoftware.smackx.muc.RoomInfo;
 import org.jivesoftware.smackx.packet.DiscoverItems;
+
 
 @SuppressWarnings({ "unused", "serial" })
 public class ButtonLaunch extends JButton implements MouseListener {
@@ -141,7 +154,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
 		    	ProblemeCourant= FileToString("DB_JOBS/"+choix);
-		    	//ProblemeCourant="CECI EST UN TEST";
+		    	
 		    	try { 
 					/*On initialise la connection */
 					xmppManager.init();
@@ -184,19 +197,47 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      //On cherche a savoir combien d'utilisateurs par rapport au fichier xml enregistrer
 				      
 				      System.out.println("On attend un nombre dutilisateur precis");
-				      SAXBuilder sxb = new SAXBuilder();
-				      Document document = sxb.build(new File(ProblemeCourant));
-				      //On initialise un nouvel élément racine avec l'élément racine du
-				      // document.
-				      Element racine = document.getRootElement();
- 
-				      XPath xpa = XPath.newInstance("/JOB/rang");
-				      Element monNoeud = (Element) xpa.selectSingleNode(racine);
-				      String retour = xpa.valueOf(monNoeud);
+				      int Nombre_requis=3;
 				      
-				      int Nombre_requis =Integer.parseInt(retour);
+				      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+
+				      try {
+
+				         DocumentBuilder builder = factory.newDocumentBuilder();
+
+				         File fileXML = new File("DB_JOBS/"+choix);
+
+				         Document xml = builder.parse(fileXML);
+
+				         Element root = xml.getDocumentElement();
+
+				         XPathFactory xpf = XPathFactory.newInstance();
+
+				         XPath path = xpf.newXPath();
+
+				                   
+
+				        String expression = "/JOB/rang";
+
+				        String str = (String)path.evaluate(expression, root);
+
+				        Nombre_requis=Integer.parseInt(str);
+
+				        System.out.println("-------------------------------------");
+				      } catch (ParserConfigurationException xe) {
+				          xe.printStackTrace();
+				       } catch (SAXException xe) {
+				          xe.printStackTrace();
+				       } catch (IOException xe) {
+				          xe.printStackTrace();
+				       } catch (XPathExpressionException xe) {
+				          xe.printStackTrace();
+				       }
+				      System.out.println("NBR : "+Nombre_requis);
 				      
-				      while(Nombre_Participants<Nombre_requis){
+				    //modifier ici attention nombre requis = 2 ,valable uniquement pour les tests 
+				      while(Nombre_Participants<2){
 				    	  Nombre_Participants=muc.getOccupantsCount();
 					      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
 					      
@@ -227,8 +268,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      //On a attendu que lon est assez de participant ou pas en fonction du split 
 				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
 				      System.out.println("Debut split ");
-				      
-				      split(Liste_user,Nombre_Participants,ProblemeCourant,xmppManager);
+				      //modifier ici attention on a pas le bon nombre de participant
+				      split(Liste_user,Nombre_Participants,ProblemeCourant,xmppManager,choix);
 				      
 				      System.out.println("Fin du split ");
 					  muc.sendMessage("Lancement du probleme du"+comboPrb.getSelectedItem().toString());
@@ -295,8 +336,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-	public int split(ArrayList<identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager)
+	public int split(ArrayList<identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
+		//modifier ici attention
 		for(int i=0;i<Nombre_Participants-1;i++)
 		{
 			String buddyJID = Liste_user.get(i).getId();
@@ -306,58 +348,97 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				xmppManager.createEntry(buddyJID, buddyName);
 				
 				//On va crer le message XML approprier puis l'envoyer 
-				Element JOB = new Element("DEBUT_JOB");
-				SAXBuilder sxb = new SAXBuilder();
-				Document doc = sxb.build(ProblemeCourant);
+				
+				
 				
 				//On construit le fichier XML avec le code a executer 
-				
-				 Element racine = doc.getRootElement();
+		
 		            
 	            /* On va dans un premier temps rechercher l'ensemble des noms des patients de notre hôpital. */
 	            
-	            /* Recherche de la liste des patients*/
-	            XPath xpa = XPath.newInstance("/JOB/exec/");   
+	            /* Recherche de la liste des exec*/
+				
+				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder builder = factory.newDocumentBuilder();
+
+		        File fileXML = new File("DB_JOBS/"+choix);
+
+		        Document xml = builder.parse(fileXML);
+
+		        Element root = xml.getDocumentElement();
+
+		        XPathFactory xpf = XPathFactory.newInstance();
+
+		        XPath path = xpf.newXPath();
+
+		                   
+
+		        String expression = "/JOB/code_exec";
+
+		        String strexec = (String)path.evaluate(expression, root);
+		        System.out.print("DEBUT STR EXEC");
+		        System.out.print(strexec);
+		        System.out.print("FIN STR EXEC");
+
+		        expression = "/JOB/code_Perl";
+
+		        String strperl = (String)path.evaluate(expression, root);
 	            
 	            /* On récupère tous les noeuds répondant au chemin //patient */
-	            List<String> results = (List<String>) xpa.selectNodes(racine) ;
-		            
-		            
-				JOB.addContent(new Element("code_exec").setText(results.get(0)));
+
 				
 				// On ajouter a sa la bonne ligne de commande a executer
-				xpa = XPath.newInstance("/JOB/cmd/");   
+		        expression = "/JOB/cmd";
+
+		        String strcmd = (String)path.evaluate(expression, root);
 		            
 		        /* On récupère tous les noeuds répondant au chemin //patient */
-				results = (List<String>) xpa.selectNodes(racine);
+				
 				String delims = "[,#]+";
-				String[] tokens =results.get(0).split(delims);
+				String[] tokens =strcmd.split(delims);
+				
 				//Faut parser la liste 
 				
 				
-				JOB.addContent(new Element("cmd").setText("toto execute des patates"));
-				JOB.addContent(new Element("id").setText(String.valueOf(i)));
+				  
+				final Document document= builder.newDocument();
+					
+				final Element racine = document.createElement("JOB");
+				document.appendChild(racine);	
+				final Element exec = document.createElement("exec");
+				exec.appendChild(document.createTextNode(strexec));
 				
-				// new XMLOutputter().output(doc, System.out);
-				XMLOutputter xmlOutput = new XMLOutputter();
+				final Element contraintes = document.createElement("contraintes");
+				contraintes.appendChild(document.createTextNode(strperl));
 				
 				
+				final Element cmd = document.createElement("cmd");
+				cmd.appendChild(document.createTextNode(strcmd));
+				final Element id = document.createElement("id");
+				id.appendChild(document.createTextNode(""+i));
+				racine.appendChild(id);
+				racine.appendChild(contraintes);
+				racine.appendChild(exec);
+				racine.appendChild(cmd);
 				
-				// display nice nice
-				xmlOutput.setFormat(Format.getPrettyFormat());
-				xmlOutput.output(doc, new FileWriter("JOB_SEND/Fichier_envoie_"+i));
-				String Probleme_individuel=FileToString("JOB_SEND/Fichier_envoie_"+i);
+				final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			    final Transformer transformer = transformerFactory.newTransformer();
+			    final DOMSource source = new DOMSource(document);
+			    final StreamResult sortie = new StreamResult(new File("JOB_SEND/XML_send_"+i));
+			    transformer.transform(source, sortie);	
+				
+				String Probleme_individuel=FileToString("JOB_SEND/XML_send_"+i);
 				
 				xmppManager.sendMessage(Probleme_individuel, buddyName+"@apocalypzer-lg-gram");
+				
+				
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// Ici on fait apelle a la fonction split 
-			  
-			  
-			
-		
+
 		}
 		 
 		return 0;
