@@ -49,7 +49,7 @@
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de build</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de test des scripts </td>
