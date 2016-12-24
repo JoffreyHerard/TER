@@ -67,7 +67,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    this.affichage = new JLabel("Selection du salon:");	
 	    this.comboPrb = new JComboBox<String>();
 	    this.ListeRoom = new ArrayList<HostedRoom>();
-	    this.xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
+	    this.xmppManager = new XmppManager(xmppManager.NOM_HOTE, 5222);
 	  }
 	  
 	@Override
@@ -111,7 +111,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 					
 					System.out.println("Etablir une liste de room");
 					
-					ListeRoom =(ArrayList<HostedRoom>)MultiUserChat.getHostedRooms(xmppManager.getConnection(), "conference.apocalypzer-lg-gram");
+					ListeRoom =(ArrayList<HostedRoom>)MultiUserChat.getHostedRooms(xmppManager.getConnection(), "conference."+xmppManager.NOM_HOTE);
 					System.out.println("Fin de etablir une liste de room");
 					Iterator it = ListeRoom.iterator();
 					

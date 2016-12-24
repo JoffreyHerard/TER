@@ -51,7 +51,7 @@ public class XmppManager {
     
     private ConnectionConfiguration config;
     private XMPPConnection connection;
-
+    static String NOM_HOTE;
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
@@ -252,7 +252,7 @@ public class XmppManager {
 						System.out.println("Resultats du calcul = "+resultat);
 						// on n'as plus que a renvoyer le resultats
 						
-						getCurrent().sendMessage("1,"+resultat, "provider@apocalypzer-lg-gram");
+						getCurrent().sendMessage("1,"+resultat, "provider@"+NOM_HOTE);
 						System.out.println("message envoyer = 1,"+resultat);
 					}else
 					{

@@ -77,7 +77,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private File repertoire;
 	 private File[] files;
 	 private File fichier_Choisi;
-	 private XmppManager xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
+	 private XmppManager xmppManager ;
 	 private String ProblemeCourant;
 	 private boolean isRunning ;
 	 private ArrayList<identity> Liste_user;
@@ -93,6 +93,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    bouton_ok = new JButton("OK");
 	    Liste_user = new ArrayList<identity>();
 	    res=new JLabel("Resultat");
+	    xmppManager = new XmppManager(XmppManager.NOM_HOTE, 5222);
 	  }
 	 public String FileToString(String PathFile)
 		{
@@ -168,7 +169,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  //Get the MultiUserChatManager
 					
 					  //Create a MultiUserChat using an XMPPConnection for a room
-					  String Name_room = "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference.apocalypzer-lg-gram";
+					  String Name_room = "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference."+xmppManager.NOM_HOTE;
 					  MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), Name_room);
 					
 					  // Create the room identity
@@ -440,7 +441,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				
 				String Probleme_individuel=FileToString("JOB_SEND/XML_send_"+i);
 				
-				xmppManager.sendMessage(Probleme_individuel, buddyName+"@apocalypzer-lg-gram");
+				xmppManager.sendMessage(Probleme_individuel, buddyName+"@"+xmppManager.NOM_HOTE);
 				
 				
 				

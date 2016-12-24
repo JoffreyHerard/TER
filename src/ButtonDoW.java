@@ -60,7 +60,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
-	    this.xmppManager = new XmppManager("apocalypzer-lg-gram", 5222);
+	    this.xmppManager = new XmppManager(xmppManager.NOM_HOTE, 5222);
 	  }
 	  
 	@Override
@@ -72,13 +72,13 @@ public class ButtonDoW extends JButton implements MouseListener {
 		  xmppManager.setProvider(false);
 		  
 		  // Create a MultiUserChat using an XMPPConnection for a room
-		  MultiUserChat muc2 = new MultiUserChat(xmppManager.getConnection(), ProblemeCourant+"@conference.apocalypzer-lg-gram");
+		  MultiUserChat muc2 = new MultiUserChat(xmppManager.getConnection(), ProblemeCourant+"@conference."+xmppManager.NOM_HOTE);
 		
 		  // User2 joins the new room
 		  // The room service will decide the amount of history to send
 	      muc2.join(username);
 	      xmppManager.createEntry("provider","BOT_Providing");
-	      xmppManager.sendMessage("I am ready to work ", "provider@apocalypzer-lg-gram");
+	      xmppManager.sendMessage("I am ready to work ", "provider@"+xmppManager.NOM_HOTE);
 	      isRunning = true;
 	      
 		  while (isRunning){
