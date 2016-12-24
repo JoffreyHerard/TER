@@ -154,7 +154,7 @@ public class XmppManager {
  	            
  	           try{
  	        	   
-					System.out.println("Ecriture du XML dans un fichier");
+					System.out.println("Ecriture du XML dans un fichier xml receive");
 					File file = new File("JOB_REC/xml_receive.xml");
 					file.createNewFile();
 					
@@ -167,20 +167,14 @@ public class XmppManager {
 					//On a maintenant cerer le fichier on va le parser pour recuperer # fichier precis
 					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder builder = factory.newDocumentBuilder();
-					
 					Document xml = builder.parse(file);
-
 			        Element root = xml.getDocumentElement();
-
 			        XPathFactory xpf = XPathFactory.newInstance();
-
 			        XPath path = xpf.newXPath();
-
 			        String expression = "/JOB/exec";
-
 			        String strexec = (String)path.evaluate(expression, root);
 			        
-
+			        
 			        expression = "/JOB/contraintes";
 
 			        String strperl = (String)path.evaluate(expression, root);
@@ -190,49 +184,64 @@ public class XmppManager {
 					
 					// On ajouter a sa la bonne ligne de commande a executer
 			        expression = "/JOB/cmd";
-
 			        String strcmd = (String)path.evaluate(expression, root);    
-			        
 			        //Creation du fichier de contrainte en PERL
 			        
-					System.out.println("Ecriture du XML dans un fichier");
+					System.out.println("Ecriture du XML dans un fichier contrainte");
 					File file_con = new File("JOB_REC/DATA_EXTRACT/contraintes.pl");
 					file.createNewFile();
 					writer = new PrintWriter(file_con);
 					writer.write(strperl);
 					writer.close();
-					Runtime runtime = Runtime.getRuntime();
 					
+					//Creation du fichier de exec en PERL et son execution
+					
+					System.out.println("Ecriture du XML dans un fichier calcul.pl");
+					File file_exec = new File("JOB_REC/DATA_EXTRACT/calcul.pl");
+					file.createNewFile();
+					writer = new PrintWriter(file_exec);
+					writer.write(strexec);
+					writer.close();
+					// execution
+					Runtime runtime = Runtime.getRuntime();
+					System.out.println("execution du fichier de contrainte ");
 					// on execute le fichier de contrainte 3 = GOOD different = NOGOOD
+					
 					Process p_cunt =runtime.exec("perl JOB_REC/DATA_EXTRACT/contraintes.pl");
-					int resultat_con=p_cunt.exitValue();
+					int resultat_con=p_cunt.waitFor();
+					System.out.println("execution termine du fichier de contrainte ");
+					
+					System.out.println("On a recupere la valeur de sortie de contraintes");
 					System.out.println("Resultat contraintes = "+resultat_con);
 					
 					if(resultat_con==3){
-						
-						
-						//Creation du fichier de exec en PERL et son execution
-						
-						System.out.println("Ecriture du XML dans un fichier");
-						File file_exec = new File("JOB_REC/DATA_EXTRACT/calcul.pl");
-						file.createNewFile();
-						writer = new PrintWriter(file_exec);
-						writer.write(strexec);
-						writer.close();
-						
 						//execution
-						runtime = Runtime.getRuntime();
-						Process p_cmd =runtime.exec("strcmd");
-						int resultat=p_cmd.exitValue();
+						System.out.println("La contrainte a valider,on va commencer lexecution");
+						
+						Process p_cmd =runtime.exec(strcmd);
+						int resultat=p_cmd.waitFor();
 						System.out.println("Resultats du calcul = "+resultat);
 						// on n'as plus que a renvoyer le resultats
 						
 						getCurrent().sendMessage(""+resultat, "provider@apocalypzer-lg-gram");
 					}	
         	   } 
- 	           catch(IOException | XPathExpressionException | SAXException | ParserConfigurationException ioe){
-        		    System.out.println("Erreur écriture");
-        	   } catch (XMPPException e) {
+ 	           catch(IOException ioe){
+        		    System.out.println("Erreur IO");
+				ioe.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (XPathExpressionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (XMPPException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
