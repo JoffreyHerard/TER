@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><JOB><id>0</id><contraintes>#!/usr/bin/perl
+#!/usr/bin/perl
 use v5.14;
 
 my $osname = $^O;
@@ -21,7 +21,4 @@ if( $osname eq 'MSWin32' ){
             exit(3);
         }
     }
-}</contraintes><exec>#!/usr/bin/perl
-use v5.14;
-
-exit $ARGV[0] +$ARGV[1] +$ARGV[2] ;</exec><cmd>perl JOB_REC/DATA_EXTRACT/calcul.pl 2 3</cmd></JOB>
+}

@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <JOB>
-  <code_Perl />
-  <code_split>path_du_fichier_du_code_de_split</code_split>
-  <code_exec />
-  <cmd>Ligne de comandes a executer</cmd>
-  <code_build />
+  <code_Perl>#!/usr/bin/perl
+use v5.14;
+
+my $osname = $^O;
+
+
+if( $osname eq 'MSWin32' ){
+  print"We are on windows";
+  # work around for historical reasons
+  exit(1);
+} else {
+    print "Test si on est sur Mac\n";
+    if ($osname eq 'darwin') {
+        print "We are on Mac OS X ...\n";
+        exit(2);
+    }
+    else {
+        print "Test si on est sur Linux\n";
+        if ($osname eq 'linux') {
+            print "We are on Linux...\n";
+            exit(3);
+        }
+    }
+}</code_Perl>
+  <code_exec>#!/usr/bin/perl
+use v5.14;
+
+exit $ARGV[0] +$ARGV[1] +$ARGV[2] ;</code_exec>
+  <cmd>perl JOB_REC/DATA_EXTRACT/calcul.pl 2 3,
+perl JOB_REC/DATA_EXTRACT/calcul.pl 3 3,
+perl JOB_REC/DATA_EXTRACT/calcul.pl 4 3,
+perl JOB_REC/DATA_EXTRACT/calcul.pl 5 3, 
+perl JOB_REC/DATA_EXTRACT/calcul.pl 26 3, 
+perl JOB_REC/DATA_EXTRACT/calcul.pl 29 3#</cmd>
+  <rang>6</rang>
 </JOB>

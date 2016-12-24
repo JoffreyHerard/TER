@@ -28,7 +28,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -394,8 +393,12 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		            
 		        /* On récupère tous les noeuds répondant au chemin //patient */
 				
-				String delims = "[,#]+";
+				String delims = "[,]";
 				String[] tokens =strcmd.split(delims);
+				System.out.print("affichage des tokens");
+				tokens[tokens.length-1]=tokens[tokens.length-1].substring(0, tokens[tokens.length-1].length()-1);
+				for(int j=0;j<tokens.length;j++)
+					System.out.println(j+" : "+tokens[j]);
 				
 				//Faut parser la liste 
 				
@@ -413,7 +416,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				
 				
 				final Element cmd = document.createElement("cmd");
-				cmd.appendChild(document.createTextNode(strcmd));
+				cmd.appendChild(document.createTextNode(tokens[i]));
 				final Element id = document.createElement("id");
 				id.appendChild(document.createTextNode(""+i));
 				racine.appendChild(id);

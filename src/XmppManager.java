@@ -13,6 +13,34 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.Presence.Type;
 
+import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 @SuppressWarnings("unused")
 public class XmppManager {
     
@@ -110,13 +138,111 @@ public class XmppManager {
         @Override
         public void processMessage(Chat chat, Message message) {
         	
-        	//Modification de reaction si provider ou non 
-            String from = message.getFrom();
-            String body = message.getBody();
-            System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
+        	if(provider){ 
+	        	//Modification de reaction si provider ou non 
+	            String from = message.getFrom();
+	            String body = message.getBody();
+	            System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
+        	}
+        	else
+        	{
+        		
+        	   String from = message.getFrom();
+ 	           String body = message.getBody();
+ 	           System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
+ 	           System.out.println("c'est partie on va executer ce qu'il faut");
+ 	            
+ 	           try{
+ 	        	   
+					System.out.println("Ecriture du XML dans un fichier");
+					File file = new File("JOB_REC/xml_receive.xml");
+					file.createNewFile();
+					
+				
+				    
+					PrintWriter writer = new PrintWriter(file);
+					writer.write(body);
+					writer.close();
+					
+					//On a maintenant cerer le fichier on va le parser pour recuperer # fichier precis
+					DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder builder = factory.newDocumentBuilder();
+					
+					Document xml = builder.parse(file);
+
+			        Element root = xml.getDocumentElement();
+
+			        XPathFactory xpf = XPathFactory.newInstance();
+
+			        XPath path = xpf.newXPath();
+
+			        String expression = "/JOB/exec";
+
+			        String strexec = (String)path.evaluate(expression, root);
+			        
+
+			        expression = "/JOB/contraintes";
+
+			        String strperl = (String)path.evaluate(expression, root);
+		            
+		            /* On récupère tous les noeuds répondant au chemin //patient */
+
+					
+					// On ajouter a sa la bonne ligne de commande a executer
+			        expression = "/JOB/cmd";
+
+			        String strcmd = (String)path.evaluate(expression, root);    
+			        
+			        //Creation du fichier de contrainte en PERL
+			        
+					System.out.println("Ecriture du XML dans un fichier");
+					File file_con = new File("JOB_REC/DATA_EXTRACT/contraintes.pl");
+					file.createNewFile();
+					writer = new PrintWriter(file_con);
+					writer.write(strperl);
+					writer.close();
+					Runtime runtime = Runtime.getRuntime();
+					
+					// on execute le fichier de contrainte 3 = GOOD different = NOGOOD
+					Process p_cunt =runtime.exec("perl JOB_REC/DATA_EXTRACT/contraintes.pl");
+					int resultat_con=p_cunt.exitValue();
+					System.out.println("Resultat contraintes = "+resultat_con);
+					
+					if(resultat_con==3){
+						
+						
+						//Creation du fichier de exec en PERL et son execution
+						
+						System.out.println("Ecriture du XML dans un fichier");
+						File file_exec = new File("JOB_REC/DATA_EXTRACT/calcul.pl");
+						file.createNewFile();
+						writer = new PrintWriter(file_exec);
+						writer.write(strexec);
+						writer.close();
+						
+						//execution
+						runtime = Runtime.getRuntime();
+						Process p_cmd =runtime.exec("strcmd");
+						int resultat=p_cmd.exitValue();
+						System.out.println("Resultats du calcul = "+resultat);
+						// on n'as plus que a renvoyer le resultats
+						
+						getCurrent().sendMessage(""+resultat, "provider@apocalypzer-lg-gram");
+					}	
+        	   } 
+ 	           catch(IOException | XPathExpressionException | SAXException | ParserConfigurationException ioe){
+        		    System.out.println("Erreur écriture");
+        	   } catch (XMPPException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	}
         }
         
     }
+    public XmppManager getCurrent() {
+		return this;
+	}
 
 	public String getServer() {
 		return server;

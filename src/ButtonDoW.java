@@ -80,6 +80,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	      xmppManager.createEntry("provider","BOT_Providing");
 	      xmppManager.sendMessage("I am ready to work ", "provider@apocalypzer-lg-gram");
 	      isRunning = true;
+	      
 		  while (isRunning){
 			  Thread.sleep(50);
 			 
