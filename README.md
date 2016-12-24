@@ -57,10 +57,18 @@
 </tr>
 <tr>
 <td>Cote client/Worker fonctionnelle</td>
-<td>Non fait</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Schemas XML</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Rapport</td>
+<td>Non fait</td>
+</tr>
+<tr>
+<td>Wiki/ How to USE</td>
 <td>Non fait</td>
 </tr>
 </tbody></table>
