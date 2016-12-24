@@ -82,6 +82,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private boolean isRunning ;
 	 private ArrayList<identity> Liste_user;
 	 private JLabel res ;
+	 
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
