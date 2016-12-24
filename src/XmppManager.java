@@ -55,7 +55,10 @@ public class XmppManager {
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
+    private boolean travail_terminer=false;
     private int retour_Providing =0;
+    private int envoyer =0;
+    private int recu =0;
     
     public XmppManager(String server, int port) {
         this.server = server;
@@ -99,10 +102,11 @@ public class XmppManager {
 		this.connection = connection;
 	}
 
-	public void performLogin(String username, String password) throws XMPPException {
+	public boolean performLogin(String username, String password) throws XMPPException {
         if (connection!=null && connection.isConnected()) {
             connection.login(username, password);
         }
+        return true;
     }
 
     public void setStatus(boolean available, String status) {
@@ -143,6 +147,29 @@ public class XmppManager {
 	            String from = message.getFrom();
 	            String body = message.getBody();
 	            System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
+	            // on regarde l'en tete du message apparente a un message xml reponse tel que lid est 1 si reponse 2
+	            //si imposible a executer dans le cas echeant un troisieme champ correspond a lid du job non reussi 
+	            //et 0 si envoie travail 
+	            
+	            // on procede donc au build un script ici un peu fictif mais pour prolonger pour voir si ca marche bien
+	            // ici on va juste sommer les results choses assez simple
+	            
+	            String regex="[,]";
+	            String[] en_tete = body.split(regex);
+	            
+	            // indice 0 = en tete indice 1 = res
+	            if(Integer.parseInt(en_tete[0])==1){
+	            	retour_Providing+=Integer.parseInt(en_tete[1]);
+	            	recu++;
+	            	if(recu==envoyer)
+	            	{
+	            		travail_terminer=true;
+	            	}
+	            }	
+	            else
+	            {
+	            	System.out.println("Lexecution n'as pas ete posible on redistribue aleatoirement la tache");
+	            }
         	}
         	else
         	{
@@ -151,7 +178,9 @@ public class XmppManager {
  	           String body = message.getBody();
  	           System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
  	           System.out.println("c'est partie on va executer ce qu'il faut");
- 	            
+ 	           // creation de l'architecture necessaire 
+ 	           File dir = new File ("JOB_REC/DATA_EXTRACT");
+ 	           dir.mkdirs();
  	           try{
  	        	   
 					System.out.println("Ecriture du XML dans un fichier xml receive");
@@ -223,7 +252,11 @@ public class XmppManager {
 						System.out.println("Resultats du calcul = "+resultat);
 						// on n'as plus que a renvoyer le resultats
 						
-						getCurrent().sendMessage(""+resultat, "provider@apocalypzer-lg-gram");
+						getCurrent().sendMessage("1,"+resultat, "provider@apocalypzer-lg-gram");
+						System.out.println("message envoyer = 1,"+resultat);
+					}else
+					{
+						//on a pas pu lexecuter on renvoi un message 
 					}	
         	   } 
  	           catch(IOException ioe){
@@ -249,7 +282,32 @@ public class XmppManager {
         }
         
     }
-    public XmppManager getCurrent() {
+    
+    public boolean isTravail_terminer() {
+		return travail_terminer;
+	}
+
+	public void setTravail_terminer(boolean travail_terminer) {
+		this.travail_terminer = travail_terminer;
+	}
+
+	public int getEnvoyer() {
+		return envoyer;
+	}
+
+	public void setEnvoyer(int envoyer) {
+		this.envoyer = envoyer;
+	}
+
+	public int getRecu() {
+		return recu;
+	}
+
+	public void setRecu(int recu) {
+		this.recu = recu;
+	}
+
+	public XmppManager getCurrent() {
 		return this;
 	}
 

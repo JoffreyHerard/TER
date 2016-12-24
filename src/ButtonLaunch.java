@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -80,7 +81,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private String ProblemeCourant;
 	 private boolean isRunning ;
 	 private ArrayList<identity> Liste_user;
-	 
+	 private JLabel res ;
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -90,6 +91,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    
 	    bouton_ok = new JButton("OK");
 	    Liste_user = new ArrayList<identity>();
+	    res=new JLabel("Resultat");
 	  }
 	 public String FileToString(String PathFile)
 		{
@@ -236,7 +238,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      System.out.println("NBR : "+Nombre_requis);
 				      
 				    //modifier ici attention nombre requis = 2 ,valable uniquement pour les tests 
-				      while(Nombre_Participants<2){
+				      while(Nombre_Participants<Nombre_requis){
 				    	  Nombre_Participants=muc.getOccupantsCount();
 					      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
 					      
@@ -276,9 +278,14 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  /*Maintenant que l'on a envoyer plusieurs problemes on va essayer davoir leur reponses*/
 					  
 					  isRunning = true;
-					  while (isRunning){
+					  fenetre.add(res);
+					  while (xmppManager.isTravail_terminer()){
 						  Thread.sleep(50);
 					  }
+					  //on a eu le resultat
+					  res.setText("Resultat : "+xmppManager.getRetour_Providing());
+					  fenetre.add(res);
+					  Thread.sleep(5000);
 					  xmppManager.destroy();	
 					  
 					  

@@ -85,6 +85,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 			  Thread.sleep(50);
 			 
 		  }
+
 		  xmppManager.destroy();	
 		  
 		} catch (Exception exc) {

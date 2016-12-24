@@ -102,8 +102,8 @@ public class ButtonWorker extends JButton implements MouseListener {
 		    	try {
 		    		
 					xmppManager.init();
-			    	String username = "worker1"; //pseudo.getText();
-			    	String password = "toto";//pass.getText();
+			    	String username = pseudo.getText();
+			    	String password = pass.getText();
 					xmppManager.performLogin(username, password);
 					xmppManager.setStatus(true, "YOLO");  
 					xmppManager.setProvider(false);
