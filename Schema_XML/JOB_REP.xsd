@@ -2,7 +2,8 @@
 	<xs:element name="JOB_REP">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="id" type="xs:Integer"/>
+				<xs:element name="id_retour" type="xs:Integer"/>
+				<xs:element name="idduPRb" type="xs:Integer"/>
 				<xs:element name="reponse" type="xs:string"/>
 				<xs:element name="code_Perl" type="xs:string"/>
 				<xs:element name="exec" type="xs:string"/>
