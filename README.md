@@ -64,12 +64,12 @@
 <td>Fait</td>
 </tr>
 <tr>
-<td>Rapport</td>
-<td>Non fait</td>
+<td>Affinemment du fonctionnement</td>
+<td>30%</td>
 </tr>
 <tr>
-<td>Wiki/ How to USE</td>
-<td>Non fait</td>
+<td>Rapport</td>
+<td>95%</td>
 </tr>
 </tbody></table>
 </article>
