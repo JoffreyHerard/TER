@@ -51,7 +51,7 @@ public class XmppManager {
     
     private ConnectionConfiguration config;
     private XMPPConnection connection;
-    static String NOM_HOTE;
+    static String NOM_HOTE="apocalypzer-lg-gram";
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
