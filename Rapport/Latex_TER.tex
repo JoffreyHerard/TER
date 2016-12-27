@@ -168,36 +168,53 @@ Nous allons dans cette partie du rapport montrer la représentation nécessaire 
 L'execution d'un script de contrainte ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() 
 \inputminted{perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
 \subsection{Split} 
-La fonction split peut se résumer en plusieurs étapes, premièrement on recupere tout les nickname et JID de chaque utilisateur de la chatroom ,pour chacun d'entre eux on leur envoi un fichier xml personnalise avec chacun une tache bien distincte en respectant le schéma associe.Pour avoir une trace on sauvegarde chaque fichier xml envoyer dans le dossier JOB\_SEND
+La fonction split peut se résumer en plusieurs étapes, premièrement on récupère tout les nickname et JID de chaque utilisateur de la chatroom ,pour chacun d'entre eux on leur envoi un fichier xml personnalise avec chacun une tache bien distincte en respectant le schéma associe.Pour avoir une trace on sauvegarde chaque fichier xml envoyer dans le dossier JOB\_SEND
 \inputminted[tabsize=2,frame=lines,linenos]{java}{Fichier_import/split.java}
 \subsection{Exec} 
-L'execution d'un script d'execution ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() bien entendu on parle de calcul chiffrer ,cela peut être aussi un résultat chiffre dans un fichier. 
+L'execution d'un script d’exécution ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() bien entendu on parle de calcul chiffrer ,cela peut être aussi un résultat chiffre dans un fichier. 
 \inputminted[tabsize=2,frame=lines,linenos]{Perl}{Fichier_import/calcul.pl}
 \subsection{Build} 
 La fonction build est simplement une addition de chaque résultat reçu petit a petit 
 \inputminted[tabsize=2,frame=lines,linenos]{Perl}{Fichier_import/build.java}
 \newpage
 \section{Description d'une exécution quelconque} 
-\newpage
+\subsection{Exécution cote Provider}
+Voici un déroulement classique cote Provider :
 \begin{enumerate}
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
-\item 
+\item Un Provider choisi un problème a lancer.
+\item Une fois le Problème lancer une Chatroom comportant le nom du problème+Providingroom est créer sur le domaine
+\item Le Provider attend un nombre suffisant de Worker en fonction du probleme(champ rang du XML)
+\item Une fois un nombre de Worker atteints, on récupère chaque identifiant et on leur envoi leur job respectif et ligne de commande respective
+\item On attend d'avoir reçu un message de type "JOB\_Reponse" autant de fois et distinct que de Workers capable de l’exécuter 
+\item On affiche le résultat
+\end{enumerate}
 
+\subsection{Exécution cote Worker}
+Voici un déroulement classique cote Worker
+\begin{enumerate}
+\item On s'identifie
+\item On choisi un salle de travail 
+\item une fois connecter on applique la même routine 
+\item A savoir, on exécute chaque script de contrainte si ils sont valide on exécute le fichier exécutable avec la ligne de commande associe.
+\end{enumerate}
+\subsection{Exécution d'un ajout}
+\begin{enumerate}
+\item On demande le nom du problème 
+\item On demande en entrer le chemin absolu pour un fichier de contrainte
+\item On demande en entrer le chemin absolu pour un fichier exécutable
+\item On demande en entrer le chemin absolu pour un fichier correspondant aux ligne de commande
+\item On demande en entrer un rang qui est égale aux nombre de workers nécessaire 
+\item Tout ceci est ajouter a un fichier XML nomme nom\_du\_probleme.xml
+\end{enumerate}
+
+\newpage\subsection{Exécution d'une suppression}
+\begin{enumerate}
+\item On demande le nom du problème 
+\item On supprime le fichier XMl associe 
 \end{enumerate}
 \chapter{Conclusion}
-\newpage
+
+
 \chapter{Annexes}
 \section{Organisation du Projet}
 \begin{itemize}
@@ -224,7 +241,6 @@ Le projet a été programme en Java version : "1.8.0\_111" sous Eclipse
 
 \newpage
 \section{Code}
-\newpage
 \subsection{XML} 
 
 BDD\_JOB.xsd

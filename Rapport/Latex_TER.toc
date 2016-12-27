@@ -19,12 +19,16 @@
 \contentsline {subsection}{\numberline {5.4.2}Split}{13}
 \contentsline {subsection}{\numberline {5.4.3}Exec}{16}
 \contentsline {subsection}{\numberline {5.4.4}Build}{16}
-\contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{17}
-\contentsline {chapter}{\numberline {6}Conclusion}{18}
-\contentsline {chapter}{\numberline {7}Annexes}{19}
-\contentsline {section}{\numberline {7.1}Organisation du Projet}{19}
-\contentsline {subsection}{\numberline {7.1.1}Outils et langages}{20}
-\contentsline {section}{\numberline {7.2}Code}{21}
-\contentsline {subsection}{\numberline {7.2.1}XML}{22}
-\contentsline {subsection}{\numberline {7.2.2}Perl}{24}
-\contentsline {subsection}{\numberline {7.2.3}Java}{25}
+\contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{18}
+\contentsline {subsection}{\numberline {5.5.1}Exécution cote Provider}{18}
+\contentsline {subsection}{\numberline {5.5.2}Exécution cote Worker}{18}
+\contentsline {subsection}{\numberline {5.5.3}Exécution d'un ajout}{18}
+\contentsline {subsection}{\numberline {5.5.4}Exécution d'une suppression}{19}
+\contentsline {chapter}{\numberline {6}Conclusion}{20}
+\contentsline {chapter}{\numberline {7}Annexes}{21}
+\contentsline {section}{\numberline {7.1}Organisation du Projet}{21}
+\contentsline {subsection}{\numberline {7.1.1}Outils et langages}{22}
+\contentsline {section}{\numberline {7.2}Code}{23}
+\contentsline {subsection}{\numberline {7.2.1}XML}{23}
+\contentsline {subsection}{\numberline {7.2.2}Perl}{25}
+\contentsline {subsection}{\numberline {7.2.3}Java}{26}
