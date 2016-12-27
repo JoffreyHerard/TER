@@ -1,0 +1,96 @@
+\documentclass[11pt]{report}  
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage{titlesec} 
+\usepackage[frenchb]{babel}
+\usepackage{xcolor,listings}
+\usepackage{amsmath,amssymb}
+\usepackage{tabu}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{layout}
+\usepackage{listings}
+\usepackage{textcomp}
+
+
+
+\newenvironment{strechpage}[1][0cm]{%
+	\newpage\vspace*{#1}\leavevmode\noindent\centering
+	\def\tempdimen{#1}%
+	\begin{minipage}{\dimexpr\linewidth-#1-#1\relax}}%
+	{\end{minipage}\vspace*\tempdimen\newpage}
+
+\titleformat{\chapter}[display]
+  {\centering\normalfont\huge\bfseries}
+  {\chaptertitlename\ \thechapter}
+  {20pt}
+  {\Huge}
+  
+\newcommand\T{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+
+\begin{document}
+ \makeatletter
+\def\maketitle{%
+  \null
+  \thispagestyle{empty}%
+  \vfill
+  \begin{center}\leavevmode
+    \normalfont
+    {\Huge \@title\par}%
+    \vskip 3cm
+    {\Large \@author\par}%
+    \vskip 1cm
+    {\Large \@date\par}%
+  \end{center}%
+  \vfill
+  \null
+  \cleardoublepage
+  }
+\makeatother
+\title{TER : Solution générique de calcul GRID exploitant des messageries instantanées
+(Java / Python, XML, XMPP / IRC)}
+\author{Joffrey Hérard}
+\date{2016-2017}
+\maketitle
+ 
+\tableofcontents 
+
+\newpage
+\chapter{Introduction} 
+Sujet : Solution générique de calcul GRID exploitant des messageries instantanées
+(Java / Python, XML, XMPP / IRC)
+Durant ce TER, la mise en place d'un système de calcul repartie entre plusieurs machine avec l’évaluation de possibilité d’exécutions ou non par la machine cible, il fallait aussi évaluer quels échanges allais être réalise par les acteurs durant une exécution type et ceci en avec le protocoles XMPP ou IRC . 
+\newpage
+\chapter{Les acteurs} 
+\newpage
+\chapter{Les échanges} 
+\newpage
+\chapter{Les Problèmes} 
+\section{Représentation des problèmes} 
+\newpage
+\chapter{Les Erreurs} 
+\section{Les Problèmes d’exécution} \newpage
+\section{Les Problèmes réseaux}\newpage
+\section{Gestions des erreurs}\newpage
+\chapter{Modélisation}
+\section{Connexions} 
+\subsection{Connexions du/des Provider} 
+\subsection{Connexions du/des Worker} 
+\newpage
+\section{Description d'une exécution quelconque} 
+\newpage
+\section{Gestions des erreurs}
+\chapter{Conclusion}
+\newpage
+\chapter{Annexes}
+\section{Organisation du Projet}
+\subsection{Outils et langages} 
+\subsection{Versionnage} 
+\section{Execution}
+\newpage
+\section{Code}
+\newpage
+
+\end{document}
