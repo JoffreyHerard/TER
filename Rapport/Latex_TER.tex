@@ -4,34 +4,16 @@
 \usepackage{helvet}
 \usepackage{titlesec} 
 \usepackage[frenchb]{babel}
-\usepackage{xcolor,listings}
 \usepackage{amsmath,amssymb}
 \usepackage{tabu}
+\usepackage[svgnames]{xcolor}
 \usepackage{graphicx}
 \usepackage{geometry}
 \usepackage{layout}
 \usepackage{listings}
 \usepackage{textcomp}
+\usepackage{minted}
 
-
-
-\lstset{
-language=Java,
-basicstyle=\normalsize, % ou ça==> basicstyle=\scriptsize,
-upquote=true,
-aboveskip={1.5\baselineskip},
-columns=fullflexible,
-showstringspaces=false,
-extendedchars=true,
-breaklines=true,
-showtabs=false,
-showspaces=false,
-showstringspaces=false,
-identifierstyle=\ttfamily,
-keywordstyle=\color[rgb]{0,0,1},
-commentstyle=\color[rgb]{0.133,0.545,0.133},
-stringstyle=\color[rgb]{0.627,0.126,0.941},
-}
 
 \newenvironment{strechpage}[1][0cm]{%
 	\newpage\vspace*{#1}\leavevmode\noindent\centering
@@ -118,20 +100,6 @@ Tout les codes du projet sont présenter en annexe.
 \end{itemize}
 
 \newpage
-\chapter{Les Problèmes} 
-Nous allons dans cette partie du rapport montrer la représentation nécessaire et désirer pour représenter un travail.Donc un problèmes c'est quoi? 
-
-\begin{itemize}
-\item Identifiant d'un problème, un entier de 0 a n.
-\item Code de contraintes, ce code est forcement un code Perl avec un code de retour bien particulier 0 pour non exécutable  et 3 pour exécutable et donc que l'on peut exécuter. 
-\item Type du fichier par exemple ".c , .cpp, .cc, .java , .pl etc.."
-\item Code d’exécution, peut importe son langage. on peut l'exécuter si le code contraintes l'a valider 
-\item La ligne de commande pour exécuter le code par exemple "perl monfichier.pl"
-\end{itemize}
-
- Fichier du schéma XML correspondant $\rightarrow$ = ../Schema\_XML/DB\_JOB.xsd.
- Tout les codes du projet sont présenter en annexe.
-\newpage
 \chapter{Les Erreurs} 
 \section{Les Problèmes d’exécution}
 Les problèmes qui peuvent opérer a travers le système,sont d'abord pour la partie XMPP: 
@@ -177,30 +145,115 @@ Nous avons plusieurs problèmes lie au réseaux quelque soit le protocole utilis
 \subsection{Connexions du/des Provider(s)} 
 \subsection{Connexions du/des Worker(s)} 
 \newpage
-\section{Représentation des JOBS} 
-\newpage
+\section{Représentation des JOBS}
+Nous allons dans cette partie du rapport montrer la représentation nécessaire et désirer pour représenter un travail.Donc un problèmes c'est quoi? 
+
+\begin{itemize}
+\item Identifiant d'un problème, un entier de 0 a n.
+\item Code de contraintes, ce code est forcement un code Perl avec un code de retour bien particulier 0 pour non exécutable  et 3 pour exécutable et donc que l'on peut exécuter. 
+\item Type du fichier par exemple ".c , .cpp, .cc, .java , .pl etc.."
+\item Code d’exécution, peut importe son langage. on peut l'exécuter si le code contraintes l'a valider 
+\item La ligne de commande pour exécuter le code par exemple "perl monfichier.pl"
+\end{itemize}
+
+\inputminted{XML}{../Schema_XML/BDD_JOB.xsd}
+\newpage 
+
 \section{Représentation des fichiers de lignes de commande} 
+\inputminted{bash}{../Echantillon_Script_Cmd/cmd.dc}
 \newpage
 \section{Les différentes fonctions principales}
 
 \subsection{Contraintes} 
+L'execution d'un script de contrainte ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() 
+\inputminted{perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
 \subsection{Split} 
+La fonction split peut se résumer en plusieurs étapes, premièrement on recupere tout les nickname et JID de chaque utilisateur de la chatroom ,pour chacun d'entre eux on leur envoi un fichier xml personnalise avec chacun une tache bien distincte en respectant le schéma associe.Pour avoir une trace on sauvegarde chaque fichier xml envoyer dans le dossier JOB\_SEND
+\inputminted[tabsize=2,frame=lines,linenos]{java}{Fichier_import/split.java}
 \subsection{Exec} 
+L'execution d'un script d'execution ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() bien entendu on parle de calcul chiffrer ,cela peut être aussi un résultat chiffre dans un fichier. 
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{Fichier_import/calcul.pl}
 \subsection{Build} 
+La fonction build est simplement une addition de chaque résultat reçu petit a petit 
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{Fichier_import/build.java}
 \newpage
 \section{Description d'une exécution quelconque} 
 \newpage
-\section{Gestions des erreurs}
+\begin{enumerate}
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+\item 
+
+\end{enumerate}
 \chapter{Conclusion}
 \newpage
 \chapter{Annexes}
 \section{Organisation du Projet}
+\begin{itemize}
+\item / \begin{itemize}
+		\item /bin  \begin{itemize} \item Tout les fichiers .class \item Images \item Schema    \end{itemize}
+		\item /DB\_JOBS \begin{itemize} \item Calculatoire.xml \item Calculatoire2.xml \item Langford.xml \item etc.. \end{itemize}
+		\item /Echantillon\_Script\_Cmd \begin{itemize} \item Robin.dc \item Toto.dc \item etc..\end{itemize}
+		\item /Echantillon\_Script\_Exec \begin{itemize}\item calcul.pl  \end{itemize}
+		\item /Echantillon\_Script\_Perl \begin{itemize}\item  DitributionContraintes.pl \end{itemize}
+		\item /JDOM  
+		\item /JOB\_REC \begin{itemize} \item \item /DATA\_EXTRACT \begin{itemize} \item fichier\_extraits\end{itemize}\item xml\_receive.xml  \end{itemize}
+		\item /JOB\_SEND \begin{itemize}\item XML\_send\_0.xml \end{itemize}
+		\item /openfire
+		\item /Rapport \begin{itemize}\item TER\_Joffrey\_Herard.pdf  \end{itemize} 
+		\item /Schema\_XML \begin{itemize}\item BDD\_JOB.xsd \item ENVOI\_RECEPTION.xsd \item JOB\_REP.xsd \end{itemize}
+		\item /smack\_3\_1\_0
+		\item /src \begin{itemize}\item Tout les fichiers .java \end{itemize}
+		\item README.md 
+\end{itemize}
+
+\end{itemize}
 \subsection{Outils et langages} 
-\subsection{Versionnage} 
-\newpage
-\section{Execution}
+Le projet a été programme en Java version : "1.8.0\_111" sous Eclipse  
+
 \newpage
 \section{Code}
+\newpage
+\subsection{XML} 
 
+BDD\_JOB.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/BDD_JOB.xsd}
+
+ENVOI\_RECEPTION.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/ENVOI_RECEPTION.xsd}
+\newpage
+JOB\_REP.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/JOB_REP.xsd}
+\newpage
+\subsection{Perl}
+Les exemple de fichier de contrainte écrit en Perl 
+DitributionContraintes.pl
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
+\newpage
+\subsection{Java}
+ButtonAjout.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonAjout.java}\newpage
+ButtonContact.java:
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonContact.java}\newpage ButtonDel.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDel.java}\newpage ButtonDoW.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDoW.java}\newpage ButtonLaunch.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonLaunch.java}\newpage ButtonWorker.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonWorker.java}\newpage Identity.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/Identity.java}\newpage
+main.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/main.java}\newpage
+Xmppmnager.java :
+\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/XmppManager.java}
 
 \end{document}

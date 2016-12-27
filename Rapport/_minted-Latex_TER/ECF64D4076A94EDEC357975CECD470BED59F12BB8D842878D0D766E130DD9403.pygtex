@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/perl}
+\PYG{k}{use} \PYG{n}{v5}\PYG{l+m+mf}{.14}\PYG{p}{;}
+
+\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}osname} \PYG{o}{=} \PYG{n+nv+vg}{\PYGZdl{}\PYGZca{}O}\PYG{p}{;}
+
+
+\PYG{k}{if}\PYG{p}{(} \PYG{n+nv}{\PYGZdl{}osname} \PYG{o+ow}{eq} \PYG{l+s}{\PYGZsq{}MSWin32\PYGZsq{}} \PYG{p}{)\PYGZob{}}
+  \PYG{k}{print}\PYG{l+s}{\PYGZdq{}We are on windows\PYGZdq{}}\PYG{p}{;}
+  \PYG{c+c1}{\PYGZsh{} work around for historical reasons}
+  \PYG{n+nb}{exit}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}Test si on est sur Mac\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}osname} \PYG{o+ow}{eq} \PYG{l+s}{\PYGZsq{}darwin\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}We are on Mac OS X ...\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+        \PYG{n+nb}{exit}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{else} \PYG{p}{\PYGZob{}}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}Test si on est sur Linux\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+        \PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}osname} \PYG{o+ow}{eq} \PYG{l+s}{\PYGZsq{}linux\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{k}{print} \PYG{l+s}{\PYGZdq{}We are on Linux...\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+            \PYG{n+nb}{exit}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{);}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

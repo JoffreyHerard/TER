@@ -80,7 +80,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private XmppManager xmppManager ;
 	 private String ProblemeCourant;
 	 private boolean isRunning ;
-	 private ArrayList<identity> Liste_user;
+	 private ArrayList<Identity> Liste_user;
 	 private JLabel res ;
 	 
 	 public ButtonLaunch(String str){
@@ -91,7 +91,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    comboPrb = new JComboBox<String>();
 	    
 	    bouton_ok = new JButton("OK");
-	    Liste_user = new ArrayList<identity>();
+	    Liste_user = new ArrayList<Identity>();
 	    res=new JLabel("Resultat");
 	    xmppManager = new XmppManager(XmppManager.NOM_HOTE, 5222);
 	  }
@@ -262,7 +262,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      
 				      for(int i = 0;i<Liste.size();i++)
 				      {
-				    	  Liste_user.add(new identity(Liste.get(i).getJid(),Liste.get(i).getRole(),Liste.get(i).getNick()));
+				    	  Liste_user.add(new Identity(Liste.get(i).getJid(),Liste.get(i).getRole(),Liste.get(i).getNick()));
 				    	  System.out.println("Nickname "+i+Liste.get(i).getNick());
 				      }
 				    	  			      
@@ -344,7 +344,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
-	public int split(ArrayList<identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
+	public int split(ArrayList<Identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
 		//modifier ici attention
 		for(int i=0;i<Nombre_Participants-1;i++)
@@ -528,10 +528,10 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	public void setRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
-	public ArrayList<identity> getListe_user() {
+	public ArrayList<Identity> getListe_user() {
 		return Liste_user;
 	}
-	public void setListe_user(ArrayList<identity> liste_user) {
+	public void setListe_user(ArrayList<Identity> liste_user) {
 		Liste_user = liste_user;
 	}
 	

@@ -1,16 +1,16 @@
 
-public class identity {
+public class Identity {
 
 	
 	private String id;
 	private String node;
 	private String name;
 	
-	public identity() {
+	public Identity() {
 		super();
 	}
 	
-	public identity(String id, String node, String name) {
+	public Identity(String id, String node, String name) {
 		super();
 		this.id = id;
 		this.node = node;
