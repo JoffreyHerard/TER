@@ -15,6 +15,24 @@
 
 
 
+\lstset{
+language=Java,
+basicstyle=\normalsize, % ou ça==> basicstyle=\scriptsize,
+upquote=true,
+aboveskip={1.5\baselineskip},
+columns=fullflexible,
+showstringspaces=false,
+extendedchars=true,
+breaklines=true,
+showtabs=false,
+showspaces=false,
+showstringspaces=false,
+identifierstyle=\ttfamily,
+keywordstyle=\color[rgb]{0,0,1},
+commentstyle=\color[rgb]{0.133,0.545,0.133},
+stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
 \newenvironment{strechpage}[1][0cm]{%
 	\newpage\vspace*{#1}\leavevmode\noindent\centering
 	\def\tempdimen{#1}%
@@ -49,9 +67,9 @@
   \cleardoublepage
   }
 \makeatother
-\title{TER : Solution générique de calcul GRID exploitant des messageries instantanées
+\title{Solution générique de calcul GRID exploitant des messageries instantanées
 (Java / Python, XML, XMPP / IRC)}
-\author{Joffrey Hérard}
+\author{ Joffrey Hérard \begin{center}Responsable : Olivier Flauzac\end{center}}
 \date{2016-2017}
 \maketitle
  
@@ -63,21 +81,112 @@ Sujet : Solution générique de calcul GRID exploitant des messageries instantan
 (Java / Python, XML, XMPP / IRC)
 Durant ce TER, la mise en place d'un système de calcul repartie entre plusieurs machine avec l’évaluation de possibilité d’exécutions ou non par la machine cible, il fallait aussi évaluer quels échanges allais être réalise par les acteurs durant une exécution type et ceci en avec le protocoles XMPP ou IRC . 
 \newpage
-\chapter{Les acteurs} 
+\chapter{Les Acteurs} 
+Nous avons donc deux genres d'acteur pour chaque travail différent disponibles 
+\begin{itemize}
+\item Fournisseur de travail/Provider, unique pour chaque travail.
+\item Des travailleurs/Workers, de 1 a n, n définit par le problèmes.
+\end{itemize}
 \newpage
-\chapter{Les échanges} 
+\chapter{Les Échanges} 
+Voici la liste des différents message qui transitent a travers une exécution type.
+\begin{enumerate} \item Nous avons en premier le message de type "ENVOI JOB" il contient :
+\begin{itemize}
+\item l'identifiant du problème,
+\item Le code des contraintes,
+\item Le code a exécuter,
+\item La ligne de  commande pour l\textquoteright exécuter.
+\end{itemize}
+\item Ensuite il y a le message ou le workers signale qu'il est prêt il contiens juste un message pour signale dans une chaîne de caractère " Je suis prêt".
+\item Il y a enfin le message qui renvoi le résultat "REPONSE JOB" il contient : 
+\begin{itemize}
+\item L'identifiant pour savoir si le code a pu être exécute.
+\item L'identifiant du problème.
+\item La valeur du retour de l\textquoteright exécution.
+\item Code de contraintes, si on a pas pu exécuter .
+\item Code exécutable, si on a pas pu exécuter .
+\item Ligne de commande associe,  si on a pas pu exécuter .
+\end{itemize}
+\end{enumerate}
+Voici la liste des fichiers schéma XML associe ainsi que leurs locations au sein du projet :
+\begin{itemize}
+\item "ENVOI\_JOB" = ../Schema\_XML/ENVOI\_RECEPTION.xsd.
+\item "READY"= ../Schema\_XML/ENVOI\_RECEPTION.xsd 
+\item "REPONSE\_JOB"= ../Schema\_XML/ENVOI\_RECEPTION.xsd.
+
+Tout les codes du projet sont présenter en annexe.
+\end{itemize}
+
 \newpage
 \chapter{Les Problèmes} 
-\section{Représentation des problèmes} 
+Nous allons dans cette partie du rapport montrer la représentation nécessaire et désirer pour représenter un travail.Donc un problèmes c'est quoi? 
+
+\begin{itemize}
+\item Identifiant d'un problème, un entier de 0 a n.
+\item Code de contraintes, ce code est forcement un code Perl avec un code de retour bien particulier 0 pour non exécutable  et 3 pour exécutable et donc que l'on peut exécuter. 
+\item Type du fichier par exemple ".c , .cpp, .cc, .java , .pl etc.."
+\item Code d’exécution, peut importe son langage. on peut l'exécuter si le code contraintes l'a valider 
+\item La ligne de commande pour exécuter le code par exemple "perl monfichier.pl"
+\end{itemize}
+
+ Fichier du schéma XML correspondant $\rightarrow$ = ../Schema\_XML/DB\_JOB.xsd.
+ Tout les codes du projet sont présenter en annexe.
 \newpage
 \chapter{Les Erreurs} 
-\section{Les Problèmes d’exécution} \newpage
-\section{Les Problèmes réseaux}\newpage
-\section{Gestions des erreurs}\newpage
+\section{Les Problèmes d’exécution}
+Les problèmes qui peuvent opérer a travers le système,sont d'abord pour la partie XMPP: 
+\begin{enumerate}
+\item Mauvais nom de domaine 
+\item Problème de Chatroom déjà existante
+\item Problème d’exécution : aucun worker peut exécuter le code, comment le détecter?
+\item 
+\end{enumerate}  
+Les problèmes qui peuvent opérer a travers le système,sont d'abord pour la partie IRC: 
+Nous avons exactement les même soucis 
+\newpage
+\section{Les Problèmes réseaux}
+Nous avons plusieurs problèmes lie au réseaux quelque soit le protocole utilise :
+\begin{enumerate}
+\item Latence/Impossible a établir une  connexion a la Chatroom
+\item Latence/Impossible a envoyer un  message d'un Provider vers un Worker
+\item Latence/Impossible a envoyer un  message d'un Worker vers un Provider
+\item Un Worker est déconnecte en plein milieu de sa tache
+\item Un Provider est déconnecte durant l'attente d'une réponse sur un JOB
+\end{enumerate}
+\newpage
+\section{Gestions des erreurs}
+
+\subsection{Gestions des erreurs sur l\textquoteright exécution}
+\begin{enumerate}
+\item Mauvais nom de domaine $ \rightarrow $ Redemander le nom de domaine jusqu’à validation .
+\item Problème de Chatroom déjà existante $\rightarrow$ Message d'erreur un problème exactement identique est en cours d’exécution .
+\item Problème d’exécution : aucun worker peut exécuter le code, comment le détecter? $\rightarrow$ Mis en place d'un tableau de variable booléenne au départ initialise a faux, si un worker renvoi avec une impossibilité d\textquoteright exécution du code dicte par le code contrainte, alors on met a vrai et on redistribue. Si aucun est capable on arrête l\textquoteright exécution.
+\end{enumerate}  
+\subsection{Gestions des erreurs sur le réseaux}
+\begin{enumerate}
+\item Latence/Impossible a établir une  connexion a la Chatroom$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Reseaux
+\item Latence/Impossible a envoyer un  message d'un Provider vers un Worker$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Réseaux
+\item Latence/Impossible a envoyer un  message d'un Worker vers un Provider$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Réseaux 
+\item Un Worker est déconnecte en plein milieu de sa tache$ \rightarrow $ Détecteur de présence permis par le protocole XMPP sur une ChatRoom MultiUser
+\item Un Provider est déconnecte durant l'attente d'une réponse sur un JOB$ \rightarrow $ Évaluation de présence d'un Provider, si aucun alors arrêter le Job en cours, ou mis en place d'un Timeout.
+\end{enumerate}
+
+\newpage
 \chapter{Modélisation}
 \section{Connexions} 
-\subsection{Connexions du/des Provider} 
-\subsection{Connexions du/des Worker} 
+\subsection{Connexions du/des Provider(s)} 
+\subsection{Connexions du/des Worker(s)} 
+\newpage
+\section{Représentation des JOBS} 
+\newpage
+\section{Représentation des fichiers de lignes de commande} 
+\newpage
+\section{Les différentes fonctions principales}
+
+\subsection{Contraintes} 
+\subsection{Split} 
+\subsection{Exec} 
+\subsection{Build} 
 \newpage
 \section{Description d'une exécution quelconque} 
 \newpage
@@ -88,9 +197,10 @@ Durant ce TER, la mise en place d'un système de calcul repartie entre plusieurs
 \section{Organisation du Projet}
 \subsection{Outils et langages} 
 \subsection{Versionnage} 
+\newpage
 \section{Execution}
 \newpage
 \section{Code}
-\newpage
+
 
 \end{document}

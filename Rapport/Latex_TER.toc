@@ -1,23 +1,31 @@
 \select@language {french}
-\contentsline {chapter}{\numberline {1}Introduction}{3}
-\contentsline {chapter}{\numberline {2}Les acteurs}{4}
-\contentsline {chapter}{\numberline {3}Les échanges}{5}
-\contentsline {chapter}{\numberline {4}Les Problèmes}{6}
-\contentsline {section}{\numberline {4.1}Représentation des problèmes}{6}
-\contentsline {chapter}{\numberline {5}Les Erreurs}{7}
-\contentsline {section}{\numberline {5.1}Les Problèmes d’exécution}{7}
-\contentsline {section}{\numberline {5.2}Les Problèmes réseaux}{8}
-\contentsline {section}{\numberline {5.3}Gestions des erreurs}{9}
-\contentsline {chapter}{\numberline {6}Modélisation}{10}
-\contentsline {section}{\numberline {6.1}Connexions}{10}
-\contentsline {subsection}{\numberline {6.1.1}Connexions du/des Provider}{10}
-\contentsline {subsection}{\numberline {6.1.2}Connexions du/des Worker}{10}
-\contentsline {section}{\numberline {6.2}Description d'une exécution quelconque}{11}
-\contentsline {section}{\numberline {6.3}}{12}
-\contentsline {section}{\numberline {6.4}Gestions des erreurs}{12}
-\contentsline {chapter}{\numberline {7}Conclusion}{13}
-\contentsline {chapter}{\numberline {8}Annexes}{14}
-\contentsline {section}{\numberline {8.1}Organisation du Projet}{15}
-\contentsline {subsection}{\numberline {8.1.1}Outils et langages}{16}
-\contentsline {subsection}{\numberline {8.1.2}Versionnage}{17}
-\contentsline {section}{\numberline {8.2}Execution}{18}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Les Acteurs}{5}
+\contentsline {chapter}{\numberline {3}Les Échanges}{6}
+\contentsline {chapter}{\numberline {4}Les Problèmes}{7}
+\contentsline {chapter}{\numberline {5}Les Erreurs}{8}
+\contentsline {section}{\numberline {5.1}Les Problèmes d’exécution}{8}
+\contentsline {section}{\numberline {5.2}Les Problèmes réseaux}{9}
+\contentsline {section}{\numberline {5.3}Gestions des erreurs}{10}
+\contentsline {subsection}{\numberline {5.3.1}Gestions des erreurs sur l\textquoteright exécution}{10}
+\contentsline {subsection}{\numberline {5.3.2}Gestions des erreurs sur le réseaux}{10}
+\contentsline {chapter}{\numberline {6}Modélisation}{11}
+\contentsline {section}{\numberline {6.1}Connexions}{11}
+\contentsline {subsection}{\numberline {6.1.1}Connexions du/des Provider(s)}{11}
+\contentsline {subsection}{\numberline {6.1.2}Connexions du/des Worker(s)}{11}
+\contentsline {section}{\numberline {6.2}Représentation des JOBS}{12}
+\contentsline {section}{\numberline {6.3}Représentation des fichiers de lignes de commande}{13}
+\contentsline {section}{\numberline {6.4}Les différentes fonctions principales}{14}
+\contentsline {subsection}{\numberline {6.4.1}Contraintes}{14}
+\contentsline {subsection}{\numberline {6.4.2}Split}{14}
+\contentsline {subsection}{\numberline {6.4.3}Exec}{14}
+\contentsline {subsection}{\numberline {6.4.4}Build}{14}
+\contentsline {section}{\numberline {6.5}Description d'une exécution quelconque}{15}
+\contentsline {section}{\numberline {6.6}Gestions des erreurs}{16}
+\contentsline {chapter}{\numberline {7}Conclusion}{17}
+\contentsline {chapter}{\numberline {8}Annexes}{18}
+\contentsline {section}{\numberline {8.1}Organisation du Projet}{18}
+\contentsline {subsection}{\numberline {8.1.1}Outils et langages}{18}
+\contentsline {subsection}{\numberline {8.1.2}Versionnage}{18}
+\contentsline {section}{\numberline {8.2}Execution}{19}
+\contentsline {section}{\numberline {8.3}Code}{20}

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  27 DEC 2016 10:52
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  27 DEC 2016 12:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -411,34 +411,37 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
-) (./Latex_TER.aux)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(./Latex_TER.aux)
 \openout1 = `Latex_TER.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 33.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 51.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Info: Redefining \dots on input line 33.
-LaTeX Info: Redefining \up on input line 33.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Info: Redefining \dots on input line 51.
+LaTeX Info: Redefining \up on input line 51.
 
 
 Package frenchb.ldf Warning: Add \usepackage{fontspec} to the
-(frenchb.ldf)                preamble of your document, on input line 33.
+(frenchb.ldf)                preamble of your document, on input line 51.
 
 \c@lstlisting=\count154
 *geometry* driver: auto-detecting
@@ -478,65 +481,73 @@ Package frenchb.ldf Warning: Add \usepackage{fontspec} to the
 [1
 
 ] (./Latex_TER.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 6.
+Missing character: There is no ’ in font ecrm1095!
+LaTeX Font Info:    Try loading font information for U+msa on input line 7.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 6.
+LaTeX Font Info:    Try loading font information for U+msb on input line 7.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Missing character: There is no ’ in font ecrm1095!
-)
+) [2
+
+
+])
 \tf@toc=\write3
 \openout3 = `Latex_TER.toc'.
 
- [2
-
-
-]
+ [3]
 Chapitre 1.
 Missing character: There is no ’ in font ecrm1095!
 Missing character: There is no ’ in font ecrm1095!
-[3
-
-]
-Chapitre 2.
 [4
 
 ]
-Chapitre 3.
+Chapitre 2.
 [5
 
 ]
-Chapitre 4.
+Chapitre 3.
 [6
+
+]
+Chapitre 4.
+Missing character: There is no ’ in font ecrm1095!
+[7
 
 ]
 Chapitre 5.
 Missing character: There is no ’ in font ecbx1440!
-[7
+Missing character: There is no ’ in font ecrm1095!
+[8
 
-] [8] [9]
+] [9]
+Missing character: There is no ’ in font ecrm1095!
+Missing character: There is no ’ in font ecrm1095!
+Missing character: There is no ’ in font ecrm1095!
+Missing character: There is no ’ in font ecrm1095!
+Missing character: There is no ’ in font ecrm1095!
+Missing character: There is no ’ in font ecrm1095!
+ [10]
 Chapitre 6.
-[10
+[11
 
-] [11] [12]
+] [12] [13] [14] [15] [16]
 Chapitre 7.
-[13
+[17
 
 ]
 Chapitre 8.
-[14
+[18
 
-] [15] [16] [17] [18] (./Latex_TER.aux) ) 
+] [19] [20] (./Latex_TER.aux) ) 
 Here is how much of TeX's memory you used:
- 6497 strings out of 493589
- 86840 string characters out of 6145555
- 167395 words of memory out of 5000000
- 9828 multiletter control sequences out of 15000+600000
+ 6536 strings out of 493589
+ 87480 string characters out of 6145555
+ 196975 words of memory out of 5000000
+ 9863 multiletter control sequences out of 15000+600000
  16019 words of font info for 42 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 28i,5n,35p,325b,282s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,5n,40p,407b,342s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Latex_TER.pdf (18 pages).
+Output written on Latex_TER.pdf (20 pages).
