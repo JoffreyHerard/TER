@@ -340,7 +340,7 @@ public class XmppManager {
 					
 					System.out.println("Ecriture du XML dans un fichier de calcul");
 					File file_exec = new File("JOB_REC/DATA_EXTRACT/"+nom_fic_exec);
-					file.createNewFile();
+					file_exec.createNewFile();
 					writer = new PrintWriter(file_exec);
 					writer.write(strexec);
 					writer.close();

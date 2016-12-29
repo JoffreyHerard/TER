@@ -92,26 +92,26 @@
 </thead><tbody>
 <tr>
 <td>Interface</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Ajout d'un job</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Suppresion d'un job</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Envoi JOB en message IRC</td>
 <td>Non Fait</td>
 </tr>
 <tr>
-<td>Envoi JOB en message XMPP</td>
+<td>Repartition des JOBs en message IRC</td>
 <td>Non Fait</td>
 </tr>
 <tr>
-<td>Repartition des JOBs en message XMPP</td>
-<td>Non Fait</td>
-</tr>
-<tr>
-<td>Reception message XMPP cote client</td>
+<td>Reception message IRC cote client</td>
 <td>Non Fait</td>
 </tr>
 <tr>
@@ -124,19 +124,19 @@
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de split</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de exec</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de build</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de test des scripts </td>
-<td>Non Fait</td>
+<td> Fait</td>
 </tr>
 <tr>
 <td>Cote client/Worker fonctionnelle</td>
