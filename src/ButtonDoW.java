@@ -78,7 +78,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 		  // The room service will decide the amount of history to send
 	      muc2.join(username);
 	      xmppManager.createEntry("provider","BOT_Providing");
-	      xmppManager.sendMessage("I am ready to work ", "provider@"+xmppManager.NOM_HOTE);
+	      xmppManager.sendMessage("-1", "provider@"+xmppManager.NOM_HOTE);
 	      isRunning = true;
 	      
 		  while (isRunning){

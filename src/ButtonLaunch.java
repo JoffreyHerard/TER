@@ -80,7 +80,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private XmppManager xmppManager ;
 	 private String ProblemeCourant;
 	 private boolean isRunning ;
-	 private ArrayList<Identity> Liste_user;
+	 protected static ArrayList<Identity> Liste_user;
 	 private JLabel res ;
 	 
 	 public ButtonLaunch(String str){
@@ -95,7 +95,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    res=new JLabel("Resultat");
 	    xmppManager = new XmppManager(XmppManager.NOM_HOTE, 5222);
 	  }
-	 public String FileToString(String PathFile)
+	 public static String FileToString(String PathFile)
 		{
 			String fic ="";
 			//lecture du fichier texte	
@@ -184,7 +184,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  
 
 				      System.out.println("On enregistre le nombre de personne");
-				      int  Nombre_Participants=muc.getOccupantsCount();
+				      int  Nombre_Participants=muc.getOccupantsCount()-1;
 				      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
 				      
 				      Iterator it = muc.getOccupants();
@@ -200,7 +200,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      //On cherche a savoir combien d'utilisateurs par rapport au fichier xml enregistrer
 				      
 				      System.out.println("On attend un nombre dutilisateur precis");
-				      int Nombre_requis=3;
+				      int Nombre_requis=0;
 				      
 				      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -239,16 +239,17 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				       }
 				      System.out.println("NBR : "+Nombre_requis);
 				      
-				    //modifier ici attention nombre requis = 2 ,valable uniquement pour les tests 
+				      //modifier ici attention nombre requis = 2 ,valable uniquement pour les tests 
+				      
 				      while(Nombre_Participants<Nombre_requis){
-				    	  Nombre_Participants=muc.getOccupantsCount();
-					      System.out.println("Number of occupants et affichage de la liste:"+Nombre_Participants);
+				    	  Nombre_Participants=muc.getOccupantsCount()-1;
+					      System.out.println("Number of occupants et affichage de la liste exclu le provider : "+Nombre_Participants+" Pour nombre requis : "+Nombre_requis);
 					      
 					      it = muc.getOccupants();
-					      
+					      System.out.println("Affichage tableau : ");
 					      while(it.hasNext())
 					      {
-					    	  System.out.println("Affichage tableau : ");
+					    	
 					    	  System.out.println("Valeur "+it.next());	  
 					      }
 
@@ -260,7 +261,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      ArrayList<Occupant> Liste=(ArrayList<Occupant>)muc.getParticipants();
 				      
 				      
-				      for(int i = 0;i<Liste.size();i++)
+				      for(int i = 1;i<Liste.size();i++)
 				      {
 				    	  Liste_user.add(new Identity(Liste.get(i).getJid(),Liste.get(i).getRole(),Liste.get(i).getNick()));
 				    	  System.out.println("Nickname "+i+Liste.get(i).getNick());
@@ -272,22 +273,31 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
 				      System.out.println("Debut split ");
 				      //modifier ici attention on a pas le bon nombre de participant
-				      split(Liste_user,Nombre_Participants,ProblemeCourant,xmppManager,choix);
+				      split(Liste_user,Liste_user.size(),ProblemeCourant,xmppManager,choix);
 				      
 				      System.out.println("Fin du split ");
 					  muc.sendMessage("Lancement du probleme du"+comboPrb.getSelectedItem().toString());
 					  
 					  /*Maintenant que l'on a envoyer plusieurs problemes on va essayer davoir leur reponses*/
-					  
+					  xmppManager.setEnvoyer(Liste_user.size());
+					  xmppManager.setWorkerIncapacite(new boolean[Liste.size()-1]);
 					  isRunning = true;
 					  fenetre.add(res);
 					  while (xmppManager.isTravail_terminer()){
 						  Thread.sleep(50);
 					  }
 					  //on a eu le resultat
-					  res.setText("Resultat : "+xmppManager.getRetour_Providing());
-					  fenetre.add(res);
-					  Thread.sleep(5000);
+					  if(xmppManager.getRetour_Providing()!=-1){
+						  res.setText("Resultat : "+xmppManager.getRetour_Providing());
+						  
+						  fenetre.add(res);
+						  Thread.sleep(5000);
+					  }
+					  else
+					  {
+						  //il y a une erreur sur les workers 
+						  res.setText("Resultat : Erreur");
+					  }
 					  xmppManager.destroy();	
 					  
 					  
@@ -347,7 +357,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	public int split(ArrayList<Identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
 		//modifier ici attention
-		for(int i=0;i<Nombre_Participants-1;i++)
+		for(int i=0;i<Nombre_Participants;i++)
 		{
 			String buddyJID = Liste_user.get(i).getId();
 			String buddyName = Liste_user.get(i).getName();
@@ -414,7 +424,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				
 				  
 				final Document document= builder.newDocument();
-					
+			    
 				final Element racine = document.createElement("JOB");
 				document.appendChild(racine);	
 				final Element exec = document.createElement("exec");

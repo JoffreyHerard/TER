@@ -27,12 +27,16 @@ if( $osname eq 'MSWin32' ){
   <code_exec>#!/usr/bin/perl
 use v5.14;
 
-exit $ARGV[0] +$ARGV[1] +$ARGV[2] ;</code_exec>
-  <cmd>perl JOB_REC/DATA_EXTRACT/calcul.pl 2 3,
-perl JOB_REC/DATA_EXTRACT/calcul.pl 3 3,
-perl JOB_REC/DATA_EXTRACT/calcul.pl 4 3,
-perl JOB_REC/DATA_EXTRACT/calcul.pl 5 3, 
-perl JOB_REC/DATA_EXTRACT/calcul.pl 26 3, 
-perl JOB_REC/DATA_EXTRACT/calcul.pl 29 3#</cmd>
-  <rang>6</rang>
+
+
+# Création du fichier 'fichier.txt'
+open (FICHIER, "&gt;resultat.txt") || die ("Vous ne pouvez pas créer le fichier \"fichier.txt\"");
+# On écrit dans le fichier...
+print FICHIER  $ARGV[0] +$ARGV[1] ;
+
+exit 0;</code_exec>
+  <cmd>perl calcul.pl 2 3,
+perl calcul.pl 3 3</cmd>
+  <rang>2</rang>
+  <nom_fic>calcul.pl</nom_fic>
 </JOB>

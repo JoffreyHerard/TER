@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +29,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -59,6 +62,7 @@ public class XmppManager {
     private int retour_Providing=0;
     private int envoyer =0;
     private int recu =0;
+    private boolean[] WorkerIncapacite;
     
     public XmppManager(String server, int port) {
         this.server = server;
@@ -136,12 +140,15 @@ public class XmppManager {
         Roster roster = connection.getRoster();
         roster.createEntry(user, name, null);
     }
-    
+    public boolean appartient(boolean[] WorkerIncapaciteB,int id_choisi)
+    {
+    	return WorkerIncapacite[id_choisi];
+    }
     class MyMessageListener implements MessageListener {
 
         @Override
         public void processMessage(Chat chat, Message message) {
-        	
+        	String ID ="";
         	if(provider){ 
 	        	//Modification de reaction si provider ou non 
 	            String from = message.getFrom();
@@ -156,20 +163,121 @@ public class XmppManager {
 	            
 	            String regex="[,]";
 	            String[] en_tete = body.split(regex);
-	            
+	            if(Integer.parseInt(en_tete[0])!=-1)
 	            // indice 0 = en tete indice 1 = res
-	            if(Integer.parseInt(en_tete[0])==1){
-	            	retour_Providing+=Integer.parseInt(en_tete[1]);
-	            	recu++;
-	            	if(recu==envoyer)
-	            	{
-	            		travail_terminer=true;
-	            	}
-	            }	
-	            else
-	            {
-	            	System.out.println("Lexecution n'as pas ete posible on redistribue aleatoirement la tache");
-	            }
+		            if(Integer.parseInt(en_tete[0])==1){
+		            	retour_Providing+=Integer.parseInt(en_tete[1]);
+		            	recu++;
+		            	if(recu==envoyer)
+		            	{
+		            		travail_terminer=true;
+		            	}
+		            }	
+		            else
+		            {
+		            	// On choisi le worker qui va s'occuper de sa 
+		            	WorkerIncapacite[Integer.parseInt(en_tete[2])]=true;
+		            	String buddyName ="";
+		            	String buddyID="";
+		            	int id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
+		            	while(appartient(WorkerIncapacite,id_choisi))
+		            	{
+		            		id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
+		            	}
+		            	//On recupere ces informations
+		            	buddyID =ButtonLaunch.Liste_user.get(id_choisi).getId();
+		            	buddyName=ButtonLaunch.Liste_user.get(id_choisi).getName();
+		            	
+		            	
+		            	System.out.println("Lexecution n'as pas ete possible on redistribue aleatoirement la tache");
+		            	
+		            	//On doit parser le xml recu qui est en en_tete[3] et le renvoyer a l'id choisi  
+		            	String Probleme_individuel="";
+		            	
+		            	
+		            	try {
+			            	//On va recuperer les information interessantes dans le fichier xml recu 	
+			            	System.out.println("Ecriture du XML dans un fichier xml receive_FAILURE");
+							File fileXML = new File("JOB_REC/xml_receive_failure_pour.xml"+id_choisi);
+							fileXML.createNewFile();
+							PrintWriter writer = new PrintWriter(fileXML);
+							writer.write(body);
+							writer.close();
+						
+			            	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+							DocumentBuilder builder = factory.newDocumentBuilder();
+							
+							Document xml = builder.parse(fileXML);
+					        Element root = xml.getDocumentElement();
+					        
+					        
+					        XPathFactory xpf = XPathFactory.newInstance();
+					        XPath path = xpf.newXPath();
+					        String expression_C = "/JOB/contraintes";
+					        String expression_E = "/JOB/exec";
+					        String expression_CMD = "/JOB/cmd";
+							
+					        String strexec = (String)path.evaluate(expression_E, root);
+					        String strcmd = (String)path.evaluate(expression_CMD, root);    
+					        String strperl = (String)path.evaluate(expression_C, root);    
+					        
+					        
+					        
+					        
+							//On crer le nouveau XML a expedie 
+							final Document document= builder.newDocument();
+		
+							final Element racine = document.createElement("JOB");
+							document.appendChild(racine);	
+							final Element exec = document.createElement("exec");
+							exec.appendChild(document.createTextNode(strexec));
+							
+							final Element contraintes = document.createElement("contraintes");
+							contraintes.appendChild(document.createTextNode(strperl));
+							
+							
+							final Element cmd = document.createElement("cmd");
+							cmd.appendChild(document.createTextNode(strcmd));
+							final Element id = document.createElement("id");
+							id.appendChild(document.createTextNode(""+id_choisi));
+							racine.appendChild(id);
+							racine.appendChild(contraintes);
+							racine.appendChild(exec);
+							racine.appendChild(cmd);
+							
+						
+							
+							final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+						    final Transformer transformer = transformerFactory.newTransformer();
+						    final DOMSource source = new DOMSource(document);
+						    final StreamResult sortie = new StreamResult(new File("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi));
+	
+						    transformer.transform(source, sortie);	
+						    sendMessage(ButtonLaunch.FileToString("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi), buddyName+"@"+NOM_HOTE);
+							
+		            	} catch (XMPPException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (XPathExpressionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ParserConfigurationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (SAXException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (TransformerConfigurationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (TransformerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		            }
         	}
         	else
         	{
@@ -182,9 +290,9 @@ public class XmppManager {
  	           File dir = new File ("JOB_REC/DATA_EXTRACT");
  	           dir.mkdirs();
  	           try{
- 	        	   
+ 	        	    int rand =(int) (Math.random()*100000);
 					System.out.println("Ecriture du XML dans un fichier xml receive");
-					File file = new File("JOB_REC/xml_receive.xml");
+					File file = new File("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+rand+".xml");
 					file.createNewFile();
 					
 				
@@ -203,7 +311,8 @@ public class XmppManager {
 			        String expression = "/JOB/exec";
 			        String strexec = (String)path.evaluate(expression, root);
 			        
-			        
+			        String expressionID = "/JOB/id";
+			        ID = (String)path.evaluate(expressionID, root);
 			        expression = "/JOB/contraintes";
 
 			        String strperl = (String)path.evaluate(expression, root);
@@ -225,8 +334,12 @@ public class XmppManager {
 					
 					//Creation du fichier de exec en PERL et son execution
 					
-					System.out.println("Ecriture du XML dans un fichier calcul.pl");
-					File file_exec = new File("JOB_REC/DATA_EXTRACT/calcul.pl");
+					expression = "/JOB/nom_fic";
+
+					String nom_fic_exec = (String)path.evaluate(expression, root); 
+					
+					System.out.println("Ecriture du XML dans un fichier de calcul");
+					File file_exec = new File("JOB_REC/DATA_EXTRACT/"+nom_fic_exec);
 					file.createNewFile();
 					writer = new PrintWriter(file_exec);
 					writer.write(strexec);
@@ -249,14 +362,15 @@ public class XmppManager {
 						
 						Process p_cmd =runtime.exec(strcmd);
 						int resultat=p_cmd.waitFor();
-						System.out.println("Resultats du calcul = "+resultat);
-						// on n'as plus que a renvoyer le resultats
-						
+						System.out.println("Retour  du calcul = "+resultat);
+						// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
+						String resultatF= ButtonLaunch.FileToString("JOB_REC/resultat.txt");
 						getCurrent().sendMessage("1,"+resultat, "provider@"+NOM_HOTE);
-						System.out.println("message envoyer = 1,"+resultat);
+						System.out.println("message envoyer = 1,"+resultatF);
 					}else
 					{
-						//on a pas pu lexecuter on renvoi un message 
+						//Si on peut pas lexecuter on le renvoie aux provider
+						sendMessage("0,NO,"+ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+rand+".xml"), "provider@"+NOM_HOTE);
 					}	
         	   } 
  	           catch(IOException ioe){
@@ -361,6 +475,22 @@ public class XmppManager {
 
 	public static int getPacketreplytimeout() {
 		return packetReplyTimeout;
+	}
+
+	public static String getNOM_HOTE() {
+		return NOM_HOTE;
+	}
+
+	public static void setNOM_HOTE(String nOM_HOTE) {
+		NOM_HOTE = nOM_HOTE;
+	}
+
+	public boolean[] getWorkerIncapacite() {
+		return WorkerIncapacite;
+	}
+
+	public void setWorkerIncapacite(boolean[] workerIncapacite) {
+		WorkerIncapacite = workerIncapacite;
 	}
     
 }
