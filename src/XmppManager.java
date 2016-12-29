@@ -163,22 +163,24 @@ public class XmppManager {
 	            
 	            String regex="[,]";
 	            String[] en_tete = body.split(regex);
-	            
+
 	            if(Integer.parseInt(en_tete[0])!=-1){
 	            // indice 0 = en tete indice 1 = res
 	            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])!=-1 vrai ");
 		            if(Integer.parseInt(en_tete[0])==1){
 		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 vrai ");
-		            	retour_Providing+=Integer.parseInt(en_tete[1]);
+		            	int retour=Integer.parseInt(en_tete[1]);
+		            	retour_Providing= retour_Providing + retour;
+		            	System.out.println("On passe retour_Providing+=Integer.parseInt(en_tete[1]);");
 		            	recu++;
 		            	System.out.println("recu = "+recu);
 		            	System.out.println("envoyer = "+envoyer);
-		            	try {
+		            	/*try {
 							Thread.sleep(5000);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 		            	if(recu==envoyer)
 		            	{
 		            		travail_terminer=true;
