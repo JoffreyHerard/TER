@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  27 DEC 2016 17:34
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  27 DEC 2016 17:45
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -707,6 +707,8 @@ Missing character: There is no ’ in font ecrm1095!
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
 ) [11]
+Missing character: There is no ’ in font ecrm1095!
+
 (./_minted-Latex_TER/AF9B0ED446C3A335A916C641341A8ECAD900A39B81C10E29D56F189F58
 0E26A5.pygtex) [12]
 (./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BED59F12BB8D842878D0D766E130
@@ -723,7 +725,7 @@ Missing character: There is no ’ in font ecrm1095!
 C65DB0.pygtex)
 (./_minted-Latex_TER/7ADA1F44CF100499458A294497B69E98AB3C8A6819A807FF94F3C7E948
 04FFD3.pygtex [16]) [17]
-Overfull \hbox (29.57352pt too wide) in paragraph at lines 185--186
+Overfull \hbox (29.57352pt too wide) in paragraph at lines 186--187
 []\T1/cmr/m/n/10.95 Une fois le Pro-blème lan-cer une Cha-troom com-por-tant le
  nom du pro-blème+Providingroom
  []
