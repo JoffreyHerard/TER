@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.Image;
 
+@SuppressWarnings({ "serial", "unused" })
 public class Panneau extends JPanel {
 	  public void paintComponent(Graphics g){
 	          
