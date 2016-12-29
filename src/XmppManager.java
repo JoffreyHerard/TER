@@ -58,7 +58,7 @@ public class XmppManager {
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
-    private boolean travail_terminer=false;
+    protected boolean travail_terminer=false;
     private int retour_Providing=0;
     private int envoyer =0;
     private int recu =0;
@@ -130,7 +130,7 @@ public class XmppManager {
     }
     
     public void sendMessage(String message, String buddyJID) throws XMPPException {
-        System.out.println(String.format("Sending mesage '%1$s' to user %2$s", message, buddyJID));
+       // System.out.println(String.format("Sending mesage '%1$s' to user %2$s", message, buddyJID));
         Chat chat = chatManager.createChat(buddyJID, messageListener);
         chat.sendMessage(message);
     }
@@ -163,11 +163,22 @@ public class XmppManager {
 	            
 	            String regex="[,]";
 	            String[] en_tete = body.split(regex);
-	            if(Integer.parseInt(en_tete[0])!=-1)
+	            
+	            if(Integer.parseInt(en_tete[0])!=-1){
 	            // indice 0 = en tete indice 1 = res
+	            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])!=-1 vrai ");
 		            if(Integer.parseInt(en_tete[0])==1){
+		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 vrai ");
 		            	retour_Providing+=Integer.parseInt(en_tete[1]);
 		            	recu++;
+		            	System.out.println("recu = "+recu);
+		            	System.out.println("envoyer = "+envoyer);
+		            	try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		            	if(recu==envoyer)
 		            	{
 		            		travail_terminer=true;
@@ -175,6 +186,7 @@ public class XmppManager {
 		            }	
 		            else
 		            {
+		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 faux ");
 		            	// On choisi le worker qui va s'occuper de sa 
 		            	WorkerIncapacite[Integer.parseInt(en_tete[2])]=true;
 		            	String buddyName ="";
@@ -278,6 +290,7 @@ public class XmppManager {
 							e.printStackTrace();
 						}
 		            }
+	            }
         	}
         	else
         	{
@@ -287,7 +300,7 @@ public class XmppManager {
  	           System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
  	           System.out.println("c'est partie on va executer ce qu'il faut");
  	           // creation de l'architecture necessaire 
- 	           File dir = new File ("JOB_REC/DATA_EXTRACT");
+ 	           File dir = new File ("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName());
  	           dir.mkdirs();
  	           try{
  	        	    int rand =(int) (Math.random()*100000);
@@ -326,7 +339,7 @@ public class XmppManager {
 			        //Creation du fichier de contrainte en PERL
 			        
 					System.out.println("Ecriture du XML dans un fichier contrainte");
-					File file_con = new File("JOB_REC/DATA_EXTRACT/contraintes.pl");
+					File file_con = new File("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/contraintes.pl");
 					file.createNewFile();
 					writer = new PrintWriter(file_con);
 					writer.write(strperl);
@@ -339,7 +352,7 @@ public class XmppManager {
 					String nom_fic_exec = (String)path.evaluate(expression, root); 
 					
 					System.out.println("Ecriture du XML dans un fichier de calcul");
-					File file_exec = new File("JOB_REC/DATA_EXTRACT/"+nom_fic_exec);
+					File file_exec = new File("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/"+nom_fic_exec);
 					file_exec.createNewFile();
 					writer = new PrintWriter(file_exec);
 					writer.write(strexec);
@@ -347,25 +360,39 @@ public class XmppManager {
 					// execution
 					Runtime runtime = Runtime.getRuntime();
 					System.out.println("execution du fichier de contrainte ");
-					// on execute le fichier de contrainte 3 = GOOD different = NOGOOD
+					// on execute le fichier de contrainte 3 = GOOD / different = NOGOOD
 					
-					Process p_cunt =runtime.exec("perl JOB_REC/DATA_EXTRACT/contraintes.pl");
+					Process p_cunt =runtime.exec("perl JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/contraintes.pl");
 					int resultat_con=p_cunt.waitFor();
-					System.out.println("execution termine du fichier de contrainte ");
+					System.out.println("execution termine du fichier de contraintes ");
 					
 					System.out.println("On a recupere la valeur de sortie de contraintes");
 					System.out.println("Resultat contraintes = "+resultat_con);
 					
 					if(resultat_con==3){
 						//execution
-						System.out.println("La contrainte a valider,on va commencer lexecution");
+						System.out.println("La contrainte a valider,on va commencer l'execution strcmd = "+strcmd);
+						// On traville la chaine strcmd pour comprendre ce qu'il faut
+						
+						String delims = "[/]";
+						String[] tokens =strcmd.split(delims);
+						System.out.print("affichage des tokens");
+						for(int j=0;j<tokens.length;j++)
+							System.out.println(j+" :"+tokens[j]);
+						
+						strcmd =tokens[0]+"JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/"+tokens[1];
+						System.out.println("MAJ DE strcmd = "+strcmd);
+
+					
 						
 						Process p_cmd =runtime.exec(strcmd);
 						int resultat=p_cmd.waitFor();
 						System.out.println("Retour  du calcul = "+resultat);
 						// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
-						String resultatF= ButtonLaunch.FileToString("JOB_REC/resultat.txt");
-						getCurrent().sendMessage("1,"+resultat, "provider@"+NOM_HOTE);
+						String resultatF= ButtonLaunch.FileToString("resultat.txt");
+						
+						//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
+						getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
 						System.out.println("message envoyer = 1,"+resultatF);
 					}else
 					{

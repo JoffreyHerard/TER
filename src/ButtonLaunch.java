@@ -199,7 +199,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      
 				      //On cherche a savoir combien d'utilisateurs par rapport au fichier xml enregistrer
 				      
-				      System.out.println("On attend un nombre dutilisateur precis");
+				      System.out.println("On attend un nombre d'utilisateur precis");
 				      int Nombre_requis=0;
 				      
 				      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -243,15 +243,15 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      
 				      while(Nombre_Participants<Nombre_requis){
 				    	  Nombre_Participants=muc.getOccupantsCount()-1;
-					      System.out.println("Number of occupants et affichage de la liste exclu le provider : "+Nombre_Participants+" Pour nombre requis : "+Nombre_requis);
+					      //System.out.println("Number of occupants et affichage de la liste exclu le provider : "+Nombre_Participants+" Pour nombre requis : "+Nombre_requis);
 					      
 					      it = muc.getOccupants();
-					      System.out.println("Affichage tableau : ");
-					      while(it.hasNext())
-					      {
+					      //System.out.println("Affichage tableau : ");
+					      //while(it.hasNext())
+					     // {
 					    	
-					    	  System.out.println("Valeur "+it.next());	  
-					      }
+					    	  //System.out.println("Valeur "+it.next());	  
+					     // }
 
 				      }
 				      
@@ -261,20 +261,19 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				      ArrayList<Occupant> Liste=(ArrayList<Occupant>)muc.getParticipants();
 				      
 				      
-				      for(int i = 1;i<Liste.size();i++)
+				      for(int i = 0;i<Liste.size();i++)
 				      {
 				    	  Liste_user.add(new Identity(Liste.get(i).getJid(),Liste.get(i).getRole(),Liste.get(i).getNick()));
 				    	  System.out.println("Nickname "+i+Liste.get(i).getNick());
 				      }
 				    	  			      
-				      
+						
 				      //maintenant que on a la liste des utilisateur connecte a la chatRoom on va leur envoyer chacun un #Split method un job 
 				      //On a attendu que lon est assez de participant ou pas en fonction du split 
 				      //Voir pour filtrer son propre nom a savoir is on est tjr le premier ou pas 
 				      System.out.println("Debut split ");
 				      //modifier ici attention on a pas le bon nombre de participant
 				      split(Liste_user,Liste_user.size(),ProblemeCourant,xmppManager,choix);
-				      
 				      System.out.println("Fin du split ");
 					  muc.sendMessage("Lancement du probleme du"+comboPrb.getSelectedItem().toString());
 					  
@@ -283,15 +282,15 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  xmppManager.setWorkerIncapacite(new boolean[Liste.size()-1]);
 					  isRunning = true;
 					  fenetre.add(res);
-					  while (xmppManager.isTravail_terminer()){
+					  while (!xmppManager.isTravail_terminer()){
 						  Thread.sleep(50);
 					  }
 					  //on a eu le resultat
-					  if(xmppManager.getRetour_Providing()!=-1){
+					  if(xmppManager.travail_terminer){
 						  res.setText("Resultat : "+xmppManager.getRetour_Providing());
 						  
 						  fenetre.add(res);
-						  Thread.sleep(5000);
+						  
 					  }
 					  else
 					  {
@@ -357,7 +356,20 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	public int split(ArrayList<Identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
 		//modifier ici attention
-		for(int i=0;i<Nombre_Participants;i++)
+		// TEST AFFICHAGE 
+		
+		int i =0;
+		System.out.println("Nb part = "+Nombre_Participants);
+		System.out.println("Nb size = "+Liste_user.size());
+		for(i=0;i<Nombre_Participants;i++)
+		{
+			String buddyJID = Liste_user.get(i).getId();
+			String buddyName = Liste_user.get(i).getName();
+		
+			System.out.println(i+"ID : "+buddyJID +"Name : "+buddyName);
+		}	
+	
+		for( i=0;i<Nombre_Participants;i++)
 		{
 			String buddyJID = Liste_user.get(i).getId();
 			String buddyName = Liste_user.get(i).getName();
@@ -415,10 +427,14 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				String delims = "[,]";
 				String[] tokens =strcmd.split(delims);
 				System.out.print("affichage des tokens");
-				tokens[tokens.length-1]=tokens[tokens.length-1].substring(0, tokens[tokens.length-1].length()-1);
+				//tokens[tokens.length-1]=tokens[tokens.length-1].substring(0, tokens[tokens.length-1].length()-1);
 				for(int j=0;j<tokens.length;j++)
 					System.out.println(j+" : "+tokens[j]);
 				
+				// on recuper le nom du fichier 
+				expression = "/JOB/nom_fic";
+
+		        String strnom_fic = (String)path.evaluate(expression, root);
 				//Faut parser la liste 
 				
 				
@@ -438,7 +454,11 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				cmd.appendChild(document.createTextNode(tokens[i]));
 				final Element id = document.createElement("id");
 				id.appendChild(document.createTextNode(""+i));
+				final Element nom_fic = document.createElement("nom_fic");
+				nom_fic.appendChild(document.createTextNode(strnom_fic));
+				
 				racine.appendChild(id);
+				racine.appendChild(nom_fic);
 				racine.appendChild(contraintes);
 				racine.appendChild(exec);
 				racine.appendChild(cmd);
@@ -459,7 +479,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// Ici on fait apelle a la fonction split 
+			
 
 		}
 		 
