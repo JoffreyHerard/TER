@@ -69,7 +69,7 @@
 </tr>
 <tr>
 <td>Rapport</td>
-<td>95%</td>
+<td>Fait</td>
 </tr>
 </tbody></table>
 </article>

@@ -56,7 +56,7 @@ public class XmppManager {
     private MessageListener messageListener;
     private boolean provider;
     private boolean travail_terminer=false;
-    private int retour_Providing =0;
+    private int retour_Providing=0;
     private int envoyer =0;
     private int recu =0;
     
