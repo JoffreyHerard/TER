@@ -38,8 +38,9 @@ public class MyBot extends PircBot {
     public void onPrivateMessage(String sender, String login, String hostname, String message)
     {
     	System.out.println("Appelle de la methode onPrivateMessage");
-    	System.out.println("On affiche ");
+    	System.out.println("On affiche "); 
     	System.out.println("Sender : "+sender+ " login of the sender : "+login+" Hostname of sender : "+hostname+" and message : "+message);
+    	sendMessage("apocalypzer",sender + ": The time is now ");
     }
     @Override
     protected void onJoin(String channel, String sender, String login, String hostname)
