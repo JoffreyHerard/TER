@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smack.jar"/>
+	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smackx.jar"/>
+	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
