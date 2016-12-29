@@ -169,7 +169,8 @@ public class XmppManager {
 	            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])!=-1 vrai ");
 		            if(Integer.parseInt(en_tete[0])==1){
 		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 vrai ");
-		            	int retour=Integer.parseInt(en_tete[1]);
+		            	System.out.println("Debut de la chaine : /"+en_tete[1]+"/Fin de la chaine ");
+		            	int retour=Integer.parseInt(en_tete[1],10);
 		            	retour_Providing= retour_Providing + retour;
 		            	System.out.println("On passe retour_Providing+=Integer.parseInt(en_tete[1]);");
 		            	recu++;
