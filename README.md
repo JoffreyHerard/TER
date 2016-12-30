@@ -21,19 +21,19 @@
 </tr>
 <tr>
 <td>Envoi JOB en message IRC</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Repartition des JOBs en message IRC</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Reception message IRC cote client</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Lancement d'un job et sa terminaison</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Realisation d'echantillon de script de contrainte</td>
@@ -53,11 +53,11 @@
 </tr>
 <tr>
 <td>Realisation d'echantillon de test des scripts </td>
-<td> Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Cote client/Worker fonctionnelle</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Schemas XML</td>
@@ -69,7 +69,7 @@
 </tr>
 <tr>
 <td>Rapport</td>
-<td>Non Fait</td>
+<td> Fait</td>
 </tr>
 </tbody></table>
 </article>
