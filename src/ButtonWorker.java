@@ -8,10 +8,12 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -21,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.jibble.pircbot.IrcException;
+import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.MessageListener;
@@ -41,16 +45,12 @@ public class ButtonWorker extends JButton implements MouseListener {
 	 private JTextField pseudo ;
 	 private JLabel label_pseudal ;
 		
-	 private JTextField pass ;
-	 private JLabel label_pass ;
+	
 	 private JLabel affichage ;	
 	 private String username ;
-	 private String password ;
-	 
-	 private XmppManager xmppManager;
+	 private ArrayList<String> Probleme;
 	 private String ProblemeCourant;
 	 private boolean isRunning ;
-	 private ArrayList<HostedRoom> ListeRoom;
 	 private JComboBox<String> comboPrb; 
 	 
 	 
@@ -63,12 +63,9 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    this.bouton_ok_channel = new ButtonDoW("OK");
 	    this.pseudo = new JTextField("pseudo");
 	    this.label_pseudal = new JLabel("Pseudo");	
-	    this.pass = new JTextField("Password");
-	    this.label_pass = new JLabel("Mot de passe");
 	    this.affichage = new JLabel("Selection du salon:");	
 	    this.comboPrb = new JComboBox<String>();
-	    this.ListeRoom = new ArrayList<HostedRoom>();
-	    this.xmppManager = new XmppManager(xmppManager.NOM_HOTE, 5222);
+	    this.Probleme= new  ArrayList<String>();
 	  }
 	  
 	@Override
@@ -80,8 +77,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		fenetre.add(label_pseudal);
 		fenetre.add(pseudo);
 		
-	    fenetre.add(label_pass);
-	    fenetre.add(pass);
+	   
 		fenetre.setTitle("Travail sur des taches");
 		fenetre.add(bouton_ok);
 		
@@ -102,31 +98,44 @@ public class ButtonWorker extends JButton implements MouseListener {
 		    	
 		    	try {
 		    		
-					xmppManager.init();
+					
 			    	String username = pseudo.getText();
-			    	String password = pass.getText();
-					xmppManager.performLogin(username, password);
-					xmppManager.setStatus(true, "YOLO");  
-					xmppManager.setProvider(false);
-					
-					
+
 					System.out.println("Etablir une liste de room");
 					
-					ListeRoom =(ArrayList<HostedRoom>)MultiUserChat.getHostedRooms(xmppManager.getConnection(), "conference."+xmppManager.NOM_HOTE);
-					System.out.println("Fin de etablir une liste de room");
-					Iterator it = ListeRoom.iterator();
+					 // Now start our bot up.
+			        BotGetRoom botg = new BotGetRoom();
+			        
+			        // Enable debugging output.
+			        botg.setVerbose(true);
+			        
+			        // Connect to the IRC server.
+			        
+					botg.connect("irc.freenode.net");
 					
-					while(it.hasNext())
-					{
-						HostedRoom tmp = (HostedRoom) it.next();
-						System.out.println("ChatRoom : "+tmp.getName());
-						comboPrb.addItem(tmp.getName());
+			        // Join the  channel.
+			        botg.joinChannel("#TEST_TER_GRID_JH");
+			        // on ask le provider
+			        
+			        botg.sendMessage("#TEST_TER_GRID_JH", "problem?");
+			        
+			        File resume = new File("resume.txt");
+			        while(!resume.exists())
+			        {	
+			        	System.out.println("On attend le fichier qui resume tout les probleme disponible");
+			        	Thread.sleep(500);
+			        } 
+			        Scanner scanner = new Scanner(new File("resume.txt"));
+					while (scanner.hasNextLine()) {
+						String line = scanner.nextLine();
+						comboPrb.addItem(line);
 					}
+					System.out.println("Fin de etablir une liste de room");
+
 					
 					fenetre.remove(label_pseudal);
 					fenetre.remove(pseudo);
-					fenetre.remove(label_pass);
-					fenetre.remove(pass);
+					
 					fenetre.remove(bouton_ok);
 					fenetre.setVisible(false); 
 					
@@ -138,13 +147,22 @@ public class ButtonWorker extends JButton implements MouseListener {
 					
 					bouton_ok_channel.setProblemeCourant(comboPrb.getSelectedItem().toString());
 					bouton_ok_channel.setUsername(username);
-					bouton_ok_channel.setPassword(password);
+					
 					
 					fenetre.setVisible(true); 
-					xmppManager.destroy();					
-				} catch (XMPPException exc) {
+							
+				} catch (NickAlreadyInUseException e1) {
 					// TODO Auto-generated catch block
-					exc.printStackTrace();
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IrcException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 		    }
 	
@@ -245,22 +263,6 @@ public class ButtonWorker extends JButton implements MouseListener {
 		this.label_pseudal = label_pseudal;
 	}
 
-	public JTextField getPass() {
-		return pass;
-	}
-
-	public void setPass(JTextField pass) {
-		this.pass = pass;
-	}
-
-	public JLabel getLabel_pass() {
-		return label_pass;
-	}
-
-	public void setLabel_pass(JLabel label_pass) {
-		this.label_pass = label_pass;
-	}
-
 	public JLabel getAffichage() {
 		return affichage;
 	}
@@ -277,22 +279,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public XmppManager getXmppManager() {
-		return xmppManager;
-	}
-
-	public void setXmppManager(XmppManager xmppManager) {
-		this.xmppManager = xmppManager;
-	}
-
+	
 	public String getProblemeCourant() {
 		return ProblemeCourant;
 	}
@@ -309,13 +296,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		this.isRunning = isRunning;
 	}
 
-	public ArrayList<HostedRoom> getListeRoom() {
-		return ListeRoom;
-	}
-
-	public void setListeRoom(ArrayList<HostedRoom> listeRoom) {
-		ListeRoom = listeRoom;
-	}
+	
 
 	public JComboBox<String> getComboPrb() {
 		return comboPrb;

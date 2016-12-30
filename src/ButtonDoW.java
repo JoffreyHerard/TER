@@ -55,7 +55,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	private XmppManager xmppManager;
 	private String ProblemeCourant;
 	private boolean isRunning ;
-	
+	private BotWorker botW;
 	public ButtonDoW(String str){
 	    super(str);
 	    this.name = str;
@@ -66,29 +66,32 @@ public class ButtonDoW extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
     	try{
-          xmppManager.init();
-		  xmppManager.performLogin(username, password);
-		  xmppManager.setStatus(true, "YOLO");  
-		  xmppManager.setProvider(false);
-		  
-		  // Create a MultiUserChat using an XMPPConnection for a room
-		  MultiUserChat muc2 = new MultiUserChat(xmppManager.getConnection(), ProblemeCourant+"@conference."+xmppManager.NOM_HOTE);
-		
-		  // User2 joins the new room
-		  // The room service will decide the amount of history to send
-	      muc2.join(username);
-	      xmppManager.createEntry("provider","BOT_Providing");
-	      xmppManager.sendMessage("-1", "provider@"+xmppManager.NOM_HOTE);
-	      isRunning = true;
-	      
-		  while (isRunning){
-			  Thread.sleep(50);
-			 
-		  }
 
-		  xmppManager.destroy();	
-		  
-		} catch (Exception exc) {
+    		botW = new BotWorker();
+    		// Create a MultiUserChat using an XMPPConnection for a room
+    	  	
+    		// User2 joins the new room
+    		// The room service will decide the amount of history to send
+	     
+    		isRunning = true;
+    		// Enable debugging output.
+    		botW.setVerbose(true);
+            
+            // Connect to the IRC server.
+            
+            botW.connect("irc.freenode.net");
+    		
+            // Join the  channel.
+            botW.joinChannel("#providing_room_"+ProblemeCourant);
+            
+    		while (isRunning){
+    			Thread.sleep(50);
+			 
+    		}
+
+    		botW=null;
+
+    	} catch (Exception exc) {
 			// TODO Auto-generated catch block
 			exc.printStackTrace();
 		}
