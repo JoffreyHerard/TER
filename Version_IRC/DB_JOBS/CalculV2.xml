@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JOB>
+  <code_Perl>#!/usr/bin/perl
+use v5.14;
+
+my $osname = $^O;
+
+
+if( $osname eq 'MSWin32' ){
+  print"We are on windows";
+  # work around for historical reasons
+  exit(1);
+} else {
+    print "Test si on est sur Mac\n";
+    if ($osname eq 'darwin') {
+        print "We are on Mac OS X ...\n";
+        exit(2);
+    }
+    else {
+        print "Test si on est sur Linux\n";
+        if ($osname eq 'linux') {
+            print "We are on Linux...\n";
+            exit(3);
+        }
+    }
+}</code_Perl>
+  <code_exec>#!/usr/bin/perl
+use v5.14;
+
+
+
+# Création du fichier 'fichier.txt'
+open (FICHIER, "&gt;resultat.txt") || die ("Vous ne pouvez pas créer le fichier \"fichier.txt\"");
+# On écrit dans le fichier...
+print FICHIER  $ARGV[0] +$ARGV[1] ;
+
+exit 0;</code_exec>
+  <cmd>perl /calcul.pl 2 3,
+perl /calcul.pl 3 3,</cmd>
+  <rang>2</rang>
+  <nom_fic>calcul.pl</nom_fic>
+</JOB>

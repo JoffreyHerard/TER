@@ -1,0 +1,13 @@
+<xs:schema>
+	<xs:element name="JOB">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="nom_fic" type="xs:string"/>
+				<xs:element name="code_Perl" type="xs:string"/>
+				<xs:element name="code_exec" type="xs:string"/>
+				<xs:element name="cmd" type="xs:string"/>
+				<xs:element name="rang" type="xs:Integer"/>
+		 	</xs:sequence>
+		 </xs:complexType>
+	</xs:element>
+</xs:schema>
