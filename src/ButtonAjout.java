@@ -97,7 +97,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 			while ((ligne=br.readLine())!=null)
 			{
 				System.out.println(ligne);
-				fic+=ligne+"\n";
+				fic+=ligne;
 			}
 			br.close(); 
 			ipsr.close();

@@ -120,6 +120,31 @@ public class ButtonLaunch extends JButton implements MouseListener {
 			}
 			return fic;
 		} 
+	 public static String FileToString2(String PathFile)
+		{
+			String fic ="";
+			//lecture du fichier texte	
+			try
+			{
+				InputStream ips=new FileInputStream(PathFile); 
+				InputStreamReader ipsr=new InputStreamReader(ips);
+				BufferedReader br=new BufferedReader(ipsr);
+				String ligne;
+				while ((ligne=br.readLine())!=null)
+				{
+					System.out.println(ligne);
+					fic+=ligne;
+				}
+				br.close(); 
+				ipsr.close();
+				ips.close();
+			}		
+			catch (Exception e)
+			{
+				System.out.println(e.toString());
+			}
+			return fic;
+		} 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub

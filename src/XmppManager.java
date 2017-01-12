@@ -168,11 +168,14 @@ public class XmppManager {
 	            // indice 0 = en tete indice 1 = res
 	            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])!=-1 vrai ");
 		            if(Integer.parseInt(en_tete[0])==1){
-		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 vrai ");
-		            	
-		            	int retour=Integer.parseInt(en_tete[1].substring(0,1));
+		            	System.out.println("chaine recu :en_tete[1] "+en_tete[1]);
+		            	System.out.println("en_tete[1].length() "+en_tete[1].length());
+		            	//on enleve le retour chariot
+		            	en_tete[1].replaceAll("\n"," ");
+		            	System.out.println("chaine recu :en_tete[1] 2 "+en_tete[1]);
+		            	int retour=Integer.parseInt(en_tete[1].substring(0,en_tete[1].length()));
 		            	retour_Providing= retour_Providing + retour;
-		            	System.out.println("On passe retour_Providing+=Integer.parseInt(en_tete[1]);");
+		            	System.out.println("retour_Providing ="+retour_Providing);
 		            	recu++;
 		            	System.out.println("recu = "+recu);
 		            	System.out.println("envoyer = "+envoyer);
@@ -392,7 +395,7 @@ public class XmppManager {
 						int resultat=p_cmd.waitFor();
 						System.out.println("Retour  du calcul = "+resultat);
 						// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
-						String resultatF= ButtonLaunch.FileToString("resultat.txt");
+						String resultatF= ButtonLaunch.FileToString2("resultat.txt");
 						
 						//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
 						getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
