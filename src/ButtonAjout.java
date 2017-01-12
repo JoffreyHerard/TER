@@ -127,31 +127,39 @@ public class ButtonAjout extends JButton implements MouseListener {
 				try {
 
 					
-					Element JOB = new Element("JOB");
-					Document doc = new Document(JOB);
+						Element JOB = new Element("JOB");
+						Document doc = new Document(JOB);
+						
+						
+						Fichier_Perl=FileToString(contraintesT);
+	
+						Fichier_Exec=FileToString(exec1T);
+						Fichier_Commande=FileToString(commandeT);
+						
+						JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
+						
+						JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
+						JOB.addContent(new Element("cmd").setText(Fichier_Commande));
+						JOB.addContent(new Element("rang").setText(rang));
+						JOB.addContent(new Element("nom_fic").setText(nom_fic));
+						
+	
+						// new XMLOutputter().output(doc, System.out);
+						XMLOutputter xmlOutput = new XMLOutputter();
+	
+						// display nice nice
+						xmlOutput.setFormat(Format.getPrettyFormat());
+						if(!(new File("DB_JOBS/"+nom+".xml").exists())){
+							xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
+						}
+						else
+						{
+							//messagebox
+						}
+						
+						System.out.println("Fichier Enregistrer!");
+						
 					
-					
-					Fichier_Perl=FileToString(contraintesT);
-
-					Fichier_Exec=FileToString(exec1T);
-					Fichier_Commande=FileToString(commandeT);
-					
-					JOB.addContent(new Element("code_Perl").setText(Fichier_Perl));
-					
-					JOB.addContent(new Element("code_exec").setText(Fichier_Exec));
-					JOB.addContent(new Element("cmd").setText(Fichier_Commande));
-					JOB.addContent(new Element("rang").setText(rang));
-					JOB.addContent(new Element("nom_fic").setText(nom_fic));
-					
-
-					// new XMLOutputter().output(doc, System.out);
-					XMLOutputter xmlOutput = new XMLOutputter();
-
-					// display nice nice
-					xmlOutput.setFormat(Format.getPrettyFormat());
-					xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
-
-					System.out.println("Fichier Enregistrer!");
 				  } catch (IOException io) {
 					System.out.println(io.getMessage());
 				  }
@@ -188,10 +196,15 @@ public class ButtonAjout extends JButton implements MouseListener {
 
 					// new XMLOutputter().output(doc, System.out);
 					XMLOutputter xmlOutput = new XMLOutputter();
-
+					
 					// display nice nice
 					xmlOutput.setFormat(Format.getPrettyFormat());
-					xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
+					if(!(new File("DB_JOBS/"+nom+".xml").exists())){
+						xmlOutput.output(doc, new FileWriter("DB_JOBS/"+nom+".xml"));
+					}else
+					{
+						//messagebox
+					}
 
 					System.out.println("Fichier Enregistrer!");
 				  } catch (IOException io) {
