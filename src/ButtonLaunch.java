@@ -150,7 +150,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 		
 		fenetre.setTitle("Lancement d'une tache");
-		fenetre.setSize(800, 400);
+		fenetre.setSize(150,200);
 		fenetre.setLocationRelativeTo(null);
 		
 		fenetre.setBackground(Color.white);
@@ -182,7 +182,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
 		    	ProblemeCourant= FileToString("DB_JOBS/"+choix);
-		    	
+		    	MessageBox.show("Lancement JOB", "Tache enregistre ! le Resultat de votre execution seras affiche ici ");
 		    	try { 
 					/*On initialise la connection */
 					xmppManager.init();

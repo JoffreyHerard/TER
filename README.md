@@ -68,11 +68,27 @@
 <td>Fait</td>
 </tr>
 <tr>
+<td>Detection d'incapacite d'un worker a faire les taches </td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Detection d'incapacite de tout les workers a faire les taches</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Bouton annuler du worker</td>
+<td>????</td>
+</tr>
+<tr>
 <td>Implementation NQueen Mono-Worker</td>
 <td>Fait</td>
 </tr>
 <tr>
 <td>Implementation NQueen Multi-Worker</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Faire génération de log</td>
 <td>Fait</td>
 </tr>
 <tr>

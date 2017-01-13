@@ -121,7 +121,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		File d = new File ("DB_JOBS");
 		File f = new File ("DB_JOBS/"+nom+".xml");
 		if (d.exists()&& d.isDirectory()){
-		     /*Le fichier existe on va faire la creation du fichier XML associer*/
+		     /*Le dosseier existe on va faire la creation du fichier XML associer*/
 			if (!f.exists())
 			{
 				try {
@@ -167,6 +167,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 			}
 			else
 			{	
+				MessageBox.show("Erreur", "Problemes deja existant");
 				retour= -1;
 			}
 			

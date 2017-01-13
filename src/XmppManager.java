@@ -77,7 +77,22 @@ public class XmppManager {
 	public void setProvider(boolean provider) {
 		this.provider = provider;
 	}
-
+	public boolean TousIncapacite(boolean[] WorkerIncapacite)
+	{
+		boolean res= false;
+		int i =0;
+		
+		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==true)
+		{
+			i++;
+		}
+		
+		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==true )
+		{
+			res=true;
+		}
+		return res;
+	}
 	public void init() throws XMPPException {
         
         System.out.println(String.format("Initializing connection to server %1$s port %2$d", server, port));
@@ -198,103 +213,112 @@ public class XmppManager {
 		            	String buddyName ="";
 		            	String buddyID="";
 		            	int id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
+		            	
 		            	while(appartient(WorkerIncapacite,id_choisi))
 		            	{
 		            		id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
 		            	}
-		            	//On recupere ces informations
-		            	buddyID =ButtonLaunch.Liste_user.get(id_choisi).getId();
-		            	buddyName=ButtonLaunch.Liste_user.get(id_choisi).getName();
-		            	
-		            	
-		            	System.out.println("Lexecution n'as pas ete possible on redistribue aleatoirement la tache");
-		            	
-		            	//On doit parser le xml recu qui est en en_tete[3] et le renvoyer a l'id choisi  
-		            	String Probleme_individuel="";
-		            	
-		            	
-		            	try {
-			            	//On va recuperer les information interessantes dans le fichier xml recu 	
-			            	System.out.println("Ecriture du XML dans un fichier xml receive_FAILURE");
-							File fileXML = new File("JOB_REC/xml_receive_failure_pour.xml"+id_choisi);
-							fileXML.createNewFile();
-							PrintWriter writer = new PrintWriter(fileXML);
-							writer.write(body);
-							writer.close();
-						
-			            	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-							DocumentBuilder builder = factory.newDocumentBuilder();
+		            	if(TousIncapacite(WorkerIncapacite))
+		            	{
+		            		travail_terminer=true;
+		            		retour_Providing= -1;
+		            		MessageBox.show("Erreur", "Tous les Workers on ete incapacite");
+		            	}
+		            	else{
+			            	//On recupere ces informations
+			            	buddyID =ButtonLaunch.Liste_user.get(id_choisi).getId();
+			            	buddyName=ButtonLaunch.Liste_user.get(id_choisi).getName();
+			            	
+			            	
+			            	System.out.println("L'execution n'as pas ete possible on redistribue aleatoirement la tache");
+			            	
+			            	//On doit parser le xml recu qui est en en_tete[3] et le renvoyer a l'id choisi  
+			            	String Probleme_individuel="";
+			            	
+			            	
+			            	try {
+				            	//On va recuperer les information interessantes dans le fichier xml recu 	
+				            	System.out.println("Ecriture du XML dans un fichier xml receive_FAILURE");
+								File fileXML = new File("JOB_REC/xml_receive_failure_pour.xml"+id_choisi);
+								fileXML.createNewFile();
+								PrintWriter writer = new PrintWriter(fileXML);
+								writer.write(body);
+								writer.close();
 							
-							Document xml = builder.parse(fileXML);
-					        Element root = xml.getDocumentElement();
-					        
-					        
-					        XPathFactory xpf = XPathFactory.newInstance();
-					        XPath path = xpf.newXPath();
-					        String expression_C = "/JOB/contraintes";
-					        String expression_E = "/JOB/exec";
-					        String expression_CMD = "/JOB/cmd";
+				            	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+								DocumentBuilder builder = factory.newDocumentBuilder();
+								
+								Document xml = builder.parse(fileXML);
+						        Element root = xml.getDocumentElement();
+						        
+						        
+						        XPathFactory xpf = XPathFactory.newInstance();
+						        XPath path = xpf.newXPath();
+						        String expression_C = "/JOB/contraintes";
+						        String expression_E = "/JOB/exec";
+						        String expression_CMD = "/JOB/cmd";
+								
+						        String strexec = (String)path.evaluate(expression_E, root);
+						        String strcmd = (String)path.evaluate(expression_CMD, root);    
+						        String strperl = (String)path.evaluate(expression_C, root);    
+						        
+						        
+						        
+						        
+								//On crer le nouveau XML a expedie 
+								final Document document= builder.newDocument();
+			
+								final Element racine = document.createElement("JOB");
+								document.appendChild(racine);	
+								final Element exec = document.createElement("exec");
+								exec.appendChild(document.createTextNode(strexec));
+								
+								final Element contraintes = document.createElement("contraintes");
+								contraintes.appendChild(document.createTextNode(strperl));
+								
+								
+								final Element cmd = document.createElement("cmd");
+								cmd.appendChild(document.createTextNode(strcmd));
+								final Element id = document.createElement("id");
+								id.appendChild(document.createTextNode(""+id_choisi));
+								racine.appendChild(id);
+								racine.appendChild(contraintes);
+								racine.appendChild(exec);
+								racine.appendChild(cmd);
+								
 							
-					        String strexec = (String)path.evaluate(expression_E, root);
-					        String strcmd = (String)path.evaluate(expression_CMD, root);    
-					        String strperl = (String)path.evaluate(expression_C, root);    
-					        
-					        
-					        
-					        
-							//On crer le nouveau XML a expedie 
-							final Document document= builder.newDocument();
+								
+								final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+							    final Transformer transformer = transformerFactory.newTransformer();
+							    final DOMSource source = new DOMSource(document);
+							    final StreamResult sortie = new StreamResult(new File("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi));
 		
-							final Element racine = document.createElement("JOB");
-							document.appendChild(racine);	
-							final Element exec = document.createElement("exec");
-							exec.appendChild(document.createTextNode(strexec));
-							
-							final Element contraintes = document.createElement("contraintes");
-							contraintes.appendChild(document.createTextNode(strperl));
-							
-							
-							final Element cmd = document.createElement("cmd");
-							cmd.appendChild(document.createTextNode(strcmd));
-							final Element id = document.createElement("id");
-							id.appendChild(document.createTextNode(""+id_choisi));
-							racine.appendChild(id);
-							racine.appendChild(contraintes);
-							racine.appendChild(exec);
-							racine.appendChild(cmd);
-							
-						
-							
-							final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-						    final Transformer transformer = transformerFactory.newTransformer();
-						    final DOMSource source = new DOMSource(document);
-						    final StreamResult sortie = new StreamResult(new File("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi));
-	
-						    transformer.transform(source, sortie);	
-						    sendMessage(ButtonLaunch.FileToString("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi), buddyName+"@"+NOM_HOTE);
-							
-		            	} catch (XMPPException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (XPathExpressionException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (ParserConfigurationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (SAXException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (TransformerConfigurationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (TransformerException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+							    transformer.transform(source, sortie);	
+							    sendMessage(ButtonLaunch.FileToString("JOB_SEND/xml_send_Cfailure_pour.xml"+id_choisi), buddyName+"@"+NOM_HOTE);
+								
+			            	} catch (XMPPException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (XPathExpressionException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (ParserConfigurationException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (SAXException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (TransformerConfigurationException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (TransformerException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+		            	}	
 		            }
 	            }
         	}

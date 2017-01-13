@@ -7,11 +7,16 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.core.LoggerContext;
 
 @SuppressWarnings("unused")
 public class main {
 
 	public static void main(final String[] args) {
+		
+		LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+		
 		JFrame fenetre = new JFrame();
 		ImageIcon icone = new ImageIcon("/home/apocalypzer/workspace/TER/src/images/urca.jpg");
 		JLabel image = new JLabel(icone);

@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6-sources.jar"/>
 	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smack.jar"/>
 	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smackx.jar"/>
+	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/apache-log4j-2.7-bin/log4j-api-2.7.jar"/>
+	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/apache-log4j-2.7-bin/log4j-core-2.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
