@@ -68,6 +68,14 @@
 <td>Fait</td>
 </tr>
 <tr>
+<td>Implementation NQueen Mono-Worker</td>
+<td>Fait</td>
+</tr>
+<tr>
+<td>Implementation NQueen Multi-Worker</td>
+<td>Fait</td>
+</tr>
+<tr>
 <td>Rapport</td>
 <td>Fait</td>
 </tr>
@@ -76,9 +84,3 @@
   </div>
 
 </div>
-
-
-
-
-
-
