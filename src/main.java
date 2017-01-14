@@ -17,7 +17,7 @@ public class main {
 		LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
 		
 		JFrame fenetre = new JFrame();
-		ImageIcon icone = new ImageIcon("/home/apocalypzer/workspace/TER/src/images/urca.jpg");
+		ImageIcon icone = new ImageIcon("src/images/urca.jpg");
 		JLabel image = new JLabel(icone);
 		
 	    fenetre.setTitle("Calcul Grid XMPP");
