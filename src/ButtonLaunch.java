@@ -177,7 +177,10 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	/*Lancement du JOB*/
 		    	// on recupere ce qui a ete choisi 
 		    	String choix =comboPrb.getSelectedItem().toString();
-		    
+		    	// on doit demander le nom et mdp du admin provider ici dans une message box 
+		    	
+		    	
+		    	
 		    	String username = "provider";
 		    	String password = "toto";
 		    	choix= choix+".xml"; 

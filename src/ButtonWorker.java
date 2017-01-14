@@ -68,7 +68,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    this.affichage = new JLabel("Selection du salon:");	
 	    this.comboPrb = new JComboBox<String>();
 	    this.ListeRoom = new ArrayList<HostedRoom>();
-	    this.xmppManager = new XmppManager(xmppManager.NOM_HOTE, 5222);
+	    this.xmppManager = new XmppManager(xmppManager.ADRESSE_HOTE, 5222);
 	  }
 	  
 	@Override

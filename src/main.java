@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.JPanel;
 
 import org.apache.logging.log4j.*;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -30,6 +29,44 @@ public class main {
 	   
 	    
 	    fenetre.setContentPane(new Panneau()); 
+	    JOptionPane jop = new JOptionPane();            
+
+
+	    JOptionPane jop1 = new JOptionPane(), jop2 = new JOptionPane();
+
+	    
+	    
+	    String nom_hote = jop1.showInputDialog(null, "Nom du serveur ?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
+	    String addr_hote = jop1.showInputDialog(null, "Adresse du serveur?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
+	    
+	    jop2.showMessageDialog(null, "Nom du serveur XMPP: " + nom_hote+" Adresse serveur XMPP: "+addr_hote, "Serveur XMPP", JOptionPane.INFORMATION_MESSAGE);
+	    
+	    int estHOST = jop.showConfirmDialog(null, "Etes vous l'host du serveur XMPP?", "Host XMPP", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+	    if(estHOST != JOptionPane.NO_OPTION && 
+
+	    		estHOST != JOptionPane.CANCEL_OPTION && 
+
+	    				estHOST != JOptionPane.CLOSED_OPTION){
+
+	         switch(estHOST)
+	         {
+		         case JOptionPane.OK_OPTION:
+		        	 XmppManager.setADRESSE_HOTE(nom_hote);
+		        	 XmppManager.setNOM_HOTE(nom_hote);
+		        	 break;
+	
+		         case JOptionPane.NO_OPTION:
+		        	 XmppManager.setADRESSE_HOTE(addr_hote);
+		        	 XmppManager.setNOM_HOTE(nom_hote);
+		        	 break;
+	
+		         default:
+		        	 
+		        	 break;
+	         }
+
+	    }
 	    
 	    fenetre.setLayout(new FlowLayout());
 	    

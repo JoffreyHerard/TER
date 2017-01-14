@@ -60,7 +60,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
-	    this.xmppManager = new XmppManager(xmppManager.NOM_HOTE, 5222);
+	    this.xmppManager = new XmppManager(xmppManager.ADRESSE_HOTE, 5222);
 	  }
 	  
 	@Override

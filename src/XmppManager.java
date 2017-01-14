@@ -54,6 +54,7 @@ public class XmppManager {
     
     private ConnectionConfiguration config;
     private XMPPConnection connection;
+    static String ADRESSE_HOTE="192.168.1.11";
     static String NOM_HOTE="apocalypzer-lg-gram";
     private ChatManager chatManager;
     private MessageListener messageListener;
@@ -548,6 +549,14 @@ public class XmppManager {
 
 	public void setWorkerIncapacite(boolean[] workerIncapacite) {
 		WorkerIncapacite = workerIncapacite;
+	}
+
+	public static String getADRESSE_HOTE() {
+		return ADRESSE_HOTE;
+	}
+
+	public static void setADRESSE_HOTE(String aDRESSE_HOTE) {
+		ADRESSE_HOTE = aDRESSE_HOTE;
 	}
     
 }
