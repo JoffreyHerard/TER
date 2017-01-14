@@ -68,6 +68,7 @@ Nous avons donc deux genres d'acteur pour chaque travail différent disponibles
 \begin{itemize}
 \item Fournisseur de travail/Provider, unique pour chaque travail.
 \item Des travailleurs/Workers, de 1 a n, n définit par le problèmes.
+Chaque Provider est possiblement exécuter sur n'importe quel système d'exploitation  tout comme chaque worker
 \end{itemize}
 \newpage
 \chapter{Les Échanges} 
@@ -241,36 +242,36 @@ Voici un déroulement classique cote Worker
 Le projet a été programme en Java version : "1.8.0\_111" sous Eclipse  
 
 \newpage
-\section{Code}
-\subsection{XML} 
-
-BDD\_JOB.xsd
-\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/BDD_JOB.xsd}
-
-ENVOI\_RECEPTION.xsd
-\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/ENVOI_RECEPTION.xsd}
-\newpage
-JOB\_REP.xsd
-\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/JOB_REP.xsd}
-\newpage
-\subsection{Perl}
-Les exemple de fichier de contrainte écrit en Perl 
-DitributionContraintes.pl
-\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
-\newpage
-\subsection{Java}
-ButtonAjout.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonAjout.java}\newpage
-ButtonContact.java:
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonContact.java}\newpage ButtonDel.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDel.java}\newpage ButtonDoW.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDoW.java}\newpage ButtonLaunch.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonLaunch.java}\newpage ButtonWorker.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonWorker.java}\newpage Identity.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/Identity.java}\newpage
-main.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/main.java}\newpage
-Xmppmnager.java :
-\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/XmppManager.java}
+%\section{Code}
+%\subsection{XML} 
+%
+%BDD\_JOB.xsd
+%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/BDD_JOB.xsd}
+%
+%ENVOI\_RECEPTION.xsd
+%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/ENVOI_RECEPTION.xsd}
+%\newpage
+%JOB\_REP.xsd
+%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/JOB_REP.xsd}
+%\newpage
+%\subsection{Perl}
+%Les exemple de fichier de contrainte écrit en Perl 
+%DitributionContraintes.pl
+%\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
+%\newpage
+%\subsection{Java}
+%ButtonAjout.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonAjout.java}\newpage
+%ButtonContact.java:
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonContact.java}\newpage ButtonDel.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDel.java}\newpage ButtonDoW.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDoW.java}\newpage ButtonLaunch.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonLaunch.java}\newpage ButtonWorker.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonWorker.java}\newpage Identity.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/Identity.java}\newpage
+%main.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/main.java}\newpage
+%Xmppmnager.java :
+%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/XmppManager.java}
 
 \end{document}

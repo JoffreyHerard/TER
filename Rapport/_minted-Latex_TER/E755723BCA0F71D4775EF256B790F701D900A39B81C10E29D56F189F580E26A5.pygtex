@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+perl/ calcul.pl \PYG{l+m}{2} 3,
+perl/ calcul.pl \PYG{l+m}{3} 3
+\end{Verbatim}

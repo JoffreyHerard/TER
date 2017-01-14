@@ -28,7 +28,3 @@
 \contentsline {chapter}{\numberline {7}Annexes}{21}
 \contentsline {section}{\numberline {7.1}Organisation du Projet}{21}
 \contentsline {subsection}{\numberline {7.1.1}Outils et langages}{22}
-\contentsline {section}{\numberline {7.2}Code}{23}
-\contentsline {subsection}{\numberline {7.2.1}XML}{23}
-\contentsline {subsection}{\numberline {7.2.2}Perl}{25}
-\contentsline {subsection}{\numberline {7.2.3}Java}{26}

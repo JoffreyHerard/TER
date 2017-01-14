@@ -1,8 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-perl calcul.pl \PYG{l+m}{2} 3,
-perl calcul.pl \PYG{l+m}{3} 3,
-perl calcul.pl \PYG{l+m}{4} 3,
-perl calcul.pl \PYG{l+m}{5} 3, 
-perl calcul.pl \PYG{l+m}{26} 3, 
-perl calcul.pl \PYG{l+m}{29} 3\PYGZsh{}
-\end{Verbatim}

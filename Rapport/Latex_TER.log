@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  27 DEC 2016 17:45
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  14 JAN 2017 12:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -702,14 +702,14 @@ Chapitre 5.
 Missing character: There is no ’ in font ecrm1095!
  (./_minted-Latex_TER/default-pyg-prefix.pygstyle)
 (./_minted-Latex_TER/default.pygstyle)
-(./_minted-Latex_TER/19BF85943A1D338BD8F45E1AEED3A1894956E2F3CCC13EE19C30DBF1EF
+(./_minted-Latex_TER/B47E25D3AA03CB51DD2B3D71AD7FC5174956E2F3CCC13EE19C30DBF1EF
 798386.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
 ) [11]
 Missing character: There is no ’ in font ecrm1095!
 
-(./_minted-Latex_TER/AF9B0ED446C3A335A916C641341A8ECAD900A39B81C10E29D56F189F58
+(./_minted-Latex_TER/E755723BCA0F71D4775EF256B790F701D900A39B81C10E29D56F189F58
 0E26A5.pygtex) [12]
 (./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BED59F12BB8D842878D0D766E130
 DD9403.pygtex
@@ -739,42 +739,14 @@ Chapitre 6.
 Chapitre 7.
 [21
 
-] [22]
-(./_minted-Latex_TER/19BF85943A1D338BD8F45E1AEED3A1894956E2F3CCC13EE19C30DBF1EF
-798386.pygtex)
-(./_minted-Latex_TER/12EDF949303C35EA2E20650E0152ADCA288F149F2DA6B33A16C2D77CDA
-ACD5D4.pygtex) [23]
-(./_minted-Latex_TER/99B68F071456396C901DAA361D5333A8D9224BE34EECF0A3B61A20808F
-0635C1.pygtex) [24]
-(./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BEE83CE2401B11A2E01872DB9C77
-FFA96D.pygtex) [25]
-(./_minted-Latex_TER/27109B78E454763FDA7950F9D9131A15BF56A155AF8CA50FCE27B63FE6
-0A8617.pygtex [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36]) [37]
-(./_minted-Latex_TER/3C94D68C4BFA6D5D651E2FBA82A0FAE31E426B5F3BEBC2BFC4B5ADBA39
-46C249.pygtex [38] [39] [40]) [41]
-(./_minted-Latex_TER/E819E9973C3B3B7E4F435EAA719B5EEC630F8B823A4F67A9F4A0358AD6
-E74C2D.pygtex [42] [43] [44] [45] [46]) [47]
-(./_minted-Latex_TER/3EF390A8EA1446BA0A23D88AD0EA5485F5F2857AE37EFA7C216B3958A9
-5AD8BE.pygtex [48] [49] [50] [51] [52]) [53]
-(./_minted-Latex_TER/1BD1C13C528E891E50CFBA0294B6E5242563BFE69986EF1A4D27448720
-B2D4CF.pygtex [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65]
-[66]) [67]
-(./_minted-Latex_TER/4103BE31E30B33FA52001249BDE7C0B8E75DAA5CA21E600998A375C373
-79FD91.pygtex [68] [69] [70] [71] [72] [73] [74] [75]) [76]
-(./_minted-Latex_TER/D80599EBE33A1D8CC5CFB81F861182C9E55D38EE8DAE980E755C2EF475
-F0F5FA.pygtex) [77]
-(./_minted-Latex_TER/DB8CD50105E313F95E67CE54D27F9B1976ABE4BEE66B52794C7D8892E4
-35A0FA.pygtex [78]) [79]
-(./_minted-Latex_TER/7F5A8347B9E2F134B5372CB18A0646AE68B6BA59ADFC2F5AE96D505976
-D7DC5A.pygtex [80] [81] [82] [83] [84] [85] [86] [87]) [88] (./Latex_TER.aux) )
- 
+] [22] (./Latex_TER.aux) ) 
 Here is how much of TeX's memory you used:
- 9956 strings out of 493589
- 158775 string characters out of 6145555
- 283087 words of memory out of 5000000
- 13125 multiletter control sequences out of 15000+600000
- 18012 words of font info for 47 fonts, out of 8000000 for 9000
+ 9900 strings out of 493589
+ 154516 string characters out of 6145555
+ 281138 words of memory out of 5000000
+ 13108 multiletter control sequences out of 15000+600000
+ 17713 words of font info for 46 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
  37i,7n,35p,823b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Latex_TER.pdf (88 pages).
+Output written on Latex_TER.pdf (22 pages).
