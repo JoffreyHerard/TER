@@ -54,8 +54,8 @@ public class XmppManager {
     
     private ConnectionConfiguration config;
     private XMPPConnection connection;
-    static String ADRESSE_HOTE="192.168.1.11";
-    static String NOM_HOTE="apocalypzer-lg-gram";
+    static String ADRESSE_HOTE;
+    static String NOM_HOTE;
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
