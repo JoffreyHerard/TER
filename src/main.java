@@ -44,13 +44,8 @@ public class main {
 	    jop2.showMessageDialog(null, "Nom du serveur XMPP: " + nom_hote+" Adresse serveur XMPP: "+addr_hote, "Serveur XMPP", JOptionPane.INFORMATION_MESSAGE);
 	    
 	    int estHOST = jop.showConfirmDialog(null, "Etes vous l'host du serveur XMPP?", "Host XMPP", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-	    if(estHOST != JOptionPane.NO_OPTION && 
-
-	    		estHOST != JOptionPane.CANCEL_OPTION && 
-
+	    if(	estHOST != JOptionPane.CANCEL_OPTION && 
 	    				estHOST != JOptionPane.CLOSED_OPTION){
-
 	         switch(estHOST)
 	         {
 		         case JOptionPane.OK_OPTION:
@@ -67,8 +62,8 @@ public class main {
 		        	 
 		        	 break;
 	         }
-
 	    }
+	    System.out.println("On est passe");
 	    fenetre.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/urca.jpg")); 
 	    
 	    ButtonLaunch bL =new ButtonLaunch("Lancer une tache");
