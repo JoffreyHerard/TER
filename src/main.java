@@ -54,13 +54,13 @@ public class main {
 	         switch(estHOST)
 	         {
 		         case JOptionPane.OK_OPTION:
-		        	 XmppManager.setADRESSE_HOTE(nom_hote);
-		        	 XmppManager.setNOM_HOTE(nom_hote);
+		        	 XmppManager.ADRESSE_HOTE=nom_hote;
+		        	 XmppManager.NOM_HOTE=nom_hote;
 		        	 break;
 	
 		         case JOptionPane.NO_OPTION:
-		        	 XmppManager.setADRESSE_HOTE(addr_hote);
-		        	 XmppManager.setNOM_HOTE(nom_hote);
+		        	 XmppManager.ADRESSE_HOTE=addr_hote;
+		        	 XmppManager.NOM_HOTE=nom_hote;
 		        	 break;
 	
 		         default:
