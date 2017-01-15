@@ -71,13 +71,19 @@ public class main {
 	    }
 	    fenetre.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/urca.jpg")); 
 	    
+	    ButtonLaunch bL =new ButtonLaunch("Lancer une tache");
+	    ButtonWorker bW=new ButtonWorker("Client d'une tache");
+	    ButtonAjout bA=new ButtonAjout("Ajouter une tache a la base");
+	    ButtonDel bD= new ButtonDel("Retirer une tache de la base");
+	    ButtonContact bC =new ButtonContact("Contact");
+	    
 	    fenetre.setLayout(new FlowLayout());
 	    fenetre.getContentPane().add(image,BorderLayout.WEST);
-	    fenetre.getContentPane().add(new ButtonLaunch("Lancer une tache"),BorderLayout.EAST);
-	    fenetre.getContentPane().add(new ButtonWorker("Client d'une tache"),BorderLayout.EAST);
-	    fenetre.getContentPane().add(new ButtonAjout("Ajouter une tache a la base"),BorderLayout.EAST);
-	    fenetre.getContentPane().add(new ButtonDel("Retirer une tache de la base"),BorderLayout.EAST);
-	    fenetre.getContentPane().add(new ButtonContact("Contact"),BorderLayout.EAST);
+	    fenetre.getContentPane().add(bL,BorderLayout.EAST);
+	    fenetre.getContentPane().add(bW,BorderLayout.EAST);
+	    fenetre.getContentPane().add(bA,BorderLayout.EAST);
+	    fenetre.getContentPane().add(bD,BorderLayout.EAST);
+	    fenetre.getContentPane().add(bC,BorderLayout.EAST);
 	    
 	    fenetre.setVisible(true);
 	}

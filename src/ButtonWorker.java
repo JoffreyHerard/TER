@@ -94,7 +94,10 @@ public class ButtonWorker extends JButton implements MouseListener {
 		
 		fenetre.setVisible(true); 
 		
-		
+		File d = new File ("JOB_SEND/");
+    	d.mkdir();
+    	d = new File ("JOB_REC/");
+    	d.mkdir();
 
 		bouton_ok.addMouseListener(new MouseListener(){
 	

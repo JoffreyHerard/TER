@@ -94,7 +94,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	    Liste_user = new ArrayList<Identity>();
 	    res=new JLabel("Resultat");
 	    xmppManager = new XmppManager(XmppManager.NOM_HOTE, 5222);
-	  }
+	 }
 	 public static String FileToString(String PathFile)
 		{
 			String fic ="";
@@ -158,7 +158,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		repertoire = new File("DB_JOBS");
 		files =repertoire.listFiles(xmlFileFilter);
 		
-		comboPrb.setPreferredSize(new Dimension(150, 40));
+		comboPrb.setPreferredSize(new Dimension(150, 60));
 		for(int i = 0;i<files.length;i++)
 		{
 			int taille_nom= files[i].getName().length();
@@ -180,8 +180,10 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	String choix =comboPrb.getSelectedItem().toString();
 		    	// on doit demander le nom et mdp du admin provider ici dans une message box 
 		    	
-		    	
-		    	
+		    	File d = new File ("JOB_SEND/");
+		    	d.mkdir();
+		    	d = new File ("JOB_REC/");
+		    	d.mkdir();
 		    	String username = "provider";
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
