@@ -159,6 +159,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		files =repertoire.listFiles(xmlFileFilter);
 		
 		comboPrb.setPreferredSize(new Dimension(150, 60));
+		// verifions quil y a deja des job sinon on ouvre
+		
+		
 		for(int i = 0;i<files.length;i++)
 		{
 			int taille_nom= files[i].getName().length();

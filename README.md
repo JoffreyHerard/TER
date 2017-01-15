@@ -92,6 +92,10 @@
 <td>Fait</td>
 </tr>
 <tr>
+<td>Executable</td>
+<td>Fait</td>
+</tr>
+<tr>
 <td>Rapport</td>
 <td>Fait</td>
 </tr>
