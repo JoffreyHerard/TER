@@ -56,6 +56,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	private String ProblemeCourant;
 	private boolean isRunning ;
 	
+	@SuppressWarnings("static-access")
 	public ButtonDoW(String str){
 	    super(str);
 	    this.name = str;
@@ -63,6 +64,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	    this.xmppManager = new XmppManager(xmppManager.ADRESSE_HOTE, 5222);
 	  }
 	  
+	@SuppressWarnings("static-access")
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
     	try{

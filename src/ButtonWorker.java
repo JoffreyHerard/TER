@@ -54,7 +54,8 @@ public class ButtonWorker extends JButton implements MouseListener {
 	 private JComboBox<String> comboPrb; 
 	 
 	 
-	 public ButtonWorker(String str){
+	 @SuppressWarnings("static-access")
+	public ButtonWorker(String str){
 	    super(str);
 	    this.name = str;
 	    this.addMouseListener(this);
@@ -97,7 +98,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 
 		bouton_ok.addMouseListener(new MouseListener(){
 	
-		    @SuppressWarnings("deprecation")
+		    @SuppressWarnings("static-access")
 			public void mouseClicked(MouseEvent e) {
 		    	
 		    	try {
@@ -114,6 +115,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 					
 					ListeRoom =(ArrayList<HostedRoom>)MultiUserChat.getHostedRooms(xmppManager.getConnection(), "conference."+xmppManager.NOM_HOTE);
 					System.out.println("Fin de etablir une liste de room");
+					@SuppressWarnings("rawtypes")
 					Iterator it = ListeRoom.iterator();
 					
 					while(it.hasNext())

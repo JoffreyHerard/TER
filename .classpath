@@ -2,14 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6-contrib.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6-junit.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/JDOM/jdom-2.0.6-sources.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smack.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/smack_3_1_0/smackx.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/apache-log4j-2.7-bin/log4j-api-2.7.jar"/>
-	<classpathentry kind="lib" path="/home/apocalypzer/Téléchargements/apache-log4j-2.7-bin/log4j-core-2.7.jar"/>
+	<classpathentry kind="lib" path="JDOM/jdom-2.0.6-contrib.jar"/>
+	<classpathentry kind="lib" path="JDOM/jdom-2.0.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="JDOM/jdom-2.0.6-junit.jar"/>
+	<classpathentry kind="lib" path="JDOM/jdom-2.0.6-sources.jar"/>
+	<classpathentry kind="lib" path="JDOM/jdom-2.0.6.jar"/>
+	<classpathentry kind="lib" path="apache-log4j-2.7-bin/log4j-api-2.7.jar"/>
+	<classpathentry kind="lib" path="apache-log4j-2.7-bin/log4j-core-2.7.jar"/>
+	<classpathentry kind="lib" path="smack_3_1_0/smack.jar"/>
+	<classpathentry kind="lib" path="smack_3_1_0/smackx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

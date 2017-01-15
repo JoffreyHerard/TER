@@ -12,7 +12,8 @@ import org.apache.logging.log4j.core.LoggerContext;
 @SuppressWarnings("unused")
 public class main {
 
-	public static void main(final String[] args) {
+	@SuppressWarnings("static-access")
+	public static void main(String[] args){
 		
 		LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
 		
@@ -25,7 +26,7 @@ public class main {
 	    fenetre.setResizable(false);
 	    fenetre.setLocationRelativeTo(null);
 	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    fenetre.setVisible(true);
+	   
 	   
 	    
 	    fenetre.setContentPane(new Panneau()); 
@@ -36,8 +37,9 @@ public class main {
 
 	    
 	    
-	    String nom_hote = jop1.showInputDialog(null, "Nom du serveur ?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
-	    String addr_hote = jop1.showInputDialog(null, "Adresse du serveur?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
+
+		String nom_hote = jop1.showInputDialog(null, "Nom du serveur ?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
+		String addr_hote = jop1.showInputDialog(null, "Adresse du serveur?", "Information Serveur", JOptionPane.QUESTION_MESSAGE);
 	    
 	    jop2.showMessageDialog(null, "Nom du serveur XMPP: " + nom_hote+" Adresse serveur XMPP: "+addr_hote, "Serveur XMPP", JOptionPane.INFORMATION_MESSAGE);
 	    
@@ -67,16 +69,16 @@ public class main {
 	         }
 
 	    }
+	    fenetre.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/urca.jpg")); 
 	    
 	    fenetre.setLayout(new FlowLayout());
-	    
-
 	    fenetre.getContentPane().add(image,BorderLayout.WEST);
 	    fenetre.getContentPane().add(new ButtonLaunch("Lancer une tache"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonWorker("Client d'une tache"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonAjout("Ajouter une tache a la base"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonDel("Retirer une tache de la base"),BorderLayout.EAST);
 	    fenetre.getContentPane().add(new ButtonContact("Contact"),BorderLayout.EAST);
+	    
 	    fenetre.setVisible(true);
 	}
 	

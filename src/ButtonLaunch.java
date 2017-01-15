@@ -173,7 +173,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
    	    
 		bouton_ok.addMouseListener(new MouseListener(){
 
-		    public void mouseClicked(MouseEvent e) {
+		    @SuppressWarnings("rawtypes")
+			public void mouseClicked(MouseEvent e) {
 		    	/*Lancement du JOB*/
 		    	// on recupere ce qui a ete choisi 
 		    	String choix =comboPrb.getSelectedItem().toString();
@@ -197,7 +198,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  //Get the MultiUserChatManager
 					
 					  //Create a MultiUserChat using an XMPPConnection for a room
-					  String Name_room = "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference."+xmppManager.NOM_HOTE;
+					  @SuppressWarnings("static-access")
+					String Name_room = "providing_room_"+comboPrb.getSelectedItem().toString()+"@conference."+xmppManager.NOM_HOTE;
 					  MultiUserChat muc = new MultiUserChat(xmppManager.getConnection(), Name_room);
 					
 					  // Create the room identity
@@ -381,6 +383,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		// TODO Auto-generated method stub
 
 	}
+	@SuppressWarnings("static-access")
 	public int split(ArrayList<Identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
 		//modifier ici attention
