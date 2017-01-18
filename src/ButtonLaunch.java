@@ -8,6 +8,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,7 +85,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	 private boolean isRunning ;
 	 protected static ArrayList<Identity> Liste_user;
 	 private JLabel res ;
-	 
+	 private boolean travail_split;
 	 public ButtonLaunch(String str){
 	    super(str);
 	    this.name = str;
@@ -170,8 +173,60 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		
 
 	    fenetre.add(comboPrb);
-
 	    fenetre.add(bouton_ok);
+	    fenetre.addWindowListener(new WindowListener()
+	    {
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				// on doit savoir si on a rependu les job ou pas ! 
+				
+				if(!xmppManager.travail_terminer && travail_split)
+				{
+					// il faut prevenir tout les worker d'arreter leur execution 
+				}
+				xmppManager.destroy();
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
 		fenetre.setVisible(true); 
    	    
 		bouton_ok.addMouseListener(new MouseListener(){
@@ -332,7 +387,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 						  //il y a une erreur sur les workers 
 						  res.setText("Resultat : Erreur");
 					  }
-					  xmppManager.destroy();	
+					 
 					  
 					  
 		    	}
@@ -391,8 +446,6 @@ public class ButtonLaunch extends JButton implements MouseListener {
 	@SuppressWarnings("static-access")
 	public int split(ArrayList<Identity> Liste_user,int Nombre_Participants,String ProblemeCourant,XmppManager xmppManager,String choix)
 	{
-		//modifier ici attention
-		// TEST AFFICHAGE 
 		
 		int i =0;
 		System.out.println("Nb part = "+Nombre_Participants);
@@ -518,7 +571,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 			
 
 		}
-		 
+		travail_split= true;
 		return 0;
 	}
 	public String getName() {

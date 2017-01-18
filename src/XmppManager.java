@@ -64,7 +64,11 @@ public class XmppManager {
     private int envoyer =0;
     private int recu =0;
     private boolean[] WorkerIncapacite;
-    
+    private ConnectionListener ConnectionListener;
+    static String name_provider ;
+    static boolean job_enCours ;
+    static int  rand ;
+    static String ID;
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
@@ -111,7 +115,8 @@ public class XmppManager {
         
         chatManager = connection.getChatManager();
         messageListener = new MyMessageListener();
-        
+        ConnectionListener = new MyConnectionListener();
+        connection.addConnectionListener(ConnectionListener);
     }
     
     public XMPPConnection getConnection() {
@@ -156,15 +161,51 @@ public class XmppManager {
         Roster roster = connection.getRoster();
         roster.createEntry(user, name, null);
     }
+    
     public boolean appartient(boolean[] WorkerIncapaciteB,int id_choisi)
     {
     	return WorkerIncapacite[id_choisi];
+    }
+    
+    class MyConnectionListener implements ConnectionListener {
+
+		@Override
+		public void connectionClosed() {
+			// TODO Auto-generated method stub
+			System.out.println("Quelqun c'est deconnecter faut savoir qui !!!");
+		}
+
+		@Override
+		public void connectionClosedOnError(Exception arg0) {
+			// TODO Auto-generated method stub
+			System.out.println("Quelqun c'est deconnecter avec une erreur faut savoir qui !!!");
+		}
+
+		@Override
+		public void reconnectingIn(int arg0) {
+			// TODO Auto-generated method stub
+			System.out.println("Reconnection !!!");
+		}
+
+		@Override
+		public void reconnectionFailed(Exception arg0) {
+			// TODO Auto-generated method stub
+			System.out.println("Reconnection echouer !!!");
+			
+		}
+
+		@Override
+		public void reconnectionSuccessful() {
+			// TODO Auto-generated method stub
+			System.out.println("Reconnection reussite !!!");
+			
+		}
     }
     class MyMessageListener implements MessageListener {
 
         @Override
         public void processMessage(Chat chat, Message message) {
-        	String ID ="";
+        	 ID ="";
         	if(provider){ 
 	        	//Modification de reaction si provider ou non 
 	            String from = message.getFrom();
@@ -327,6 +368,7 @@ public class XmppManager {
         	{
         		
         	   String from = message.getFrom();
+        	   name_provider=from;
  	           String body = message.getBody();
  	           System.out.println(String.format("Received message '%1$s' from %2$s", body, from));
  	           System.out.println("c'est partie on va executer ce qu'il faut");
@@ -334,7 +376,8 @@ public class XmppManager {
  	           File dir = new File ("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName());
  	           dir.mkdirs();
  	           try{
- 	        	    int rand =(int) (Math.random()*100000);
+ 	        	    job_enCours=true;
+ 	        	    rand =(int) (Math.random()*100000);
 					System.out.println("Ecriture du XML dans un fichier xml receive");
 					File file = new File("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+rand+".xml");
 					file.createNewFile();
@@ -430,6 +473,7 @@ public class XmppManager {
 						//Si on peut pas lexecuter on le renvoie aux provider
 						sendMessage("0,NO,"+ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+rand+".xml"), "provider@"+NOM_HOTE);
 					}	
+					 job_enCours=false;
         	   } 
  	           catch(IOException ioe){
         		    System.out.println("Erreur IO");

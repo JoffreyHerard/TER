@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><JOB><id>0</id><nom_fic>nQueen8.py</nom_fic><contraintes>#!/usr/bin/perl
-
-use v5.14;
-
-
-my $value= system("python -V");
-
-if( $value eq 0)
-{
-	exit(3);
-}
-else
-{
-	exit(0);
-}</contraintes><exec>#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import copy
 from StringIO import StringIO
@@ -36,9 +22,9 @@ def resolution(taille, eta):
             for j in etat :
                 j = int(j)
                 liste[j]=False
-                if (j+len(etat)-where) &lt; taille and j+(len(etat)-where) &gt;= 0:
+                if (j+len(etat)-where) < taille and j+(len(etat)-where) >= 0:
                     liste[j+(len(etat)-where)] = False
-                if (j-len(etat)-where) &lt; taille and j-(len(etat)-where) &gt;= 0:
+                if (j-len(etat)-where) < taille and j-(len(etat)-where) >= 0:
                     liste[j-(len(etat)-where)] = False
                 where+=1
             if liste[i]:
@@ -48,4 +34,4 @@ def resolution(taille, eta):
     mon_fichier.close()
 
 
-resolution(8, "")</exec><cmd>python /nQueen8.py</cmd></JOB>
+resolution(8, "")
