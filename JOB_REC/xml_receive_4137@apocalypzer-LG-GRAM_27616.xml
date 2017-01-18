@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><JOB><id>0</id><nom_fic>nQueen14.py</nom_fic><contraintes>#!/usr/bin/perl
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><JOB><id>0</id><nom_fic>nQueen8.py</nom_fic><contraintes>#!/usr/bin/perl
 
 use v5.14;
 
@@ -48,4 +48,4 @@ def resolution(taille, eta):
     mon_fichier.close()
 
 
-resolution(14, "")</exec><cmd>python /nQueen14.py</cmd></JOB>
+resolution(8, "")</exec><cmd>python /nQueen8.py</cmd></JOB>

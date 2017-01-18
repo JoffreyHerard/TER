@@ -458,16 +458,28 @@ public class XmppManager {
 						System.out.println("MAJ DE strcmd = "+strcmd);
 
 					
+						new Thread(new Runnable(){
+							@Override
+							public void run(){
+								Process p_cmd;
+								try {
+									
+								p_cmd = runtime.exec(strcmd);
+								int resultat=p_cmd.waitFor();
+								System.out.println("Retour  du calcul = "+resultat);
+								// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
+								String resultatF= ButtonLaunch.FileToString2("resultat.txt");
+								//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
+								getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
+								System.out.println("message envoyer = 1,"+resultatF);
+								} catch (IOException | InterruptedException | XMPPException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						}).start();
 						
-						Process p_cmd =runtime.exec(strcmd);
-						int resultat=p_cmd.waitFor();
-						System.out.println("Retour  du calcul = "+resultat);
-						// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
-						String resultatF= ButtonLaunch.FileToString2("resultat.txt");
 						
-						//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
-						getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
-						System.out.println("message envoyer = 1,"+resultatF);
 					}else
 					{
 						//Si on peut pas lexecuter on le renvoie aux provider

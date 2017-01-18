@@ -96,6 +96,78 @@ public class ButtonWorker extends JButton implements MouseListener {
 		fenetre.setLocationRelativeTo(null);
 		
 		fenetre.setVisible(true); 
+		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		fenetre.addWindowListener(new WindowListener()
+	    {
+		  
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				// on doit signaler que l'on s'en va si un job est en cours 
+				System.out.println("On va nettoyer tout ca");
+				if(xmppManager.job_enCours)
+				{
+					
+					// On signale au provider de rediriger le job
+					//Si on peut pas lexecuter on le renvoie aux provider
+					try {
+						xmppManager.sendMessage("0,NO,"+xmppManager.ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+xmppManager.rand+".xml"), "provider@"+xmppManager.NOM_HOTE);
+					} catch (XMPPException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//on supprime la connexion 
+					xmppManager.destroy();
+					
+				}
+				else
+				{
+					// il ne travaille pas alors on s'en fiche ou il a deja finit 
+					xmppManager.destroy();
+				
+				}
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+	    	
+	    });
+		
 		
 		File d = new File ("JOB_SEND/");
     	d.mkdir();
@@ -148,75 +220,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 					bouton_ok_channel.setUsername(username);
 					bouton_ok_channel.setPassword(password);
 					
-					fenetre.addWindowListener(new WindowListener()
-					    {
-						  
-							@Override
-							public void windowActivated(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowClosed(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowClosing(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								// on doit signaler que l'on s'en va si un job est en cours 
-								System.out.println("On va nettoyer tout ca");
-								if(xmppManager.job_enCours)
-								{
-									
-									// On signale au provider de rediriger le job
-									//Si on peut pas lexecuter on le renvoie aux provider
-									try {
-										xmppManager.sendMessage("0,NO,"+xmppManager.ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+xmppManager.rand+".xml"), "provider@"+xmppManager.NOM_HOTE);
-									} catch (XMPPException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-									//on supprime la connexion 
-									xmppManager.destroy();
-									
-								}
-								else
-								{
-									// il ne travaille pas alors on s'en fiche ou il a deja finit 
-									xmppManager.destroy();
-								
-								}
-								
-							}
-
-							@Override
-							public void windowDeactivated(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowDeiconified(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowIconified(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-
-							@Override
-							public void windowOpened(WindowEvent arg0) {
-								// TODO Auto-generated method stub
-								
-							}
-					    	
-					    });
+					
 					fenetre.setVisible(true); 
 								
 				} catch (XMPPException exc) {
