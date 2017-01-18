@@ -69,6 +69,8 @@ public class XmppManager {
     static boolean job_enCours ;
     static int  rand ;
     static String ID;
+    static String strcmd;
+    
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
@@ -409,7 +411,7 @@ public class XmppManager {
 					
 					// On ajouter a sa la bonne ligne de commande a executer
 			        expression = "/JOB/cmd";
-			        String strcmd = (String)path.evaluate(expression, root);    
+			         strcmd = (String)path.evaluate(expression, root);    
 			        //Creation du fichier de contrainte en PERL
 			        
 					System.out.println("Ecriture du XML dans un fichier contrainte");
@@ -462,16 +464,15 @@ public class XmppManager {
 							@Override
 							public void run(){
 								Process p_cmd;
-								try {
-									
-								p_cmd = runtime.exec(strcmd);
-								int resultat=p_cmd.waitFor();
-								System.out.println("Retour  du calcul = "+resultat);
-								// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
-								String resultatF= ButtonLaunch.FileToString2("resultat.txt");
-								//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
-								getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
-								System.out.println("message envoyer = 1,"+resultatF);
+								try {									
+									p_cmd = runtime.exec(strcmd);
+									int resultat=p_cmd.waitFor();
+									System.out.println("Retour  du calcul = "+resultat);
+									// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
+									String resultatF= ButtonLaunch.FileToString2("resultat.txt");
+									//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
+									getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
+									System.out.println("message envoyer = 1,"+resultatF);
 								} catch (IOException | InterruptedException | XMPPException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
