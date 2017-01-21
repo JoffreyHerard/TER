@@ -369,7 +369,8 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  
 					  /*Maintenant que l'on a envoyer plusieurs problemes on va essayer davoir leur reponses*/
 					  xmppManager.setEnvoyer(Liste_user.size());
-					  xmppManager.setWorkerIncapacite(new boolean[Liste.size()-1]);
+					  boolean [] tab = new boolean[Liste.size()]; 
+					  xmppManager.setWorkerIncapacite(tab);
 					  isRunning = true;
 					  fenetre.add(res);
 					  while (!xmppManager.isTravail_terminer()){

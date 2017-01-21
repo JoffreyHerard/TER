@@ -1,4 +1,5 @@
 
+import org.apache.logging.log4j.core.util.SystemNanoClock;
 import org.jivesoftware.smack.*;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
@@ -87,19 +88,22 @@ public class XmppManager {
 	}
 	public boolean TousIncapacite(boolean[] WorkerIncapacite)
 	{
-		boolean res= false;
+		boolean res= true;
 		int i =0;
-		
-		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==true)
+		boolean trouve = false;
+		while(i<WorkerIncapacite.length && trouve)
 		{
-			i++;
+			if(WorkerIncapacite[i]==false)
+			{
+				trouve=true;
+			}
+			else
+			{
+				i++;
+			}
+			
 		}
-		
-		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==true )
-		{
-			res=true;
-		}
-		return res;
+		return !trouve;
 	}
 	public void init() throws XMPPException {
         
@@ -167,7 +171,7 @@ public class XmppManager {
     
     public boolean appartient(boolean[] WorkerIncapaciteB,int id_choisi)
     {
-    	return WorkerIncapacite[id_choisi];
+    	return !WorkerIncapacite[id_choisi];
     }
     
     class MyConnectionListener implements ConnectionListener {
@@ -255,19 +259,16 @@ public class XmppManager {
 		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 faux ");
 		            	// On choisi le worker qui va s'occuper de sa 
 		            	
-		        
+		            	String sortieEn= new String(en_tete[2]);
+		            	
 		            	int id_cancel =Integer.parseInt(en_tete[2]);
+		            	System.out.println("On passe le random ");
 		            	WorkerIncapacite[id_cancel]=true;
 		            	
 		            	System.out.println("On passe le random0 ");
 		            	String buddyName ="";
 		            	String buddyID="";
-		            	int id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
-		            	System.out.println("On passe le random1 ");
-		            	while(appartient(WorkerIncapacite,id_choisi))
-		            	{
-		            		id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
-		            	}
+		            	
 		            	System.out.println("On passe le random 2");
 
 		            	if(TousIncapacite(WorkerIncapacite))
@@ -277,6 +278,13 @@ public class XmppManager {
 		            		MessageBox.show("Erreur", "Tous les Workers on ete incapacite");
 		            	}
 		            	else{
+		            		int id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
+			            	System.out.println("On passe le random avec id choisi = "+id_choisi);
+			            	
+			            	while(appartient(WorkerIncapacite,id_choisi))
+			            	{
+			            		id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
+			            	}
 		            		System.out.println("Ils sont pas tous incapacite ");
 			            	//On recupere ces informations
 			            	buddyID =ButtonLaunch.Liste_user.get(id_choisi).getId();

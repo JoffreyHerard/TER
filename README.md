@@ -80,12 +80,24 @@
 <td>Fait</td>
 </tr>
 <tr>
+<td>Redistribution d'une tache qui n'as pu etre accomplie</td>
+<td>Fait</td>
+</tr>
+<tr>
 <td>Implementation NQueen Mono-Worker</td>
 <td>Fait</td>
 </tr>
 <tr>
 <td>Implementation NQueen Multi-Worker</td>
 <td>Fait</td>
+</tr>
+<tr>
+<td>Implementation Langford Mono-Worker</td>
+<td>Non Fait</td>
+</tr>
+<tr>
+<td>Implementation Langford Multi-Worker</td>
+<td>Non Fait</td>
 </tr>
 <tr>
 <td>Faire génération de log</td>
