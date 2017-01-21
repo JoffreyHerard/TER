@@ -77,7 +77,7 @@
 </tr>
 <tr>
 <td>Bouton annuler du worker</td>
-<td>????</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Implementation NQueen Mono-Worker</td>

@@ -81,15 +81,7 @@ public class ButtonDoW extends JButton implements MouseListener {
 	      muc2.join(username);
 	      xmppManager.createEntry("provider","BOT_Providing");
 	      xmppManager.sendMessage("-1", "provider@"+xmppManager.NOM_HOTE);
-	      isRunning = true;
-	      
-		  while (isRunning){
-			  Thread.sleep(50);
-			 
-		  }
 
-		  xmppManager.destroy();	
-		  
 		} catch (Exception exc) {
 			// TODO Auto-generated catch block
 			exc.printStackTrace();

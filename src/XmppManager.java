@@ -65,12 +65,13 @@ public class XmppManager {
     private int recu =0;
     private boolean[] WorkerIncapacite;
     private ConnectionListener ConnectionListener;
-    static String name_provider ;
-    static boolean job_enCours ;
-    static int  rand ;
-    static String ID;
-    static String strcmd;
-    
+    protected static String name_provider ;
+    protected  static boolean job_enCours ;
+    protected static int  rand ;
+    protected  static String ID;
+    protected  static String strcmd;
+    protected  static Process p_cmd;
+    protected static Thread t;
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
@@ -89,12 +90,12 @@ public class XmppManager {
 		boolean res= false;
 		int i =0;
 		
-		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==true)
+		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==false)
 		{
 			i++;
 		}
 		
-		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==true )
+		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==false )
 		{
 			res=true;
 		}
@@ -458,35 +459,26 @@ public class XmppManager {
 						
 						strcmd =tokens[0]+"JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/"+tokens[1];
 						System.out.println("MAJ DE strcmd = "+strcmd);
-
-					
-						new Thread(new Runnable(){
-							@Override
-							public void run(){
-								Process p_cmd;
-								try {									
-									p_cmd = runtime.exec(strcmd);
-									int resultat=p_cmd.waitFor();
-									System.out.println("Retour  du calcul = "+resultat);
-									// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
-									String resultatF= ButtonLaunch.FileToString2("resultat.txt");
-									//String resultatF= ButtonLaunch.FileToString("JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/resultat.txt");
-									getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
-									System.out.println("message envoyer = 1,"+resultatF);
-								} catch (IOException | InterruptedException | XMPPException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-						}).start();
+									
+						p_cmd = runtime.exec(strcmd);
+									
+									
+						int resultat=p_cmd.waitFor();
+						System.out.println("Retour  du calcul = "+resultat);
+						// on n'as plus que a lire le resultats dans un ficheir resultat.txt tout le fichier ne doit contenir que la valeur souhaites ici des entiers
+						String resultatF= ButtonLaunch.FileToString2("resultat.txt");
+						getCurrent().sendMessage("1,"+resultatF, "provider@"+NOM_HOTE);
+						System.out.println("message envoyer = 1,"+resultatF);
+						job_enCours=false;
 						
-						
+						 
 					}else
 					{
 						//Si on peut pas lexecuter on le renvoie aux provider
 						sendMessage("0,NO,"+ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+rand+".xml"), "provider@"+NOM_HOTE);
 					}	
-					 job_enCours=false;
+					
+					
         	   } 
  	           catch(IOException ioe){
         		    System.out.println("Erreur IO");

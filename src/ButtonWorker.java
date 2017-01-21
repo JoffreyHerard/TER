@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -22,7 +23,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
@@ -44,7 +47,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 	 private JTextField pseudo ;
 	 private JLabel label_pseudal ;
 		
-	 private JTextField pass ;
+	 private JPasswordField pass ;
 	 private JLabel label_pass ;
 	 private JLabel affichage ;	
 	 private String username ;
@@ -63,16 +66,60 @@ public class ButtonWorker extends JButton implements MouseListener {
 	    this.name = str;
 	    this.addMouseListener(this);
 	    this.fenetre = new JFrame();
+		fenetre.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 	    this.bouton_ok = new JButton("OK");
 	    this.bouton_ok_channel = new ButtonDoW("OK");
 	    this.pseudo = new JTextField("pseudo");
 	    this.label_pseudal = new JLabel("Pseudo");	
-	    this.pass = new JTextField("Password");
+	    this.pass = new JPasswordField("Password");
 	    this.label_pass = new JLabel("Mot de passe");
 	    this.affichage = new JLabel("Selection du salon:");	
 	    this.comboPrb = new JComboBox<String>();
 	    this.ListeRoom = new ArrayList<HostedRoom>();
 	    this.xmppManager = new XmppManager(xmppManager.ADRESSE_HOTE, 5222);
+	    fenetre.addWindowListener(new WindowAdapter()//du coup non et je vais miam x) cest le menu en haut pour lancer si tu veux et le carre rou
+	    	    {
+	    			// l;e nom du serv c apocalypzer-lg-gram tu es bien lhost et lip c 192.168.1.23 
+	    			@Override
+	    			public void windowClosing(WindowEvent arg0) {
+	    				// TODO Auto-generated method stub
+	    				// on doit signaler que l'on s'en va si un job est en cours 
+	    				System.out.println("On va nettoyer tout ca");
+	    				try{
+	    					if(xmppManager.job_enCours)
+	    					{
+	    						
+	    						// On signale au provider de rediriger le job
+	    						//Si on peut pas lexecuter on le renvoie aux provider
+	    						try {
+	    							
+	    							bouton_ok_channel.getXmppManager().sendMessage("0,NO,"+xmppManager.ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+xmppManager.rand+".xml"), "provider@"+xmppManager.NOM_HOTE);
+	    							
+	    						} catch (XMPPException e) {
+	    							// TODO Auto-generated catch block
+	    							e.printStackTrace();
+	    						}
+	    						//on supprime la connexion 
+	    						bouton_ok_channel.getXmppManager().destroy();
+	    						
+	    					}
+	    					else
+	    					{
+	    						// il ne travaille pas alors on s'en fiche ou il a deja finit 
+	    						   
+	    						
+	    						bouton_ok_channel.getXmppManager().destroy();
+	    					    
+	    					}
+	    					fenetre.dispose();
+	    				}catch(NullPointerException e){
+	    					fenetre.dispose();
+	    				}//faudra que tu gere cette erreur ^^ 
+	    				
+	    			}
+	    	    	
+	    	    });
 	  }
 	  
 	@Override
@@ -96,77 +143,6 @@ public class ButtonWorker extends JButton implements MouseListener {
 		fenetre.setLocationRelativeTo(null);
 		
 		fenetre.setVisible(true); 
-		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		fenetre.addWindowListener(new WindowListener()
-	    {
-		  
-			@Override
-			public void windowActivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				// on doit signaler que l'on s'en va si un job est en cours 
-				System.out.println("On va nettoyer tout ca");
-				if(xmppManager.job_enCours)
-				{
-					
-					// On signale au provider de rediriger le job
-					//Si on peut pas lexecuter on le renvoie aux provider
-					try {
-						xmppManager.sendMessage("0,NO,"+xmppManager.ID+","+ButtonLaunch.FileToString("JOB_REC/xml_receive_"+ManagementFactory.getRuntimeMXBean().getName()+"_"+xmppManager.rand+".xml"), "provider@"+xmppManager.NOM_HOTE);
-					} catch (XMPPException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					//on supprime la connexion 
-					xmppManager.destroy();
-					
-				}
-				else
-				{
-					// il ne travaille pas alors on s'en fiche ou il a deja finit 
-					xmppManager.destroy();
-				
-				}
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-	    	
-	    });
 		
 		
 		File d = new File ("JOB_SEND/");
@@ -183,7 +159,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		    		
 					xmppManager.init();
 			    	String username = pseudo.getText();
-			    	String password = pass.getText();
+			    	String password = new String(pass.getPassword());
 					xmppManager.performLogin(username, password);
 					xmppManager.setStatus(true, "YOLO");  
 					xmppManager.setProvider(false);
@@ -202,7 +178,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 						System.out.println("ChatRoom : "+tmp.getName());
 						comboPrb.addItem(tmp.getName());
 					}
-					
+					xmppManager.destroy();
 					fenetre.remove(label_pseudal);
 					fenetre.remove(pseudo);
 					fenetre.remove(label_pass);
@@ -220,6 +196,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 					bouton_ok_channel.setUsername(username);
 					bouton_ok_channel.setPassword(password);
 					
+
 					
 					fenetre.setVisible(true); 
 								
@@ -330,7 +307,7 @@ public class ButtonWorker extends JButton implements MouseListener {
 		return pass;
 	}
 
-	public void setPass(JTextField pass) {
+	public void setPass(JPasswordField pass) {
 		this.pass = pass;
 	}
 
