@@ -90,12 +90,12 @@ public class XmppManager {
 		boolean res= false;
 		int i =0;
 		
-		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==false)
+		while(i<WorkerIncapacite.length && WorkerIncapacite[i]==true)
 		{
 			i++;
 		}
 		
-		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==false )
+		if(i==WorkerIncapacite.length && WorkerIncapacite[i]==true )
 		{
 			res=true;
 		}
@@ -254,15 +254,22 @@ public class XmppManager {
 		            {
 		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 faux ");
 		            	// On choisi le worker qui va s'occuper de sa 
-		            	WorkerIncapacite[Integer.parseInt(en_tete[2])]=true;
+		            	
+		        
+		            	int id_cancel =Integer.parseInt(en_tete[2]);
+		            	WorkerIncapacite[id_cancel]=true;
+		            	
+		            	System.out.println("On passe le random0 ");
 		            	String buddyName ="";
 		            	String buddyID="";
 		            	int id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
-		            	
+		            	System.out.println("On passe le random1 ");
 		            	while(appartient(WorkerIncapacite,id_choisi))
 		            	{
 		            		id_choisi =(int) (Math.random()*ButtonLaunch.Liste_user.size());
 		            	}
+		            	System.out.println("On passe le random 2");
+
 		            	if(TousIncapacite(WorkerIncapacite))
 		            	{
 		            		travail_terminer=true;
@@ -270,6 +277,7 @@ public class XmppManager {
 		            		MessageBox.show("Erreur", "Tous les Workers on ete incapacite");
 		            	}
 		            	else{
+		            		System.out.println("Ils sont pas tous incapacite ");
 			            	//On recupere ces informations
 			            	buddyID =ButtonLaunch.Liste_user.get(id_choisi).getId();
 			            	buddyName=ButtonLaunch.Liste_user.get(id_choisi).getName();

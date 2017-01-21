@@ -63,6 +63,8 @@ public class main {
 		        	 break;
 	         }
 	    }
+	    XmppManager.ADRESSE_HOTE="apocalypzer-lg-gram";
+   	    XmppManager.NOM_HOTE="apocalypzer-lg-gram";
 	    System.out.println("On est passe");
 	    fenetre.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/urca.jpg")); 
 	    
