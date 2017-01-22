@@ -1,0 +1,136 @@
+<JOB>
+<code_Perl>
+
+#!/usr/bin/perl
+use v5.14;
+
+my $osname = $^O;
+my $mypath = echo $PATH;
+
+if ($osname eq 'linux') {
+	print "We are on Linux...\n";
+	system("gcc -std=c11 -pedantic -Wall -Wextra -O3    langford-mono.c   -o langford");
+	system('export PATH=$PATH:'.$mypath);
+	exit(3);
+}
+else
+{
+	exit(0);
+}
+</code_Perl>
+<code_exec>
+#define MAXPAIRS 21
+#define POSITIONS 41
+#define FALSE 0
+#define TRUE 1
+
+#include <stdio.h>
+
+int n, m, solutions;
+int k, p;
+int done, successful;
+int a[POSITIONS], previous[POSITIONS], position[MAXPAIRS];
+
+main (argc, argv)
+int argc;
+char *argv[];
+{
+	n = atoi(argv[1]);
+	if (n==0) n=3;
+	m = 2*n;
+	initialize();
+
+	for ( ; done==FALSE; )
+	{
+		try();
+		if (successful==TRUE) lowerpair(); else higherpair();
+	};
+
+	printf( "%d\n", solutions );
+
+	FILE* fichier = NULL;
+ 
+        fichier = fopen("resultat.txt", "w");
+ 
+        if (fichier != NULL)
+        {
+		fprintf(fichier,"%d",solutions); // Écriture du resultat
+		fclose(fichier);
+    	}
+}
+
+initialize ()
+{
+	solutions = 0;
+	for (p=1; p<=m; p++) { a[p]=0; previous[p]=0;}
+	for (k=1; k<=n; k++) position[k]=0;
+	p=0;
+	k=n;
+	done = FALSE;
+}
+
+removepair ()
+{
+	p=position[k];
+	a[p]=0;
+	a[p+k+1]=0;
+	/* position[k]=0; */
+}
+
+propundity ()
+{
+	/* test for reflection */
+	int q;
+	done=TRUE;
+	q=m;
+	for (p=1;done&&p<q;)
+	{
+		done = a[p] == previous[q];
+		p++; q--;
+	}
+	if (!done)
+	{
+		solutions++;
+		for (p=1; p<=m; p++) previous[p]=a[p];
+		for (k=1; k<=3; k++) removepair();
+		k=3;
+	}
+}
+
+lowerpair ()
+{
+	k--;
+	if (k>0) p=0; else propundity();
+}
+
+higherpair ()
+{
+	k++;
+	done = k>n;
+	if (!done) removepair();
+}
+
+
+try ()
+{
+	successful=FALSE;
+
+	for ( ; !successful && p+k+1<m; )
+	{
+		p++;
+		successful=(a[p]==0 && a[p+k+1]==0);
+	}
+
+	if (successful)
+	{
+		a[p]=k;
+		a[p+k+1]=k;
+		position[k]=p;
+	}
+}
+
+</code_exec>
+<cmd>langford 12</cmd>
+<rang>1</rang>
+<nom_fic>langford.c</nom_fic>
+</JOB>

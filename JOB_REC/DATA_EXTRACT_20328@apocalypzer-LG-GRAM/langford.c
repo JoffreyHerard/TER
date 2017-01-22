@@ -1,40 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><JOB><id>0</id><nom_fic>langford.c</nom_fic><contraintes>#!/usr/bin/perl
-use v5.14;
-use Cwd 'abs_path';
-use Data::Dumper qw(Dumper);
-
-my $osname = $^O;
-
-if ($osname eq 'linux') {
-	print "We are on Linux...\n";
-	my $str = abs_path($0);
-	print $str."\n";
-	my $taille = length $str;
-	my $taille_fichier = length "contraintes.pl";
-	print $taille_fichier."\n";
-	print $taille."\n";
-	
- 	my $path  = substr $str,0,$taille-$taille_fichier; 
-	print "My path is ; ".$path."\n"; 
-  	system("gcc -std=c11 -pedantic -Wall -Wextra -O3  ".$path."langford.c -o ".$path."langford");
-	exit(3);
-}
-else
-{
-	exit(0);
-}
-</contraintes><exec>/*
+/*
 
 Langford's Problem
 
 John Miller
-Lewis &amp; Clark College (at the time)
+Lewis & Clark College (at the time)
 Portland, OREGON
 
 Free program for non-profit use only!  Not responsible for results!  :^)
 
 First working version after translating from Pascal.
-Successor L.c drops the procedure calls, uses register ints for p&amp;kin main.
+Successor L.c drops the procedure calls, uses register ints for p&kin main.
 This version does reflection testing, but omits state-file, position tally.
 Should optimize with 'q' in this version.  q = p+k+1 at various places..
 You may want to printout the 'a' array each time a solution is found...
@@ -69,7 +44,7 @@ NEW:	http://dialectrix.com/langford.html
 #define FALSE 0
 #define TRUE 1
 
-#include &lt;stdio.h&gt;
+#include <stdio.h>
 
 int n, m, solutions;
 int k, p;
@@ -107,8 +82,8 @@ char *argv[];
 initialize ()
 {
 	solutions = 0;
-	for (p=1; p&lt;=m; p++) { a[p]=0; previous[p]=0;}
-	for (k=1; k&lt;=n; k++) position[k]=0;
+	for (p=1; p<=m; p++) { a[p]=0; previous[p]=0;}
+	for (k=1; k<=n; k++) position[k]=0;
 	p=0;
 	k=n;
 	done = FALSE;
@@ -128,7 +103,7 @@ propundity ()
 	int q;
 	done=TRUE;
 	q=m;
-	for (p=1;done&amp;&amp;p&lt;q;)
+	for (p=1;done&&p<q;)
 	{
 		done = a[p] == previous[q];
 		p++; q--;
@@ -136,8 +111,8 @@ propundity ()
 	if (!done)
 	{
 		solutions++;
-		for (p=1; p&lt;=m; p++) previous[p]=a[p];
-		for (k=1; k&lt;=3; k++) removepair();
+		for (p=1; p<=m; p++) previous[p]=a[p];
+		for (k=1; k<=3; k++) removepair();
 		k=3;
 	}
 }
@@ -145,13 +120,13 @@ propundity ()
 lowerpair ()
 {
 	k--;
-	if (k&gt;0) p=0; else propundity();
+	if (k>0) p=0; else propundity();
 }
 
 higherpair ()
 {
 	k++;
-	done = k&gt;n;
+	done = k>n;
 	if (!done) removepair();
 }
 
@@ -160,10 +135,10 @@ try ()
 {
 	successful=FALSE;
 
-	for ( ; !successful &amp;&amp; p+k+1&lt;m; )
+	for ( ; !successful && p+k+1<m; )
 	{
 		p++;
-		successful=(a[p]==0 &amp;&amp; a[p+k+1]==0);
+		successful=(a[p]==0 && a[p+k+1]==0);
 	}
 
 	if (successful)
@@ -172,4 +147,4 @@ try ()
 		a[p+k+1]=k;
 		position[k]=p;
 	}
-}</exec><cmd>./@langford 12</cmd></JOB>
+}

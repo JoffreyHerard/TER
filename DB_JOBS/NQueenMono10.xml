@@ -52,7 +52,7 @@ def resolution(taille, eta):
 
 
 resolution(10, "")</code_exec>
-  <cmd>python /nQueen10.py</cmd>
+  <cmd>python @nQueen10.py</cmd>
   <rang>1</rang>
   <nom_fic>nQueen10.py</nom_fic>
 </JOB>

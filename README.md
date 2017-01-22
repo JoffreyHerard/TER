@@ -93,7 +93,7 @@
 </tr>
 <tr>
 <td>Implementation Langford Mono-Worker</td>
-<td>Non Fait</td>
+<td>Fait</td>
 </tr>
 <tr>
 <td>Implementation Langford Multi-Worker</td>

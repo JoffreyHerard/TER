@@ -258,19 +258,11 @@ public class XmppManager {
 		            {
 		            	System.out.println("On passe Provider Integer.parseInt(en_tete[0])==1 faux ");
 		            	// On choisi le worker qui va s'occuper de sa 
-		            	
 		            	String sortieEn= new String(en_tete[2]);
-		            	
 		            	int id_cancel =Integer.parseInt(en_tete[2]);
-		            	System.out.println("On passe le random ");
 		            	WorkerIncapacite[id_cancel]=true;
-		            	
-		            	System.out.println("On passe le random0 ");
 		            	String buddyName ="";
-		            	String buddyID="";
-		            	
-		            	System.out.println("On passe le random 2");
-
+		            	String buddyID="";	
 		            	if(TousIncapacite(WorkerIncapacite))
 		            	{
 		            		travail_terminer=true;
@@ -467,13 +459,14 @@ public class XmppManager {
 						System.out.println("La contrainte a valider,on va commencer l'execution strcmd = "+strcmd);
 						// On traville la chaine strcmd pour comprendre ce qu'il faut
 						
-						String delims = "[/]";
+						String delims = "[@]";
 						String[] tokens =strcmd.split(delims);
 						System.out.print("affichage des tokens");
 						for(int j=0;j<tokens.length;j++)
 							System.out.println(j+" :"+tokens[j]);
-						
+						// reconstitution
 						strcmd =tokens[0]+"JOB_REC/DATA_EXTRACT_"+ManagementFactory.getRuntimeMXBean().getName()+"/"+tokens[1];
+						
 						System.out.println("MAJ DE strcmd = "+strcmd);
 									
 						p_cmd = runtime.exec(strcmd);
