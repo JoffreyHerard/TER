@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+int count =0;
 /* string, used, order, index */
 void langford(char *s, char *u, int n, int i)
 {
     if (i == 2 * n) {
         puts(s);
+	count=count+1;
         return;
     }
     if (s[i]) {
@@ -32,5 +34,14 @@ int main(int argc, char **argv)
     memset(s, 0, sizeof(s));
     memset(u, 0, sizeof(u));
     langford(s, u, n, 0);
+    FILE* fichier = NULL;
+ 
+    fichier = fopen("resultat.txt", "w");
+ 
+    if (fichier != NULL)
+    {
+        fprintf(fichier,"%i",count); // Écriture du resultat
+        fclose(fichier);
+    }
     return 0;
 }
