@@ -97,6 +97,14 @@
 </tr>
 <tr>
 <td>Implementation Langford Multi-Worker</td>
+<td>Fait 50%</td>
+</tr>
+<tr>
+<td>Implementation Povray Mono-Worker</td>
+<td>Non Fait</td>
+</tr>
+<tr>
+<td>Implementation Povray Multi-Worker</td>
 <td>Non Fait</td>
 </tr>
 <tr>
