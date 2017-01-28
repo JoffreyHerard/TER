@@ -100,6 +100,14 @@
 <td>Non Fait</td>
 </tr>
 <tr>
+<td>Implementation Golomb Mono-Worker</td>
+<td>Non Fait</td>
+</tr>
+<tr>
+<td>Implementation Golomb Multi-Worker</td>
+<td>Non Fait</td>
+</tr>
+<tr>
 <td>Faire génération de log</td>
 <td>Fait</td>
 </tr>
