@@ -66,13 +66,15 @@ public class XmppManager {
     private int recu =0;
     private boolean[] WorkerIncapacite;
     private ConnectionListener ConnectionListener;
-    protected static String name_provider ;
+    protected  static String name_provider ;
     protected  static boolean job_enCours ;
-    protected static int  rand ;
+    protected  static int  rand ;
     protected  static String ID;
     protected  static String strcmd;
     protected  static Process p_cmd;
-    protected static Thread t;
+    protected  static Thread t;
+    protected  static String ProblemeCourant ;
+    
     public XmppManager(String server, int port) {
         this.server = server;
         this.port = port;
@@ -237,6 +239,15 @@ public class XmppManager {
 		            	//on enleve le retour chariot
 		            	en_tete[1].replaceAll("\n"," ");
 		            	System.out.println("chaine recu :en_tete[1] 2 "+en_tete[1]);
+		            
+		            	//on recuper le code perl de build 
+		            	
+		            	
+		            	
+		            	
+		            	
+		            	// version calculatoire simple efficace de somme des retour ...
+		            	//a ameliorer ici c'estu ne fonction implementer en dur pour les test 
 		            	int retour=Integer.parseInt(en_tete[1].substring(0,en_tete[1].length()));
 		            	retour_Providing= retour_Providing + retour;
 		            	System.out.println("retour_Providing ="+retour_Providing);
@@ -251,7 +262,42 @@ public class XmppManager {
 						}*/
 		            	if(recu==envoyer)
 		            	{
-		            		travail_terminer=true;
+		            		
+		            		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+
+						      try {
+
+						         DocumentBuilder builder = factory.newDocumentBuilder();
+
+						         File fileXML = new File("DB_JOBS/"+ProblemeCourant);
+
+						         Document xml = builder.parse(fileXML);
+
+						         Element root = xml.getDocumentElement();
+
+						         XPathFactory xpf = XPathFactory.newInstance();
+
+						         XPath path = xpf.newXPath();
+
+						         String expression = "/JOB/build";
+
+						         String str_build = (String)path.evaluate(expression, root);
+
+						      // execution du script perl de build avec les arguments recu /!\/!\/!\/!\/!\/!\/!\/!\
+
+						        System.out.println("-------------------------------------");
+						      } catch (ParserConfigurationException xe) {
+						          xe.printStackTrace();
+						       } catch (SAXException xe) {
+						          xe.printStackTrace();
+						       } catch (IOException xe) {
+						          xe.printStackTrace();
+						       } catch (XPathExpressionException xe) {
+						          xe.printStackTrace();
+						       }
+			            	
+						      travail_terminer=true;
 		            	}
 		            }	
 		            else
@@ -615,6 +661,78 @@ public class XmppManager {
 
 	public static void setADRESSE_HOTE(String aDRESSE_HOTE) {
 		ADRESSE_HOTE = aDRESSE_HOTE;
+	}
+
+	public ConnectionListener getConnectionListener() {
+		return ConnectionListener;
+	}
+
+	public void setConnectionListener(ConnectionListener connectionListener) {
+		ConnectionListener = connectionListener;
+	}
+
+	public static String getName_provider() {
+		return name_provider;
+	}
+
+	public static void setName_provider(String name_provider) {
+		XmppManager.name_provider = name_provider;
+	}
+
+	public static boolean isJob_enCours() {
+		return job_enCours;
+	}
+
+	public static void setJob_enCours(boolean job_enCours) {
+		XmppManager.job_enCours = job_enCours;
+	}
+
+	public static int getRand() {
+		return rand;
+	}
+
+	public static void setRand(int rand) {
+		XmppManager.rand = rand;
+	}
+
+	public static String getID() {
+		return ID;
+	}
+
+	public static void setID(String iD) {
+		ID = iD;
+	}
+
+	public static String getStrcmd() {
+		return strcmd;
+	}
+
+	public static void setStrcmd(String strcmd) {
+		XmppManager.strcmd = strcmd;
+	}
+
+	public static Process getP_cmd() {
+		return p_cmd;
+	}
+
+	public static void setP_cmd(Process p_cmd) {
+		XmppManager.p_cmd = p_cmd;
+	}
+
+	public static Thread getT() {
+		return t;
+	}
+
+	public static void setT(Thread t) {
+		XmppManager.t = t;
+	}
+
+	public static String getProblemeCourant() {
+		return ProblemeCourant;
+	}
+
+	public static void setProblemeCourant(String problemeCourant) {
+		ProblemeCourant = problemeCourant;
 	}
     
 }

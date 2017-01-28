@@ -245,6 +245,7 @@ public class ButtonLaunch extends JButton implements MouseListener {
 		    	String username = "provider";
 		    	String password = "toto";
 		    	choix= choix+".xml"; 
+		    	XmppManager.ProblemeCourant=choix;
 		    	ProblemeCourant= FileToString("DB_JOBS/"+choix);
 		    	MessageBox.show("Lancement JOB", "Tache enregistre ! le Resultat de votre execution seras affiche ici ");
 		    	try { 
