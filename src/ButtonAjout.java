@@ -128,7 +128,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		File d = new File ("DB_JOBS");
 		File f = new File ("DB_JOBS/"+nom+".xml");
 		if (d.exists()&& d.isDirectory()){
-		     /*Le dosseier existe on va faire la creation du fichier XML associer*/
+		     /*Le dossier existe on va faire la creation du fichier XML associer*/
 			if (!f.exists())
 			{
 				try {
@@ -328,7 +328,7 @@ public class ButtonAjout extends JButton implements MouseListener {
 		        int returnVal = fc.showOpenDialog(exec1);
 		        String nomFic = "";
 		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-		        	exec1.setText(fc.getSelectedFile().getAbsolutePath());
+		        	nom_fic_build.setText(fc.getSelectedFile().getAbsolutePath());
 		        }  
 		    }
 

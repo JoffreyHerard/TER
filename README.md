@@ -125,7 +125,7 @@
 </tr>
 <tr>
 <td>Rapport</td>
-<td>Fait</td>
+<td>Fait MAJ 28/01/2017</td>
 </tr>
 </tbody></table>
 </article>

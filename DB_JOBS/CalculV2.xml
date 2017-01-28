@@ -39,4 +39,23 @@ exit 0;</code_exec>
 perl /calcul.pl 3 3,</cmd>
   <rang>2</rang>
   <nom_fic>calcul.pl</nom_fic>
+	<build>#!/usr/bin/perl
+#---------------------#
+#  PROGRAM:  argv.pl  #
+#---------------------#
+
+$numArgs = $#ARGV + 1;
+print "thanks, you gave me $numArgs command-line arguments:\n";
+my $sum;
+foreach $argnum (0 .. $#ARGV) {
+  $sum=$sum+ $ARGV[$argnum];
+}
+print $sum;
+
+# Création du fichier '.txt'
+open (FICHIER, "&gt;resultatF.txt") || die ("Vous ne pouvez pas créer le fichier \"resultatF.txt\"");
+# On écrit dans le fichier...
+print FICHIER  $sum ;
+
+exit 0;</build>
 </JOB>

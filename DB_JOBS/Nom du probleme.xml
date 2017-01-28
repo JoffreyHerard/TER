@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<JOB>
-  <code_Perl />
-  <code_exec />
-  <cmd />
-  <rang>Rang</rang>
-  <nom_fic>Nom du fichier a executer</nom_fic>
-  <build />
-</JOB>

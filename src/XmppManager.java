@@ -49,14 +49,10 @@ import org.xml.sax.SAXException;
 public class XmppManager {
     
     private static final int packetReplyTimeout = 500; // millis
-    
     private String server;
     private int port;
-    
     private ConnectionConfiguration config;
     private XMPPConnection connection;
-    static String ADRESSE_HOTE;
-    static String NOM_HOTE;
     private ChatManager chatManager;
     private MessageListener messageListener;
     private boolean provider;
@@ -66,6 +62,7 @@ public class XmppManager {
     private int recu =0;
     private boolean[] WorkerIncapacite;
     private ConnectionListener ConnectionListener;
+    protected static String String_args;
     protected  static String name_provider ;
     protected  static boolean job_enCours ;
     protected  static int  rand ;
@@ -74,6 +71,8 @@ public class XmppManager {
     protected  static Process p_cmd;
     protected  static Thread t;
     protected  static String ProblemeCourant ;
+    protected  static String ADRESSE_HOTE;
+    protected  static String NOM_HOTE;
     
     public XmppManager(String server, int port) {
         this.server = server;
@@ -212,7 +211,8 @@ public class XmppManager {
     }
     class MyMessageListener implements MessageListener {
 
-        @Override
+        @SuppressWarnings("resource")
+		@Override
         public void processMessage(Chat chat, Message message) {
         	 ID ="";
         	if(provider){ 
@@ -240,26 +240,13 @@ public class XmppManager {
 		            	en_tete[1].replaceAll("\n"," ");
 		            	System.out.println("chaine recu :en_tete[1] 2 "+en_tete[1]);
 		            
-		            	//on recuper le code perl de build 
-		            	
-		            	
-		            	
-		            	
-		            	
+		            	//on recupere le code perl de build 
 		            	// version calculatoire simple efficace de somme des retour ...
-		            	//a ameliorer ici c'estu ne fonction implementer en dur pour les test 
+		            	//a ameliorer ici c'est une fonction implementer en dur pour les test 
+		            	String_args +=" "+ en_tete[1].substring(0,en_tete[1].length());
 		            	int retour=Integer.parseInt(en_tete[1].substring(0,en_tete[1].length()));
 		            	retour_Providing= retour_Providing + retour;
-		            	System.out.println("retour_Providing ="+retour_Providing);
 		            	recu++;
-		            	System.out.println("recu = "+recu);
-		            	System.out.println("envoyer = "+envoyer);
-		            	/*try {
-							Thread.sleep(5000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}*/
 		            	if(recu==envoyer)
 		            	{
 		            		
@@ -268,7 +255,9 @@ public class XmppManager {
 
 						      try {
 
-						         DocumentBuilder builder = factory.newDocumentBuilder();
+
+								 DocumentBuilderFactory factory1 = DocumentBuilderFactory.newInstance();
+								 DocumentBuilder builder = factory1.newDocumentBuilder();
 
 						         File fileXML = new File("DB_JOBS/"+ProblemeCourant);
 
@@ -279,14 +268,33 @@ public class XmppManager {
 						         XPathFactory xpf = XPathFactory.newInstance();
 
 						         XPath path = xpf.newXPath();
-
 						         String expression = "/JOB/build";
 
 						         String str_build = (String)path.evaluate(expression, root);
 
-						      // execution du script perl de build avec les arguments recu /!\/!\/!\/!\/!\/!\/!\/!\
-
-						        System.out.println("-------------------------------------");
+						         // execution du script perl de build avec les arguments recu /!\/!\/!\/!\/!\/!\/!\/!\
+						     	 
+								 System.out.println("Ecriture du XML dans un fichier build.pl");
+								 File file_build = new File("build.pl");
+								 PrintWriter writer= new PrintWriter(file_build);
+								 writer.write(str_build);
+								 writer.close();
+						         
+						         
+								 Runtime runtime = Runtime.getRuntime();
+								 System.out.println("execution du fichier de contrainte ");
+								 // on execute le fichier de contrainte 3 = GOOD / different = NOGOOD
+									
+								 Process p_cunt =runtime.exec("perl build.pl "+String_args);
+								 int resultat_con=p_cunt.waitFor();
+								 System.out.println("execution termine du fichier de build ");
+						         
+								 //recuperer resultat dans ResultatF.txt
+								 retour_Providing=Integer.parseInt(ButtonLaunch.FileToString2("resultatF.txt"));
+						        
+						         //donner le bon retour 
+						         
+						         
 						      } catch (ParserConfigurationException xe) {
 						          xe.printStackTrace();
 						       } catch (SAXException xe) {
@@ -295,7 +303,10 @@ public class XmppManager {
 						          xe.printStackTrace();
 						       } catch (XPathExpressionException xe) {
 						          xe.printStackTrace();
-						       }
+						       } catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 			            	
 						      travail_terminer=true;
 		            	}

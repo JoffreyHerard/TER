@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  14 JAN 2017 12:01
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  28 JAN 2017 18:25
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -702,30 +702,33 @@ Chapitre 5.
 Missing character: There is no ’ in font ecrm1095!
  (./_minted-Latex_TER/default-pyg-prefix.pygstyle)
 (./_minted-Latex_TER/default.pygstyle)
-(./_minted-Latex_TER/B47E25D3AA03CB51DD2B3D71AD7FC5174956E2F3CCC13EE19C30DBF1EF
+(./_minted-Latex_TER/6C3C2658980AE2CA1D994D248163FA684956E2F3CCC13EE19C30DBF1EF
 798386.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
 ) [11]
-Missing character: There is no ’ in font ecrm1095!
-
-(./_minted-Latex_TER/E755723BCA0F71D4775EF256B790F701D900A39B81C10E29D56F189F58
-0E26A5.pygtex) [12]
-(./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BED59F12BB8D842878D0D766E130
-DD9403.pygtex
+(./_minted-Latex_TER/F1524B10C708A599B8F4CE9BCEE3828ECFF4B6BEDAEFC370526866DF92
+B36F15.pygtex)
+(./_minted-Latex_TER/E993C7EBE4B1542633DC2D61191FCEF84663A2046E77248691876C89A2
+55BC0E.pygtex)
+(./_minted-Latex_TER/5916C6C6B324471649A555725606622083E3DC906B4990D05EE4160D32
+2D08B4.pygtex) [12]
+(./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BE2A070D7AB8EC99C1311F4B43CC
+EBABE0.pygtex
 LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 8.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ))
+[13]
 (./_minted-Latex_TER/F99593A5008C8772DF890A02438D0C2F2E16892DEC1C77685DE0F5919F
-F91237.pygtex [13] [14] [15])
+F91237.pygtex [14] [15])
 Missing character: There is no ’ in font ecrm1095!
 
 (./_minted-Latex_TER/D71242B4C47FA6442C3FCFA6576E7E577452EACACFA70AA43B724ECF65
-C65DB0.pygtex)
-(./_minted-Latex_TER/7ADA1F44CF100499458A294497B69E98AB3C8A6819A807FF94F3C7E948
-04FFD3.pygtex [16]) [17]
-Overfull \hbox (29.57352pt too wide) in paragraph at lines 186--187
+C65DB0.pygtex) [16]
+(./_minted-Latex_TER/7ADA1F44CF100499458A294497B69E98A0EB201D2D4F20F80441873075
+512A81.pygtex) [17]
+Overfull \hbox (29.57352pt too wide) in paragraph at lines 193--194
 []\T1/cmr/m/n/10.95 Une fois le Pro-blème lan-cer une Cha-troom com-por-tant le
  nom du pro-blème+Providingroom
  []
@@ -733,20 +736,38 @@ Overfull \hbox (29.57352pt too wide) in paragraph at lines 186--187
 Missing character: There is no ’ in font ecrm1095!
 [18] [19]
 Chapitre 6.
-[20
+
+(./_minted-Latex_TER/310C672B929377BAAE9CA11E1C0AFCDDC4228710FABA66F878A151E1BF
+61F252.pygtex [20
+
+])
+Missing character: There is no ’ in font ecrm1095!
+
+(./_minted-Latex_TER/22C9E7E86E278A98414FEA46B3B6FA9E578C5F1A3F7FE7ED28A38B7D11
+1988E9.pygtex) [21]
+(./_minted-Latex_TER/5916C6C6B324471649A555725606622083E3DC906B4990D05EE4160D32
+2D08B4.pygtex)
+(./_minted-Latex_TER/F1524B10C708A599B8F4CE9BCEE3828ECFF4B6BEDAEFC370526866DF92
+B36F15.pygtex)
+(./_minted-Latex_TER/B2A9F66A42C9F7E53E772A79F8D465B5F0A0734E0A690C37BAEA54E0B5
+35046B.pygtex [22]) [23]
+Chapitre 7.
+[24
 
 ]
-Chapitre 7.
-[21
+Chapitre 8.
+[25
 
-] [22] (./Latex_TER.aux) ) 
+]
+Missing character: There is no ’ in font ecrm1095!
+ [26] (./Latex_TER.aux) ) 
 Here is how much of TeX's memory you used:
- 9900 strings out of 493589
- 154516 string characters out of 6145555
- 281138 words of memory out of 5000000
- 13108 multiletter control sequences out of 15000+600000
- 17713 words of font info for 46 fonts, out of 8000000 for 9000
+ 9927 strings out of 493589
+ 156542 string characters out of 6145555
+ 281466 words of memory out of 5000000
+ 13115 multiletter control sequences out of 15000+600000
+ 18012 words of font info for 47 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 37i,7n,35p,823b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,8n,35p,823b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Latex_TER.pdf (22 pages).
+Output written on Latex_TER.pdf (26 pages).

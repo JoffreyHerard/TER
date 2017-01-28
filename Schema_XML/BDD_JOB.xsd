@@ -7,6 +7,7 @@
 				<xs:element name="code_exec" type="xs:string"/>
 				<xs:element name="cmd" type="xs:string"/>
 				<xs:element name="rang" type="xs:Integer"/>
+				<xs:element name="build" type="xs:string"/>
 		 	</xs:sequence>
 		 </xs:complexType>
 	</xs:element>

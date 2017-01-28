@@ -16,15 +16,27 @@
 \contentsline {section}{\numberline {5.3}Représentation des fichiers de lignes de commande}{12}
 \contentsline {section}{\numberline {5.4}Les différentes fonctions principales}{13}
 \contentsline {subsection}{\numberline {5.4.1}Contraintes}{13}
-\contentsline {subsection}{\numberline {5.4.2}Split}{13}
+\contentsline {subsection}{\numberline {5.4.2}Split}{14}
 \contentsline {subsection}{\numberline {5.4.3}Exec}{16}
-\contentsline {subsection}{\numberline {5.4.4}Build}{16}
+\contentsline {subsection}{\numberline {5.4.4}Build}{17}
 \contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{18}
 \contentsline {subsection}{\numberline {5.5.1}Exécution cote Provider}{18}
 \contentsline {subsection}{\numberline {5.5.2}Exécution cote Worker}{18}
 \contentsline {subsection}{\numberline {5.5.3}Exécution d'un ajout}{18}
 \contentsline {subsection}{\numberline {5.5.4}Exécution d'une suppression}{19}
-\contentsline {chapter}{\numberline {6}Conclusion}{20}
-\contentsline {chapter}{\numberline {7}Annexes}{21}
-\contentsline {section}{\numberline {7.1}Organisation du Projet}{21}
-\contentsline {subsection}{\numberline {7.1.1}Outils et langages}{22}
+\contentsline {chapter}{\numberline {6}Formatage des fichiers sources décrivant un JOB}{20}
+\contentsline {section}{\numberline {6.1}Script de contraintes}{20}
+\contentsline {subsection}{\numberline {6.1.1}Principe}{20}
+\contentsline {subsection}{\numberline {6.1.2}Exemple}{20}
+\contentsline {subsubsection}{Exemple pour un programme interpréter}{20}
+\contentsline {subsubsection}{Exemple pour un programme compilé }{21}
+\contentsline {section}{\numberline {6.2}Script de Commandes}{21}
+\contentsline {subsection}{\numberline {6.2.1}Principe}{21}
+\contentsline {subsection}{\numberline {6.2.2}Exemple}{22}
+\contentsline {section}{\numberline {6.3}Script de build}{22}
+\contentsline {subsection}{\numberline {6.3.1}Principe}{22}
+\contentsline {subsection}{\numberline {6.3.2}Exemple}{22}
+\contentsline {chapter}{\numberline {7}Conclusion}{24}
+\contentsline {chapter}{\numberline {8}Annexes}{25}
+\contentsline {section}{\numberline {8.1}Organisation du Projet}{25}
+\contentsline {subsection}{\numberline {8.1.1}Outils et langages}{26}

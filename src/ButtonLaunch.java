@@ -379,10 +379,9 @@ public class ButtonLaunch extends JButton implements MouseListener {
 					  }
 					  //on a eu le resultat
 					  if(xmppManager.travail_terminer){
-						  res.setText("Resultat : "+xmppManager.getRetour_Providing());
-						  
+						  res.setText("Resultat deja afficher"+xmppManager.getRetour_Providing());
 						  fenetre.add(res);
-						  
+						  MessageBox.show("Resultat","Resultat : "+xmppManager.getRetour_Providing());
 					  }
 					  else
 					  {
