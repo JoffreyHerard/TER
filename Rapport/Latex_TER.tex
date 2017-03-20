@@ -13,7 +13,7 @@
 \usepackage{listings}
 \usepackage{textcomp}
 \usepackage{minted}
-
+\usepackage{pdfpages}
 
 \newenvironment{strechpage}[1][0cm]{%
 	\newpage\vspace*{#1}\leavevmode\noindent\centering
@@ -51,7 +51,7 @@
 \makeatother
 \title{Solution générique de calcul GRID exploitant des messageries instantanées
 (Java / Python, XML, XMPP / IRC)}
-\author{ Joffrey Hérard \begin{center}Responsable : Olivier Flauzac\end{center}}
+\author{ Réalise par Joffrey Hérard \begin{center}Responsable : Olivier Flauzac\end{center}}
 \date{2016-2017}
 \maketitle
  
@@ -61,7 +61,7 @@
 \chapter{Introduction} 
 Sujet : Solution générique de calcul GRID exploitant des messageries instantanées
 (Java / Python, XML, XMPP / IRC)
-Durant ce TER, la mise en place d'un système de calcul repartie entre plusieurs machine avec l’évaluation de possibilité d’exécutions ou non par la machine cible, il fallait aussi évaluer quels échanges allais être réalise par les acteurs durant une exécution type et ceci en avec le protocoles XMPP ou IRC . 
+Durant ce TER, la mise en place d'un système de calcul repartie entre plusieurs machine avec l'évaluation de possibilité d'exécutions ou non par la machine cible, il fallait aussi évaluer quels échanges allais être réalise par les acteurs durant une exécution type et ceci en avec le protocoles XMPP ou IRC . 
 \newpage
 \chapter{Les Acteurs} 
 Nous avons donc deux genres d'acteur pour chaque travail différent disponibles 
@@ -103,12 +103,12 @@ Tout les codes du projet sont présenter en annexe.
 
 \newpage
 \chapter{Les Erreurs} 
-\section{Les Problèmes d’exécution}
+\section{Les Problèmes d'exécution}
 Les problèmes qui peuvent opérer a travers le système,sont : 
 \begin{enumerate}
 \item Mauvais nom de domaine 
 \item Problème de Chatroom déjà existante
-\item Problème d’exécution : aucun worker peut exécuter le code, comment le détecter?
+\item Problème d'exécution : aucun worker peut exécuter le code, comment le détecter?
 
 \end{enumerate}  
 
@@ -127,24 +127,27 @@ Nous avons plusieurs problèmes lie au réseaux quelque soit le protocole utilis
 
 \subsection{Gestions des erreurs sur l\textquoteright exécution}
 \begin{enumerate}
-\item Mauvais nom de domaine $ \rightarrow $ Redemander le nom de domaine jusqu’à validation .
-\item Problème de Chatroom déjà existante $\rightarrow$ Message d'erreur un problème exactement identique est en cours d’exécution .
-\item Problème d’exécution : aucun worker peut exécuter le code, comment le détecter? $\rightarrow$ Mis en place d'un tableau de variable booléenne au départ initialise a faux, si un worker renvoi avec une impossibilité d\textquoteright exécution du code dicte par le code contrainte, alors on met a vrai et on redistribue. Si aucun est capable on arrête l\textquoteright exécution.
+\item Mauvais nom de domaine $ \rightarrow $ Redemander le nom de domaine jusqu'à validation .
+\item Problème de Chatroom déjà existante $\rightarrow$ Message d'erreur un problème exactement identique est en cours d'exécution .
+\item Problème d'exécution : aucun worker peut exécuter le code, comment le détecter? $\rightarrow$ Mis en place d'un tableau de variable booléenne au départ initialise a faux, si un worker renvoi avec une impossibilité d\textquoteright exécution du code dicte par le code contrainte, alors on met a vrai et on redistribue. Si aucun est capable on arrête l\textquoteright exécution.
 \end{enumerate}  
 \subsection{Gestions des erreurs sur le réseaux}
 \begin{enumerate}
-\item Latence/Impossible a établir une  connexion a la Chatroom$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Reseaux
-\item Latence/Impossible a envoyer un  message d'un Provider vers un Worker$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Réseaux
-\item Latence/Impossible a envoyer un  message d'un Worker vers un Provider$ \rightarrow $ Message qui explicite le fait d’aller voir un Administrateur Réseaux 
+\item Latence/Impossible a établir une  connexion a la Chatroom$ \rightarrow $ Message qui explicite le fait d'aller voir un Administrateur Reseaux
+\item Latence/Impossible a envoyer un  message d'un Provider vers un Worker$ \rightarrow $ Message qui explicite le fait d'aller voir un Administrateur Réseaux
+\item Latence/Impossible a envoyer un  message d'un Worker vers un Provider$ \rightarrow $ Message qui explicite le fait d'aller voir un Administrateur Réseaux 
 \item Un Worker est déconnecte en plein milieu de sa tache$ \rightarrow $ Détecteur de présence permis par le protocole XMPP sur une ChatRoom MultiUser
 \item Un Provider est déconnecte durant l'attente d'une réponse sur un JOB$ \rightarrow $ Évaluation de présence d'un Provider, si aucun alors arrêter le Job en cours, ou mis en place d'un Timeout.
 \end{enumerate}
 
 \newpage
 \chapter{Modélisation}
-\section{Connexions} 
-\subsection{Connexions du/des Provider(s)} 
-\subsection{Connexions du/des Worker(s)} 
+\section{Schéma général} 
+\includepdf[scale=0.7,pages=1,pagecommand=\subsection{Schéma global d'envoi d'un job}]{toto.pdf}
+\includepdf[scale=1,pages=4]{toto.pdf}
+
+\includepdf[scale=0.7,pages=2,pagecommand=\subsection{Schéma global d'envoi de réception d'un job}]{toto.pdf}
+\includepdf[scale=1,pages=3]{toto.pdf}
 \newpage
 \section{Représentation des JOBS}
 Nous allons dans cette partie du rapport montrer la représentation nécessaire et désirer pour représenter un travail.Donc un problèmes c'est quoi? 
@@ -153,7 +156,7 @@ Nous allons dans cette partie du rapport montrer la représentation nécessaire 
 \item Identifiant d'un problème, un entier de 0 a n.
 \item Code de contraintes, ce code est forcement un code Perl avec un code de retour bien particulier 0 pour non exécutable  et 3 pour exécutable et donc que l'on peut exécuter. 
 \item Type du fichier par exemple ".c , .cpp, .cc, .java , .pl etc.."
-\item Code d’exécution, peut importe son langage. on peut l'exécuter si le code contraintes l'a valider 
+\item Code d'exécution, peut importe son langage. on peut l'exécuter si le code contraintes l'a valider 
 \item La ligne de commande pour exécuter le code par exemple "perl monfichier.pl"
 \end{itemize}
 
@@ -178,7 +181,7 @@ L'execution d'un script de contrainte ce fait avec les objets Runtime et Process
 La fonction split peut se résumer en plusieurs étapes, premièrement on récupère tout les nickname et JID de chaque utilisateur de la chatroom ,pour chacun d'entre eux on leur envoi un fichier xml personnalise avec chacun une tache bien distincte en respectant le schéma associe.Pour avoir une trace on sauvegarde chaque fichier xml envoyer dans le dossier JOB\_SEND
 \inputminted[tabsize=2,frame=lines,linenos]{java}{Fichier_import/split.java}
 \subsection{Exec} 
-L\textquoteright exécution d'un script d’exécution ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() bien entendu on parle de calcul chiffrer ,cela peut être aussi un résultat chiffre dans un fichier. 
+L\textquoteright exécution d'un script d'exécution ce fait avec les objets Runtime et Process on obtient le résultat du script avec la fonctin waitFor() bien entendu on parle de calcul chiffrer ,cela peut être aussi un résultat chiffre dans un fichier. 
 \inputminted[tabsize=2,frame=lines,linenos]{Perl}{Fichier_import/calcul.pl}
 \newpage
 \subsection{Build} 
@@ -193,7 +196,7 @@ Voici un déroulement classique cote Provider :
 \item Une fois le Problème lancer une Chatroom comportant le nom du problème+Providingroom est créer sur le domaine
 \item Le Provider attend un nombre suffisant de Worker en fonction du probleme(champ rang du XML)
 \item Une fois un nombre de Worker atteints, on récupère chaque identifiant et on leur envoi leur job respectif et ligne de commande respective
-\item On attend d'avoir reçu un message de type "JOB\_Reponse" autant de fois et distinct que de Workers capable de l’exécuter 
+\item On attend d'avoir reçu un message de type "JOB\_Reponse" autant de fois et distinct que de Workers capable de l'exécuter 
 \item On affiche le résultat
 \end{enumerate}
 
@@ -235,7 +238,7 @@ Tout script de contraintes doit répondre a ces propres contraintes :
 Pour un langage interpréter comme le python en voici un exemple
 \inputminted{perl}{../Echantillon_Script_Perl/nqueen.pl}
 \subsubsection{Exemple pour un programme compilé }
-Quand il s’avère que vous devez valide la compilation puis sa future exécution d'un code exécutable tel q'un code de langage compilé comme le C en voici un exemple sur comment faire 
+Quand il s'avère que vous devez valide la compilation puis sa future exécution d'un code exécutable tel q'un code de langage compilé comme le C en voici un exemple sur comment faire 
 \inputminted{perl}{../Echantillon_Script_Perl/langford.pl}
 \section{Script de Commandes}
 \subsection{Principe}
@@ -287,39 +290,35 @@ Tout script de contraintes doit répondre a ces propres contraintes :
 \begin{enumerate}
 \item Le projet a été programme en Java version : "1.8.0\_111" sous Eclipse  .
 \item L'API smack a été utilisé pour mettre ne place les échanges sous XMPP.
-\item Openfire a été utilisé pour installer un serveur XMPP en local afin d’exécuter tout les test.
+\item Openfire a été utilisé pour installer un serveur XMPP en local afin d'exécuter tout les test.
 \end{enumerate}
 \newpage
-%\section{Code}
-%\subsection{XML} 
-%
-%BDD\_JOB.xsd
-%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/BDD_JOB.xsd}
-%
-%ENVOI\_RECEPTION.xsd
-%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/ENVOI_RECEPTION.xsd}
-%\newpage
-%JOB\_REP.xsd
-%\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/JOB_REP.xsd}
-%\newpage
-%\subsection{Perl}
-%Les exemple de fichier de contrainte écrit en Perl 
-%DitributionContraintes.pl
-%\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/DitributionContraintes.pl}
-%\newpage
-%\subsection{Java}
-%ButtonAjout.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonAjout.java}\newpage
-%ButtonContact.java:
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonContact.java}\newpage ButtonDel.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDel.java}\newpage ButtonDoW.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonDoW.java}\newpage ButtonLaunch.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonLaunch.java}\newpage ButtonWorker.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/ButtonWorker.java}\newpage Identity.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/Identity.java}\newpage
-%main.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/main.java}\newpage
-%Xmppmnager.java :
-%\inputminted[tabsize=2,frame=lines,linenos]{Java}{../src/XmppManager.java}
+
+\newpage
+\section{Code}
+\subsection{XML} 
+
+BDD\_JOB.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/BDD_JOB.xsd}
+
+ENVOI\_RECEPTION.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/ENVOI_RECEPTION.xsd}
+\newpage
+JOB\_REP.xsd
+\inputminted[tabsize=2,frame=lines,linenos]{XML}{../Schema_XML/JOB_REP.xsd}
+\newpage
+\subsection{Fichier de lignes de commande .dc}
+Les exemple de fichier de commande écrit en texte clair 
+Toto.dc
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Cmd/Toto.dc}
+\subsection{Perl}
+Les exemple de fichier de contrainte écrit en Perl 
+langford.pl
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/langford.pl}
+
+nqueen.pl
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/nqueen.pl}
+OSname.pl
+\inputminted[tabsize=2,frame=lines,linenos]{Perl}{../Echantillon_Script_Perl/OSname.pl}
 
 \end{document}

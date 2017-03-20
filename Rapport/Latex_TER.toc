@@ -3,40 +3,44 @@
 \contentsline {chapter}{\numberline {2}Les Acteurs}{5}
 \contentsline {chapter}{\numberline {3}Les Échanges}{6}
 \contentsline {chapter}{\numberline {4}Les Erreurs}{7}
-\contentsline {section}{\numberline {4.1}Les Problèmes d’exécution}{7}
+\contentsline {section}{\numberline {4.1}Les Problèmes d'exécution}{7}
 \contentsline {section}{\numberline {4.2}Les Problèmes réseaux}{8}
 \contentsline {section}{\numberline {4.3}Gestions des erreurs}{9}
 \contentsline {subsection}{\numberline {4.3.1}Gestions des erreurs sur l\textquoteright exécution}{9}
 \contentsline {subsection}{\numberline {4.3.2}Gestions des erreurs sur le réseaux}{9}
 \contentsline {chapter}{\numberline {5}Modélisation}{10}
-\contentsline {section}{\numberline {5.1}Connexions}{10}
-\contentsline {subsection}{\numberline {5.1.1}Connexions du/des Provider(s)}{10}
-\contentsline {subsection}{\numberline {5.1.2}Connexions du/des Worker(s)}{10}
-\contentsline {section}{\numberline {5.2}Représentation des JOBS}{11}
-\contentsline {section}{\numberline {5.3}Représentation des fichiers de lignes de commande}{12}
-\contentsline {section}{\numberline {5.4}Les différentes fonctions principales}{13}
-\contentsline {subsection}{\numberline {5.4.1}Contraintes}{13}
-\contentsline {subsection}{\numberline {5.4.2}Split}{14}
-\contentsline {subsection}{\numberline {5.4.3}Exec}{16}
-\contentsline {subsection}{\numberline {5.4.4}Build}{17}
-\contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{18}
-\contentsline {subsection}{\numberline {5.5.1}Exécution cote Provider}{18}
-\contentsline {subsection}{\numberline {5.5.2}Exécution cote Worker}{18}
-\contentsline {subsection}{\numberline {5.5.3}Exécution d'un ajout}{18}
-\contentsline {subsection}{\numberline {5.5.4}Exécution d'une suppression}{19}
-\contentsline {chapter}{\numberline {6}Formatage des fichiers sources décrivant un JOB}{20}
-\contentsline {section}{\numberline {6.1}Script de contraintes}{20}
-\contentsline {subsection}{\numberline {6.1.1}Principe}{20}
-\contentsline {subsection}{\numberline {6.1.2}Exemple}{20}
-\contentsline {subsubsection}{Exemple pour un programme interpréter}{20}
-\contentsline {subsubsection}{Exemple pour un programme compilé }{21}
-\contentsline {section}{\numberline {6.2}Script de Commandes}{21}
-\contentsline {subsection}{\numberline {6.2.1}Principe}{21}
-\contentsline {subsection}{\numberline {6.2.2}Exemple}{22}
-\contentsline {section}{\numberline {6.3}Script de build}{22}
-\contentsline {subsection}{\numberline {6.3.1}Principe}{22}
-\contentsline {subsection}{\numberline {6.3.2}Exemple}{22}
-\contentsline {chapter}{\numberline {7}Conclusion}{24}
-\contentsline {chapter}{\numberline {8}Annexes}{25}
-\contentsline {section}{\numberline {8.1}Organisation du Projet}{25}
-\contentsline {subsection}{\numberline {8.1.1}Outils et langages}{26}
+\contentsline {section}{\numberline {5.1}Schéma général}{10}
+\contentsline {subsection}{\numberline {5.1.1}Schéma global d'envoi d'un job}{11}
+\contentsline {subsection}{\numberline {5.1.2}Schéma global d'envoi de réception d'un job}{13}
+\contentsline {section}{\numberline {5.2}Représentation des JOBS}{15}
+\contentsline {section}{\numberline {5.3}Représentation des fichiers de lignes de commande}{16}
+\contentsline {section}{\numberline {5.4}Les différentes fonctions principales}{17}
+\contentsline {subsection}{\numberline {5.4.1}Contraintes}{17}
+\contentsline {subsection}{\numberline {5.4.2}Split}{18}
+\contentsline {subsection}{\numberline {5.4.3}Exec}{20}
+\contentsline {subsection}{\numberline {5.4.4}Build}{21}
+\contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{22}
+\contentsline {subsection}{\numberline {5.5.1}Exécution cote Provider}{22}
+\contentsline {subsection}{\numberline {5.5.2}Exécution cote Worker}{22}
+\contentsline {subsection}{\numberline {5.5.3}Exécution d'un ajout}{22}
+\contentsline {subsection}{\numberline {5.5.4}Exécution d'une suppression}{23}
+\contentsline {chapter}{\numberline {6}Formatage des fichiers sources décrivant un JOB}{24}
+\contentsline {section}{\numberline {6.1}Script de contraintes}{24}
+\contentsline {subsection}{\numberline {6.1.1}Principe}{24}
+\contentsline {subsection}{\numberline {6.1.2}Exemple}{24}
+\contentsline {subsubsection}{Exemple pour un programme interpréter}{24}
+\contentsline {subsubsection}{Exemple pour un programme compilé }{25}
+\contentsline {section}{\numberline {6.2}Script de Commandes}{25}
+\contentsline {subsection}{\numberline {6.2.1}Principe}{25}
+\contentsline {subsection}{\numberline {6.2.2}Exemple}{26}
+\contentsline {section}{\numberline {6.3}Script de build}{26}
+\contentsline {subsection}{\numberline {6.3.1}Principe}{26}
+\contentsline {subsection}{\numberline {6.3.2}Exemple}{26}
+\contentsline {chapter}{\numberline {7}Conclusion}{28}
+\contentsline {chapter}{\numberline {8}Annexes}{29}
+\contentsline {section}{\numberline {8.1}Organisation du Projet}{29}
+\contentsline {subsection}{\numberline {8.1.1}Outils et langages}{30}
+\contentsline {section}{\numberline {8.2}Code}{31}
+\contentsline {subsection}{\numberline {8.2.1}XML}{31}
+\contentsline {subsection}{\numberline {8.2.2}Fichier de lignes de commande .dc}{33}
+\contentsline {subsection}{\numberline {8.2.3}Perl}{33}

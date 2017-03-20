@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  28 JAN 2017 18:25
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2016.12.26)  20 MAR 2017 21:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -581,11 +581,34 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 )
 runsystem(mkdir -p _minted-Latex_TER)...executed.
 
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2016/04/19 v0.5f Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+))
+\AM@pagewidth=\dimen163
+\AM@pageheight=\dimen164
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdfpages/ppxetex.def
+File: ppxetex.def 2016/04/19 v0.5f Pdfpages driver for XeTeX (AM)
+)
+\AM@pagebox=\box44
+\AM@global@opts=\toks33
+\AM@toc@title=\toks34
+\c@AM@survey=\count179
+\AM@templatesizebox=\box45
+)
 runsystem(which pygmentize && touch Latex_TER.aex)...executed.
 
 runsystem(rm Latex_TER.aex)...executed.
 
- (./Latex_TER.aux)
+
+(./Latex_TER.aux)
 \openout1 = `Latex_TER.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -602,8 +625,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 33.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 33.
@@ -648,16 +670,26 @@ Package frenchb.ldf Warning: Add \usepackage{fontspec} to the
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count179
-[1
+\c@lstlisting=\count180
+\AtBeginShipoutBox=\box46
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2016/05/14 v0.11 Display of landscape pages in PDF (HO)
 
-] (./Latex_TER.toc
-Missing character: There is no ’ in font ecrm1095!
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 99.
+
+) [1
+
+]
+(./Latex_TER.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 6.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 6.
+
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [2
@@ -669,8 +701,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [3]
 Chapitre 1.
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
 [4
 
 ]
@@ -683,91 +713,152 @@ Chapitre 3.
 
 ]
 Chapitre 4.
-Missing character: There is no ’ in font ecbx1440!
-Missing character: There is no ’ in font ecrm1095!
 [7
 
-] [8]
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
-Missing character: There is no ’ in font ecrm1095!
- [9]
+] [8] [9]
 Chapitre 5.
-[10
+File: toto.pdf Graphic file (type QTm)
+<use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page1>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page1> [10
 
 ]
-Missing character: There is no ’ in font ecrm1095!
- (./_minted-Latex_TER/default-pyg-prefix.pygstyle)
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page1>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page1>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page1> [11]
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page4>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page4>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page4>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page4>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page4>
+[12]
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page2>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page2>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page2>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page2>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page2> [13]
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf" >
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page3>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page3>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page3>
+File: toto.pdf Graphic file (type QTm)
+
+<use  "toto.pdf"  page3>
+File: toto.pdf Graphic file (type QTm)
+ <use  "toto.pdf"  page3> [14]
+(./_minted-Latex_TER/default-pyg-prefix.pygstyle)
 (./_minted-Latex_TER/default.pygstyle)
 (./_minted-Latex_TER/6C3C2658980AE2CA1D994D248163FA684956E2F3CCC13EE19C30DBF1EF
 798386.pygtex
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 2.
-) [11]
+) [15]
 (./_minted-Latex_TER/F1524B10C708A599B8F4CE9BCEE3828ECFF4B6BEDAEFC370526866DF92
 B36F15.pygtex)
 (./_minted-Latex_TER/E993C7EBE4B1542633DC2D61191FCEF84663A2046E77248691876C89A2
 55BC0E.pygtex)
 (./_minted-Latex_TER/5916C6C6B324471649A555725606622083E3DC906B4990D05EE4160D32
-2D08B4.pygtex) [12]
+2D08B4.pygtex) [16]
 (./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BE2A070D7AB8EC99C1311F4B43CC
 EBABE0.pygtex
 LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 8.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ))
-[13]
+[17]
 (./_minted-Latex_TER/F99593A5008C8772DF890A02438D0C2F2E16892DEC1C77685DE0F5919F
-F91237.pygtex [14] [15])
-Missing character: There is no ’ in font ecrm1095!
-
+F91237.pygtex [18] [19])
 (./_minted-Latex_TER/D71242B4C47FA6442C3FCFA6576E7E577452EACACFA70AA43B724ECF65
-C65DB0.pygtex) [16]
+C65DB0.pygtex) [20]
 (./_minted-Latex_TER/7ADA1F44CF100499458A294497B69E98A0EB201D2D4F20F80441873075
-512A81.pygtex) [17]
-Overfull \hbox (29.57352pt too wide) in paragraph at lines 193--194
+512A81.pygtex) [21]
+Overfull \hbox (29.57352pt too wide) in paragraph at lines 196--197
 []\T1/cmr/m/n/10.95 Une fois le Pro-blème lan-cer une Cha-troom com-por-tant le
  nom du pro-blème+Providingroom
  []
 
-Missing character: There is no ’ in font ecrm1095!
-[18] [19]
+[22] [23]
 Chapitre 6.
 
 (./_minted-Latex_TER/310C672B929377BAAE9CA11E1C0AFCDDC4228710FABA66F878A151E1BF
-61F252.pygtex [20
+61F252.pygtex [24
 
 ])
-Missing character: There is no ’ in font ecrm1095!
-
 (./_minted-Latex_TER/22C9E7E86E278A98414FEA46B3B6FA9E578C5F1A3F7FE7ED28A38B7D11
-1988E9.pygtex) [21]
+1988E9.pygtex) [25]
 (./_minted-Latex_TER/5916C6C6B324471649A555725606622083E3DC906B4990D05EE4160D32
 2D08B4.pygtex)
 (./_minted-Latex_TER/F1524B10C708A599B8F4CE9BCEE3828ECFF4B6BEDAEFC370526866DF92
 B36F15.pygtex)
 (./_minted-Latex_TER/B2A9F66A42C9F7E53E772A79F8D465B5F0A0734E0A690C37BAEA54E0B5
-35046B.pygtex [22]) [23]
+35046B.pygtex [26]) [27]
 Chapitre 7.
-[24
+[28
 
 ]
 Chapitre 8.
-[25
+[29
 
-]
-Missing character: There is no ’ in font ecrm1095!
- [26] (./Latex_TER.aux) ) 
+] [30]
+(./_minted-Latex_TER/6C3C2658980AE2CA1D994D248163FA684956E2F3CCC13EE19C30DBF1EF
+798386.pygtex)
+(./_minted-Latex_TER/E0699D3AC794E61EB16D4C837F98DC45288F149F2DA6B33A16C2D77CDA
+ACD5D4.pygtex) [31]
+(./_minted-Latex_TER/E272B5E9959201C672A262EB3AAD7DEBD9224BE34EECF0A3B61A20808F
+0635C1.pygtex) [32]
+(./_minted-Latex_TER/F1524B10C708A599B8F4CE9BCEE3828E5E59AEF35BA938A16231423B2B
+652DC9.pygtex)
+(./_minted-Latex_TER/22C9E7E86E278A98414FEA46B3B6FA9E99498B543A50C397F10D31D6C1
+75946B.pygtex)
+(./_minted-Latex_TER/310C672B929377BAAE9CA11E1C0AFCDD784F13C6621D9FA90C9945C74B
+7AF71A.pygtex [33])
+(./_minted-Latex_TER/ECF64D4076A94EDEC357975CECD470BEF5F41B99E28478CCAA96B98126
+0792A4.pygtex [34]) [35] (./Latex_TER.aux) ) 
 Here is how much of TeX's memory you used:
- 9927 strings out of 493589
- 156542 string characters out of 6145555
- 281466 words of memory out of 5000000
- 13115 multiletter control sequences out of 15000+600000
+ 10643 strings out of 493589
+ 170117 string characters out of 6145555
+ 296891 words of memory out of 5000000
+ 13787 multiletter control sequences out of 15000+600000
  18012 words of font info for 47 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 37i,8n,35p,823b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,19n,42p,844b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Latex_TER.pdf (26 pages).
+Output written on Latex_TER.pdf (35 pages).
