@@ -1,0 +1,14 @@
+\frametitle{Modélisation : Les Acteurs}
+
+\setbeamertemplate{itemize item}[raisedsquare]
+\begin{itemize}
+\item Fournisseur de travail/Provider, unique pour chaque travail a l'instant t.
+\item Des travailleurs/Workers, de 1 a n, n définit éventuellement par le problème.
+\item Un serveur qui sert de support a la messagerie instantanée.
+
+\end{itemize}
+
+\begin{exampleblock}{Note :}
+
+Chaque Provider, et chaque Workers, sont possiblement exécutés sur n'importe quel système d'exploitation.
+ \end{exampleblock}

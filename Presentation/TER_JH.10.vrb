@@ -1,0 +1,16 @@
+\frametitle{Les différents fichiers :Fichiers de Build}
+
+Fichier build.pl dans le dossier Echantillon\_Script\_build
+\begin{verbatim}
+#!/usr/bin/perl
+$numArgs = $#ARGV + 1;
+my $sum;
+foreach $argnum (0 .. $#ARGV) {
+  $sum=$sum+ $ARGV[$argnum];
+}
+open (FICHIER, ">resultatF.txt") || die ("Vous ne pouvez
+pas créer le fichier \"resultatF.txt\"");
+print FICHIER  $sum ;
+exit 0;
+\end{verbatim}
+
