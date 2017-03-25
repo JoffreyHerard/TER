@@ -1,0 +1,7 @@
+perl@ calcul.pl 2 3,
+perl@ calcul.pl 3 3,
+perl@ calcul.pl 4 3,
+perl@ calcul.pl 5 3, 
+perl@ calcul.pl 26 3, 
+perl@ calcul.pl 29 3
+

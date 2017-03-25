@@ -1,0 +1,210 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Color}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Dimension}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.FlowLayout}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.GradientPaint}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Graphics}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Graphics2D}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Image}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.event.MouseEvent}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.event.MouseListener}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.File}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.FilenameFilter}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.IOException}\PYG{o}{;} 
+\PYG{k+kn}{import} \PYG{n+nn}{javax.imageio.ImageIO}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.JButton}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.JComboBox}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.JFileChooser}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.JFrame}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.filechooser.FileNameExtensionFilter}\PYG{o}{;}
+
+\PYG{n+nd}{@SuppressWarnings}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}unused\PYGZdq{}}\PYG{o}{)}
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{ButtonDel} \PYG{k+kd}{extends} \PYG{n}{JButton} \PYG{k+kd}{implements} \PYG{n}{MouseListener} \PYG{o}{\PYGZob{}}
+	
+	 \PYG{c+cm}{/**}
+\PYG{c+cm}{	 * }
+\PYG{c+cm}{	 */}
+	\PYG{k+kd}{private} \PYG{k+kd}{static} \PYG{k+kd}{final} \PYG{k+kt}{long} \PYG{n}{serialVersionUID} \PYG{o}{=} \PYG{l+m+mi}{1L}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{String} \PYG{n}{name}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{Image} \PYG{n}{img}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{JComboBox}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}} \PYG{n}{comboPrb}\PYG{o}{;} 
+	\PYG{k+kd}{private} \PYG{k+kd}{static} \PYG{n}{FilenameFilter} \PYG{n}{xmlFileFilter} \PYG{o}{=} \PYG{k}{new} \PYG{n}{FilenameFilter}\PYG{o}{()} \PYG{o}{\PYGZob{}}\PYG{k+kd}{public} \PYG{k+kt}{boolean} \PYG{n+nf}{accept}\PYG{o}{(}\PYG{n}{File} \PYG{n}{dir}\PYG{o}{,} \PYG{n}{String} \PYG{n}{name}\PYG{o}{)} \PYG{o}{\PYGZob{}}\PYG{k}{return} \PYG{n}{name}\PYG{o}{.}\PYG{n+na}{endsWith}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}.xml\PYGZdq{}}\PYG{o}{);\PYGZcb{}\PYGZcb{};}
+	\PYG{k+kd}{private} \PYG{n}{File} \PYG{n}{repertoire}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{File}\PYG{o}{[]} \PYG{n}{files}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{JButton} \PYG{n}{bouton\PYGZus{}ok}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{File} \PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{;}
+	\PYG{k+kd}{private} \PYG{n}{String} \PYG{n}{choix}\PYG{o}{;}
+	
+	\PYG{k+kd}{public} \PYG{n+nf}{ButtonDel}\PYG{o}{(}\PYG{n}{String} \PYG{n}{str}\PYG{o}{)\PYGZob{}}
+	    \PYG{k+kd}{super}\PYG{o}{(}\PYG{n}{str}\PYG{o}{);}
+	    \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{name} \PYG{o}{=} \PYG{n}{str}\PYG{o}{;}
+	    \PYG{k}{this}\PYG{o}{.}\PYG{n+na}{addMouseListener}\PYG{o}{(}\PYG{k}{this}\PYG{o}{);}
+	    \PYG{n}{comboPrb}\PYG{o}{=} \PYG{k}{new} \PYG{n}{JComboBox}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}();}
+	    \PYG{n}{bouton\PYGZus{}ok}\PYG{o}{=} \PYG{k}{new} \PYG{n}{JButton}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}OK\PYGZdq{}}\PYG{o}{);}
+	  \PYG{o}{\PYGZcb{}}
+	  
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseClicked}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{arg0}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{c+c1}{// TODO Auto\PYGZhy{}generated method stub}
+		\PYG{n}{JFrame} \PYG{n}{fenetre} \PYG{o}{=} \PYG{k}{new} \PYG{n}{JFrame}\PYG{o}{();}
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setTitle}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Suppression d\PYGZsq{}une tache dans la base\PYGZdq{}}\PYG{o}{);}
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setSize}\PYG{o}{(}\PYG{l+m+mi}{250}\PYG{o}{,} \PYG{l+m+mi}{275}\PYG{o}{);}
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setLocationRelativeTo}\PYG{o}{(}\PYG{k+kc}{null}\PYG{o}{);}
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setLayout}\PYG{o}{(}\PYG{k}{new} \PYG{n}{FlowLayout}\PYG{o}{());}
+		\PYG{n}{repertoire} \PYG{o}{=} \PYG{k}{new} \PYG{n}{File}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}DB\PYGZus{}JOBS\PYGZdq{}}\PYG{o}{);}
+		\PYG{n}{files} \PYG{o}{=}\PYG{n}{repertoire}\PYG{o}{.}\PYG{n+na}{listFiles}\PYG{o}{(}\PYG{n}{xmlFileFilter}\PYG{o}{);}
+		
+		\PYG{n}{comboPrb}\PYG{o}{.}\PYG{n+na}{setPreferredSize}\PYG{o}{(}\PYG{k}{new} \PYG{n}{Dimension}\PYG{o}{(}\PYG{l+m+mi}{150}\PYG{o}{,} \PYG{l+m+mi}{40}\PYG{o}{));}
+		\PYG{k}{for}\PYG{o}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{;}\PYG{n}{i}\PYG{o}{\PYGZlt{}}\PYG{n}{files}\PYG{o}{.}\PYG{n+na}{length}\PYG{o}{;}\PYG{n}{i}\PYG{o}{++)}
+		\PYG{o}{\PYGZob{}}
+			\PYG{k+kt}{int} \PYG{n}{taille\PYGZus{}nom}\PYG{o}{=} \PYG{n}{files}\PYG{o}{[}\PYG{n}{i}\PYG{o}{].}\PYG{n+na}{getName}\PYG{o}{().}\PYG{n+na}{length}\PYG{o}{();}
+			\PYG{n}{comboPrb}\PYG{o}{.}\PYG{n+na}{addItem}\PYG{o}{((}\PYG{n}{files}\PYG{o}{[}\PYG{n}{i}\PYG{o}{].}\PYG{n+na}{getName}\PYG{o}{()).}\PYG{n+na}{substring}\PYG{o}{(}\PYG{l+m+mi}{0}\PYG{o}{,} \PYG{n}{taille\PYGZus{}nom}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{4}\PYG{o}{));}
+		\PYG{o}{\PYGZcb{}}
+		
+		
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{comboPrb}\PYG{o}{);}
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{bouton\PYGZus{}ok}\PYG{o}{);}
+		
+		\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setVisible}\PYG{o}{(}\PYG{k+kc}{true}\PYG{o}{);} 
+		
+		\PYG{n}{bouton\PYGZus{}ok}\PYG{o}{.}\PYG{n+na}{addMouseListener}\PYG{o}{(}\PYG{k}{new} \PYG{n}{MouseListener}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+
+		    \PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseClicked}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{e}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		    	\PYG{n}{choix} \PYG{o}{=}\PYG{n}{comboPrb}\PYG{o}{.}\PYG{n+na}{getSelectedItem}\PYG{o}{().}\PYG{n+na}{toString}\PYG{o}{();}
+		    	
+		    	\PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{=}\PYG{k}{new} \PYG{n}{File}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}DB\PYGZus{}JOBS/\PYGZdq{}}\PYG{o}{+}\PYG{n}{choix}\PYG{o}{+}\PYG{l+s}{\PYGZdq{}.xml\PYGZdq{}}\PYG{o}{);}
+			    	\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Fichier choisi : \PYGZdq{}}\PYG{o}{+}\PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{);}
+			    	
+		    	\PYG{k}{if}\PYG{o}{(}\PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{.}\PYG{n+na}{delete}\PYG{o}{())}
+		    	\PYG{o}{\PYGZob{}}
+		    		\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Fichier supprimer\PYGZdq{}}\PYG{o}{);}
+		    	\PYG{o}{\PYGZcb{}}
+		    	\PYG{k}{else}
+		    	\PYG{o}{\PYGZob{}}
+		    		\PYG{n}{System}\PYG{o}{.}\PYG{n+na}{out}\PYG{o}{.}\PYG{n+na}{println}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Fichier non supprimer\PYGZdq{}}\PYG{o}{);}
+		    	\PYG{o}{\PYGZcb{}}
+		    	\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setVisible}\PYG{o}{(}\PYG{k+kc}{false}\PYG{o}{);} 
+		    	\PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setVisible}\PYG{o}{(}\PYG{k+kc}{true}\PYG{o}{);} 
+		    \PYG{o}{\PYGZcb{}}
+
+		    \PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mousePressed}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{e}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+		    \PYG{o}{\PYGZcb{}}
+
+		    \PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseReleased}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{e}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+		    \PYG{o}{\PYGZcb{}}
+
+		    \PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseEntered}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{e}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+		    \PYG{o}{\PYGZcb{}}
+
+		    \PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseExited}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{e}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+
+		    \PYG{o}{\PYGZcb{}}
+
+		\PYG{o}{\PYGZcb{});}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseEntered}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{arg0}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{c+c1}{// TODO Auto\PYGZhy{}generated method stub}
+
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseExited}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{arg0}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{c+c1}{// TODO Auto\PYGZhy{}generated method stub}
+
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mousePressed}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{arg0}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{c+c1}{// TODO Auto\PYGZhy{}generated method stub}
+
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{n+nd}{@Override}
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{mouseReleased}\PYG{o}{(}\PYG{n}{MouseEvent} \PYG{n}{arg0}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{c+c1}{// TODO Auto\PYGZhy{}generated method stub}
+
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{String} \PYG{n+nf}{getName}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{name}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setName}\PYG{o}{(}\PYG{n}{String} \PYG{n}{name}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{name} \PYG{o}{=} \PYG{n}{name}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{Image} \PYG{n+nf}{getImg}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{img}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setImg}\PYG{o}{(}\PYG{n}{Image} \PYG{n}{img}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{img} \PYG{o}{=} \PYG{n}{img}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{JComboBox}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}} \PYG{n+nf}{getComboPrb}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{comboPrb}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setComboPrb}\PYG{o}{(}\PYG{n}{JComboBox}\PYG{o}{\PYGZlt{}}\PYG{n}{String}\PYG{o}{\PYGZgt{}} \PYG{n}{comboPrb}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{comboPrb} \PYG{o}{=} \PYG{n}{comboPrb}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{n}{FilenameFilter} \PYG{n+nf}{getXmlFileFilter}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{xmlFileFilter}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{setXmlFileFilter}\PYG{o}{(}\PYG{n}{FilenameFilter} \PYG{n}{xmlFileFilter}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{n}{ButtonDel}\PYG{o}{.}\PYG{n+na}{xmlFileFilter} \PYG{o}{=} \PYG{n}{xmlFileFilter}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{File} \PYG{n+nf}{getRepertoire}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{repertoire}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setRepertoire}\PYG{o}{(}\PYG{n}{File} \PYG{n}{repertoire}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{repertoire} \PYG{o}{=} \PYG{n}{repertoire}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{File}\PYG{o}{[]} \PYG{n+nf}{getFiles}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{files}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setFiles}\PYG{o}{(}\PYG{n}{File}\PYG{o}{[]} \PYG{n}{files}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{files} \PYG{o}{=} \PYG{n}{files}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{JButton} \PYG{n+nf}{getBouton\PYGZus{}ok}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{bouton\PYGZus{}ok}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setBouton\PYGZus{}ok}\PYG{o}{(}\PYG{n}{JButton} \PYG{n}{bouton\PYGZus{}ok}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{bouton\PYGZus{}ok} \PYG{o}{=} \PYG{n}{bouton\PYGZus{}ok}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{File} \PYG{n+nf}{getFichier\PYGZus{}Choisi}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setFichier\PYGZus{}Choisi}\PYG{o}{(}\PYG{n}{File} \PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{fichier\PYGZus{}Choisi} \PYG{o}{=} \PYG{n}{fichier\PYGZus{}Choisi}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{n}{String} \PYG{n+nf}{getChoix}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{choix}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kt}{void} \PYG{n+nf}{setChoix}\PYG{o}{(}\PYG{n}{String} \PYG{n}{choix}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{k}{this}\PYG{o}{.}\PYG{n+na}{choix} \PYG{o}{=} \PYG{n}{choix}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{long} \PYG{n+nf}{getSerialversionuid}\PYG{o}{()} \PYG{o}{\PYGZob{}}
+		\PYG{k}{return} \PYG{n}{serialVersionUID}\PYG{o}{;}
+	\PYG{o}{\PYGZcb{}}
+
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}

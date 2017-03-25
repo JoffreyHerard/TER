@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{String} \PYG{n}{from} \PYG{o}{=} \PYG{n}{message}\PYG{o}{.}\PYG{n}{getFrom}\PYG{p}{();}
+\PYG{n}{String} \PYG{n}{body} \PYG{o}{=} \PYG{n}{message}\PYG{o}{.}\PYG{n}{getBody}\PYG{p}{();}
+\PYG{n}{System}\PYG{o}{.}\PYG{n}{out}\PYG{o}{.}\PYG{n}{println}\PYG{p}{(}\PYG{n}{String}\PYG{o}{.}\PYG{n+nb}{format}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Received message \PYGZsq{}\PYGZpc{}1\PYGZdl{}s\PYGZsq{} from \PYGZpc{}2\PYGZdl{}s\PYGZdq{}}\PYG{p}{,} \PYG{n}{body}\PYG{p}{,} \PYG{n}{from}\PYG{p}{));}
+\PYG{l+s+sr}{//} \PYG{n}{on} \PYG{n}{regarde} \PYG{n}{l}\PYG{err}{\PYGZsq{}}\PYG{n}{en} \PYG{n}{tete} \PYG{n}{du} \PYG{n}{message} \PYG{n}{apparente} \PYG{n}{a} \PYG{n}{un} \PYG{n}{message} \PYG{n}{xml} \PYG{n}{reponse} \PYG{n}{tel} \PYG{n}{que} \PYG{n}{lid} \PYG{n}{est} \PYG{l+m+mi}{1} \PYG{n}{si} \PYG{n}{reponse} \PYG{l+m+mi}{2}
+\PYG{l+s+sr}{//si} \PYG{n}{imposible} \PYG{n}{a} \PYG{n}{executer} \PYG{n}{dans} \PYG{o+ow}{le} \PYG{n}{cas} \PYG{n}{echeant} \PYG{n}{un} \PYG{n}{troisieme} \PYG{n}{champ} \PYG{n}{correspond} \PYG{n}{a} \PYG{n}{lid} \PYG{n}{du} \PYG{n}{job} \PYG{n}{non} \PYG{n}{reussi} 
+\PYG{l+s+sr}{//}\PYG{n}{et} \PYG{l+m+mi}{0} \PYG{n}{si} \PYG{n}{envoie} \PYG{n}{travail} 
+
+\PYG{l+s+sr}{//} \PYG{n}{on} \PYG{n}{procede} \PYG{n}{donc} \PYG{n}{au} \PYG{n}{build} \PYG{n}{un} \PYG{n}{script} \PYG{n}{ici} \PYG{n}{un} \PYG{n}{peu} \PYG{n}{fictif} \PYG{n}{mais} \PYG{n}{pour} \PYG{n}{prolonger} \PYG{n}{pour} \PYG{n}{voir} \PYG{n}{si} \PYG{n}{ca} \PYG{n}{marche} \PYG{n}{bien}
+\PYG{l+s+sr}{//} \PYG{n}{ici} \PYG{n}{on} \PYG{n}{va} \PYG{n}{juste} \PYG{n}{sommer} \PYG{n}{les} \PYG{n}{results} \PYG{n}{choses} \PYG{n}{assez} \PYG{n}{simple}
+
+\PYG{n}{String} \PYG{n}{regex}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}[,]\PYGZdq{}}\PYG{p}{;}
+\PYG{n}{String}\PYG{o}{[]} \PYG{n}{en\PYGZus{}tete} \PYG{o}{=} \PYG{n}{body}\PYG{o}{.}\PYG{n+nb}{split}\PYG{p}{(}\PYG{n}{regex}\PYG{p}{);}
+
+\PYG{l+s+sr}{//} \PYG{n}{indice} \PYG{l+m+mi}{0} \PYG{o}{=} \PYG{n}{en} \PYG{n}{tete} \PYG{n}{indice} \PYG{l+m+mi}{1} \PYG{o}{=} \PYG{n}{res}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{Integer}\PYG{o}{.}\PYG{n}{parseInt}\PYG{p}{(}\PYG{n}{en\PYGZus{}tete}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}\PYG{o}{==}\PYG{l+m+mi}{1}\PYG{p}{)\PYGZob{}}
+\PYG{n}{retour\PYGZus{}Providing}\PYG{o}{+=}\PYG{n}{Integer}\PYG{o}{.}\PYG{n}{parseInt}\PYG{p}{(}\PYG{n}{en\PYGZus{}tete}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]);}
+\PYG{n}{recu}\PYG{o}{++}\PYG{p}{;}
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{recu}\PYG{o}{==}\PYG{n}{envoyer}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{n}{travail\PYGZus{}terminer}\PYG{o}{=}\PYG{n}{true}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,34 @@
+\select@language {french}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Les Acteurs}{5}
+\contentsline {chapter}{\numberline {3}Les Échanges}{6}
+\contentsline {chapter}{\numberline {4}Les Erreurs}{7}
+\contentsline {section}{\numberline {4.1}Les Problèmes d’exécution}{7}
+\contentsline {section}{\numberline {4.2}Les Problèmes réseaux}{8}
+\contentsline {section}{\numberline {4.3}Gestions des erreurs}{9}
+\contentsline {subsection}{\numberline {4.3.1}Gestions des erreurs sur l\textquoteright exécution}{9}
+\contentsline {subsection}{\numberline {4.3.2}Gestions des erreurs sur le réseaux}{9}
+\contentsline {chapter}{\numberline {5}Modélisation}{10}
+\contentsline {section}{\numberline {5.1}Connexions}{10}
+\contentsline {subsection}{\numberline {5.1.1}Connexions du/des Provider(s)}{10}
+\contentsline {subsection}{\numberline {5.1.2}Connexions du/des Worker(s)}{10}
+\contentsline {section}{\numberline {5.2}Représentation des JOBS}{11}
+\contentsline {section}{\numberline {5.3}Représentation des fichiers de lignes de commande}{12}
+\contentsline {section}{\numberline {5.4}Les différentes fonctions principales}{13}
+\contentsline {subsection}{\numberline {5.4.1}Contraintes}{13}
+\contentsline {subsection}{\numberline {5.4.2}Split}{13}
+\contentsline {subsection}{\numberline {5.4.3}Exec}{16}
+\contentsline {subsection}{\numberline {5.4.4}Build}{16}
+\contentsline {section}{\numberline {5.5}Description d'une exécution quelconque}{18}
+\contentsline {subsection}{\numberline {5.5.1}Exécution cote Provider}{18}
+\contentsline {subsection}{\numberline {5.5.2}Exécution cote Worker}{18}
+\contentsline {subsection}{\numberline {5.5.3}Exécution d'un ajout}{18}
+\contentsline {subsection}{\numberline {5.5.4}Exécution d'une suppression}{19}
+\contentsline {chapter}{\numberline {6}Conclusion}{20}
+\contentsline {chapter}{\numberline {7}Annexes}{21}
+\contentsline {section}{\numberline {7.1}Organisation du Projet}{21}
+\contentsline {subsection}{\numberline {7.1.1}Outils et langages}{22}
+\contentsline {section}{\numberline {7.2}Code}{23}
+\contentsline {subsection}{\numberline {7.2.1}XML}{23}
+\contentsline {subsection}{\numberline {7.2.2}Perl}{25}
+\contentsline {subsection}{\numberline {7.2.3}Java}{26}
