@@ -1,0 +1,254 @@
+\documentclass[slidetop,11pt]{beamer}
+%
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+% pour un pdf lisible à l'écran si on ne dispose pas  des fontes cmsuper ou lmodern
+\usepackage{pslatex}
+
+%------------- styles pour beamer ---------------
+% choix des couleurs
+\definecolor{fondtitre}{rgb}{255,255,255}  % vert fonce
+\definecolor{coultitre}{rgb}{0.41,0.05,0.05}  % marron
+\definecolor{fondtexte}{rgb}{255,255,255}     % ivoire
+
+\colorlet{coultexte}{black}
+
+% afficher l'ensemble du frame
+\beamertemplatetransparentcovered
+%
+% pour les choix du menu
+% supprimer les icones de navigation pour transparents
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercolor{structure}{fg=coultitre, bg=fondtitre!40}
+\setbeamercolor{block body}{bg=fondtexte}
+\setbeamercolor{normal text}{fg=coultexte,bg=fondtexte}
+
+% pour le style et couleurs
+\usecolortheme[RGB={15,90,150}]{structure}
+\usetheme[height=7mm]{Berkeley}
+
+
+% boite en couleur avec titre plus fonce
+\beamerboxesdeclarecolorscheme{fondtitre}{fondtitre!70}{coultitre!20}
+\beamerboxesdeclarecolorscheme{coultitre}{coultitre!70}{fondtitre!20}
+%------------ fin style beamer -------------------
+%
+% contenu de la page de titre
+\title{Solution générique de calcul GRID exploitant des messageries instantanées}
+\subtitle{TER}
+\author{Joffrey Hérard}
+\date{\oldstylenums{28 Mars 2017}}
+%
+%image logo
+\logo{\includegraphics[height=0.5cm]{image_logo.jpg}}
+
+\begin{document}
+% image de fond
+
+%----------------- page de titre ----------
+\frame{\titlepage}
+%
+%------------------ Sommaire ---------------
+\section*{Sommaire}
+  \frame{\frametitle{Sommaire} \small \tableofcontents}
+%
+
+\section[Introduction]{Introduction}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=debut]
+\frametitle{Introduction}
+\setbeamertemplate{itemize item}[raisedsquare]
+\begin{itemize}
+\item Calcul repartie entre plusieurs machines.
+\item évaluation de possibilité d'exécutions ou non par la machine cible.
+\item C'est quoi un Calcul? $\rightarrow$ Calculatoire pur? Calcul d'images?
+\item Quels machines supporté? 
+\item Quels échanges? Quel protocole(s)?
+\end{itemize}
+\end{frame}
+
+\section[Modélisation]{Modélisation}
+\subsection[Les Acteurs]{Les Acteurs}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=acteurs,fragile]
+\frametitle{Modélisation : Les Acteurs}
+
+\setbeamertemplate{itemize item}[raisedsquare]
+\begin{itemize}
+\item Fournisseur de travail/Provider, unique pour chaque travail a l'instant t.
+\item Des travailleurs/Workers, de 1 a n, n définit éventuellement par le problème.
+\item Un serveur qui sert de support a la messagerie instantanée.	
+
+\end{itemize}
+
+\begin{exampleblock}{Note :}
+ 
+Chaque Provider, et chaque Workers, sont possiblement exécutés sur n'importe quel système d'exploitation. 
+ \end{exampleblock}
+\end{frame}
+
+\subsection[Les Échanges]{Les Échanges}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=echanges]
+\frametitle{Modélisation : Les Échanges}
+
+\setbeamertemplate{itemize item}[raisedsquare]
+\begin{itemize}
+      \item Provider $\rightarrow$ Serveur de Messagerie
+      \item Serveur de Messagerie $\rightarrow$ Worker
+      \item Serveur de Messagerie $\rightarrow$ Provider
+      \item Worker $\rightarrow$ Serveur de Messagerie
+\end{itemize}
+
+\end{frame}
+\subsection[Représentation des JOBS]{Représentation des JOBS}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=rep_job,fragile]
+\frametitle{Modélisation : Représentation des JOBS}
+\setbeamertemplate{itemize item}[raisedsquare]
+ 
+\begin{enumerate} \item ENVOI JOB :
+\begin{itemize}
+\item l'identifiant du problème,
+\item Le code des contraintes,
+\item Le code a exécuter,
+\item La ligne de  commande pour l\textquoteright exécuter.
+\item Le nom du fichier à exécuter.
+\end{itemize}
+\item REPONSE JOB : 
+\begin{itemize}
+\item L'identifiant pour savoir si le code a pu être exécute.
+\item L'identifiant du problème.
+\item La valeur du retour de l\textquoteright exécution.
+\item Code de contraintes, si on a pas pu exécuter .
+\item Code exécutable, si on a pas pu exécuter .
+\item Ligne de commande associe,  si on a pas pu exécuter .
+\item Le nom du fichier à exécuter.
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\section[Représentation des différents fichiers]{Représentation des différents fichiers}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=diff_fichiers,fragile]
+\frametitle{Pourquoi cette représentation ?}
+\begin{enumerate}
+\item Besoin de séparations des travaux, un worker peut ne pas faire exactement la même chose que  d'autre
+\item Problème de chemin/d'accès sur un worker cible 
+\item Perl = choix de langage parfait pour du scripting \newline $\rightarrow$ Contraintes, construction du résultat
+\end{enumerate}
+
+\end{frame}
+
+\subsection[Fichiers de commandes]{Fichiers de commandes}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=commandes,fragile]
+\frametitle{Les différents fichiers : Fichiers de commandes}
+Fichier nQuenn14.dc dans le dossier Echantillon\_Script\_Cmd 
+\begin{verbatim}
+python @nQueen4.py 1,
+python @nQueen4.py 01,
+python @nQueen4.py 001,
+python @nQueen4.py 0001,
+\end{verbatim}
+\begin{block}{Sortie regex :}
+\begin{verbatim}
+python JOB_REC/DATA_EXTRACT@jherard/nQueen4.py 1
+python JOB_REC/DATA_EXTRACT@jherard/nQueen4.py 01
+python JOB_REC/DATA_EXTRACT@jherard/nQueen4.py 001
+python JOB_REC/DATA_EXTRACT@jherard/nQueen4.py 0001
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\subsection[Fichiers de contraintes]{Fichiers de contraintes}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=contraintes,fragile]
+\frametitle{Les différents fichiers :Fichiers de contraintes}
+
+Fichier nqueen.pl dans le dossier Echantillon\_Script\_Perl 
+\begin{verbatim}
+#!/usr/bin/perl
+use v5.14;
+
+my $value= system("python -V");
+if( $value eq 0){
+    exit(3);
+}
+else{
+    exit(0);
+}
+\end{verbatim}
+\end{frame}
+
+\subsection[Fichiers de Build]{Fichiers de Build}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=builds,fragile]
+\frametitle{Les différents fichiers :Fichiers de Build}
+
+Fichier build.pl dans le dossier Echantillon\_Script\_build 
+\begin{verbatim}
+#!/usr/bin/perl
+$numArgs = $#ARGV + 1;
+my $sum;
+foreach $argnum (0 .. $#ARGV) {
+  $sum=$sum+ $ARGV[$argnum];
+}
+open (FICHIER, ">resultatF.txt") || die ("Vous ne pouvez 
+pas créer le fichier \"resultatF.txt\"");
+print FICHIER  $sum ;
+exit 0;
+\end{verbatim}
+
+\end{frame}
+
+
+\subsection[Fichier d'exécution]{Fichier d'exécution}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=exec,fragile]
+\frametitle{Les différents fichiers :Fichier d'exécution}
+
+\begin{itemize}
+\item Possibilité d'un Code en brut
+\item Possibilité d'un code qui va lui même chercher un script sur le réseau 
+\item Peut être un code brut a compile (C) ou interpréter (Python)
+\end{itemize}
+\end{frame}
+
+
+\setbeamertemplate{itemize item}[triangle]
+\section[Gestion des Erreurs]{Gestion des Erreurs}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=Gestion des Erreurs]
+\frametitle{Gestion des Erreurs}
+\begin{enumerate}
+\item Gestions des erreurs sur l\textquoteright exécution
+	\begin{itemize}
+	\item Chatroom déjà existante $\rightarrow$ Message d'erreur simple.
+	\item Aucun Worker ne peut exécuter le code $\rightarrow$ Mis en place d'un tableau de Vérification et d'un échanges supplémentaire. 
+	\end{itemize}
+\item Gestions des erreurs sur le réseaux
+	\begin{itemize}
+	\item Problème de latence $\rightarrow$ essai jusqu’à 5 fois.
+	\item Un Worker est déconnecte en plein calcul $ \rightarrow $ Détecteur de présence permis par le protocole XMPP sur une ChatRoom MultiUser
+	\item Un Provider est déconnecte durant l'attente d'une réponse \newline $ \rightarrow $ Évaluation de présence d'un Provider, arrêter le Job et mis en place d'un heartbeat.
+	
+	\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\section[Conclusion]{Conclusion}
+\setbeamercolor{frametitle}{fg=fondtitre!70}
+\begin{frame}[label=conclusion]
+\frametitle{Conclusion}
+\begin{enumerate}
+\item Les problèmes qui reste a gérer
+\item OpenFire $\Rightarrow$ Montée en charge etc..
+\item JOB a entrevoir $\Rightarrow$ Une réel généricité du calcul $\Rightarrow$ Virtualisation des services
+\end{enumerate}
+\end{frame}
+
+\end{document}

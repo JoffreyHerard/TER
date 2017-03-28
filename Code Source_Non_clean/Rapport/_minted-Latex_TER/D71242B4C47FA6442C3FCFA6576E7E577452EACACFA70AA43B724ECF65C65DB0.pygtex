@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/perl}
+\PYG{k}{use} \PYG{n}{v5}\PYG{l+m+mf}{.14}\PYG{p}{;}
+
+\PYG{n+nb}{exit} \PYG{n+nv}{\PYGZdl{}ARGV}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{+}\PYG{n+nv}{\PYGZdl{}ARGV}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{p}{;}
+\end{Verbatim}

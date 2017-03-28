@@ -97,7 +97,7 @@
 </tr>
 <tr>
 <td>Implementation Langford Multi-Worker</td>
-<td>Fait 50%</td>
+<td>Fait </td>
 </tr>
 <tr>
 <td>Implementation Povray Mono-Worker</td>

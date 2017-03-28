@@ -1,7 +1,0 @@
-\frametitle{Les différents fichiers : Fichier d'exécution}
-
-\begin{itemize}
-\item Possibilité d'un code en brut
-\item Possibilité d'un code qui va lui même chercher un script sur le réseau
-\item Peut être un code brut à compiler (C) ou interpréter (Python)
-\end{itemize}

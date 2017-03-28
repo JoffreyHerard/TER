@@ -1,7 +1,0 @@
-\frametitle{Pourquoi cette représentation ?}
-\begin{enumerate}
-\item Besoin de séparations des travaux, un worker peut ne pas faire exactement la même chose que  d'autre
-\item Problème de chemin/d'accès sur un worker cible
-\item Perl = choix de langage parfait pour du scripting \newline $\rightarrow$ Contraintes, construction du résultat
-\end{enumerate}
-

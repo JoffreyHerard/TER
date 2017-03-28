@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+ch}{\PYGZsh{}!/usr/bin/perl}
+\PYG{k}{use} \PYG{n}{v5}\PYG{l+m+mf}{.14}\PYG{p}{;}
+\PYG{k}{use} \PYG{n}{Cwd} \PYG{l+s}{\PYGZsq{}abs\PYGZus{}path\PYGZsq{}}\PYG{p}{;}
+\PYG{k}{use} \PYG{n+nn}{Data::}\PYG{n}{Dumper} \PYG{l+s+sx}{qw(Dumper)}\PYG{p}{;}
+
+\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}osname} \PYG{o}{=} \PYG{n+nv+vg}{\PYGZdl{}\PYGZca{}O}\PYG{p}{;}
+
+\PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}osname} \PYG{o+ow}{eq} \PYG{l+s}{\PYGZsq{}linux\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+	\PYG{k}{print} \PYG{l+s}{\PYGZdq{}We are on Linux...\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+	\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}str} \PYG{o}{=} \PYG{n}{abs\PYGZus{}path}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}0}\PYG{p}{);}
+	\PYG{k}{print} \PYG{n+nv}{\PYGZdl{}str}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+	\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}taille} \PYG{o}{=} \PYG{n+nb}{length} \PYG{n+nv}{\PYGZdl{}str}\PYG{p}{;}
+	\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}taille\PYGZus{}fichier} \PYG{o}{=} \PYG{n+nb}{length} \PYG{l+s}{\PYGZdq{}contraintes.pl\PYGZdq{}}\PYG{p}{;}
+	\PYG{k}{print} \PYG{n+nv}{\PYGZdl{}taille\PYGZus{}fichier}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+	\PYG{k}{print} \PYG{n+nv}{\PYGZdl{}taille}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{;}
+	
+ 	\PYG{k}{my} \PYG{n+nv}{\PYGZdl{}path}  \PYG{o}{=} \PYG{n+nb}{substr} \PYG{n+nv}{\PYGZdl{}str}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nv}{\PYGZdl{}taille}\PYG{o}{\PYGZhy{}}\PYG{n+nv}{\PYGZdl{}taille\PYGZus{}fichier}\PYG{p}{;} 
+	\PYG{k}{print} \PYG{l+s}{\PYGZdq{}My path is ; \PYGZdq{}}\PYG{o}{.}\PYG{n+nv}{\PYGZdl{}path}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}\PYGZbs{}n\PYGZdq{}}\PYG{p}{;} 
+  	\PYG{n+nb}{system}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}gcc \PYGZhy{}std=c11 \PYGZhy{}pedantic \PYGZhy{}Wall \PYGZhy{}Wextra \PYGZhy{}O3  \PYGZdq{}}\PYG{o}{.}\PYG{n+nv}{\PYGZdl{}path}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}langford.c \PYGZhy{}o \PYGZdq{}}\PYG{o}{.}\PYG{n+nv}{\PYGZdl{}path}\PYG{o}{.}\PYG{l+s}{\PYGZdq{}langford\PYGZdq{}}\PYG{p}{);}
+	\PYG{n+nb}{exit}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else}
+\PYG{p}{\PYGZob{}}
+	\PYG{n+nb}{exit}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

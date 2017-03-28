@@ -1,0 +1,43 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.*}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.*}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.File}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.IOException}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.imageio.ImageIO}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Graphics}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.Image}\PYG{o}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.swing.JPanel}\PYG{o}{;}
+
+
+\PYG{n+nd}{@SuppressWarnings}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}unused\PYGZdq{}}\PYG{o}{)}
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{main} \PYG{o}{\PYGZob{}}
+
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{main}\PYG{o}{(}\PYG{k+kd}{final} \PYG{n}{String}\PYG{o}{[]} \PYG{n}{args}\PYG{o}{)} \PYG{o}{\PYGZob{}}
+		\PYG{n}{JFrame} \PYG{n}{fenetre} \PYG{o}{=} \PYG{k}{new} \PYG{n}{JFrame}\PYG{o}{();}
+		\PYG{n}{ImageIcon} \PYG{n}{icone} \PYG{o}{=} \PYG{k}{new} \PYG{n}{ImageIcon}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}/home/apocalypzer/workspace/TER/src/images/urca.jpg\PYGZdq{}}\PYG{o}{);}
+		\PYG{n}{JLabel} \PYG{n}{image} \PYG{o}{=} \PYG{k}{new} \PYG{n}{JLabel}\PYG{o}{(}\PYG{n}{icone}\PYG{o}{);}
+		
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setTitle}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Calcul Grid XMPP\PYGZdq{}}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setSize}\PYG{o}{(}\PYG{l+m+mi}{250}\PYG{o}{,} \PYG{l+m+mi}{310}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setResizable}\PYG{o}{(}\PYG{k+kc}{false}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setLocationRelativeTo}\PYG{o}{(}\PYG{k+kc}{null}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setDefaultCloseOperation}\PYG{o}{(}\PYG{n}{JFrame}\PYG{o}{.}\PYG{n+na}{EXIT\PYGZus{}ON\PYGZus{}CLOSE}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setVisible}\PYG{o}{(}\PYG{k+kc}{true}\PYG{o}{);}
+	   
+	    
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setContentPane}\PYG{o}{(}\PYG{k}{new} \PYG{n}{Panneau}\PYG{o}{());} 
+	    
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setLayout}\PYG{o}{(}\PYG{k}{new} \PYG{n}{FlowLayout}\PYG{o}{());}
+	    
+
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{n}{image}\PYG{o}{,}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{WEST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{k}{new} \PYG{n}{ButtonLaunch}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Lancer une tache\PYGZdq{}}\PYG{o}{),}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{EAST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{k}{new} \PYG{n}{ButtonWorker}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Client d\PYGZsq{}une tache\PYGZdq{}}\PYG{o}{),}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{EAST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{k}{new} \PYG{n}{ButtonAjout}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Ajouter une tache a la base\PYGZdq{}}\PYG{o}{),}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{EAST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{k}{new} \PYG{n}{ButtonDel}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Retirer une tache de la base\PYGZdq{}}\PYG{o}{),}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{EAST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{getContentPane}\PYG{o}{().}\PYG{n+na}{add}\PYG{o}{(}\PYG{k}{new} \PYG{n}{ButtonContact}\PYG{o}{(}\PYG{l+s}{\PYGZdq{}Contact\PYGZdq{}}\PYG{o}{),}\PYG{n}{BorderLayout}\PYG{o}{.}\PYG{n+na}{EAST}\PYG{o}{);}
+	    \PYG{n}{fenetre}\PYG{o}{.}\PYG{n+na}{setVisible}\PYG{o}{(}\PYG{k+kc}{true}\PYG{o}{);}
+	\PYG{o}{\PYGZcb{}}
+	
+\PYG{o}{\PYGZcb{}}
+\end{Verbatim}
